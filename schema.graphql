@@ -1,0 +1,22 @@
+type Song {
+  title: String!
+  album: Album!
+  lyrics: String!
+  tags: [Tag!] @relation
+}
+
+type Album {
+  title: String!
+  songs: [Song!] @relation
+}
+
+type Tag {
+  name: String! @unique
+  songs: [Song!]! @relation
+}
+
+type Query {
+  allTags: [Tag!]!
+  allAlbums: [Album!]!
+  allSongs: [Song!]!
+}
