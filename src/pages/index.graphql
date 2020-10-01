@@ -1,0 +1,8 @@
+query GetTags {
+  allTags {
+    data {
+      id: _id
+      name
+    }
+  }
+}
