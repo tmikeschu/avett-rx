@@ -58,7 +58,7 @@
           ["^@emotion/core", "^react", "graphql", "^@?\\w"],
 
           // Internal packages. should match any direct child of ./src
-          ["^(assets|components|hooks|lib|pages|config)(/.*|$)"],
+          ["^(assets|api|components|hooks|lib|pages|config)(/.*|$)"],
 
           // Parent imports. Put `..` last.
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
