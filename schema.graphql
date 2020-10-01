@@ -15,6 +15,11 @@ type Tag {
   songs: [Song!]! @relation
 }
 
+type User {
+  email: String! @unique
+  name: String
+}
+
 type Query {
   allTags: [Tag!]!
   allAlbums: [Album!]!
