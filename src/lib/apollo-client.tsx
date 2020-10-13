@@ -1,21 +1,35 @@
 import * as React from "react";
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider as AP,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { removeFragmentSpreadFromDocument } from "@apollo/client/utilities";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { Any } from "./types";
+import useCurrentUser from "./use-current-user";
 
 type Cache = Record<string, Any>;
-type InitialState = Record<string, Any>;
+export type InitialState = Record<string, Any>;
 
 let apolloClient: ApolloClient<Cache>;
 
-function createApolloClient(): ApolloClient<Cache> {
+function createApolloClient({
+  token,
+}: {
+  token?: string;
+} = {}): ApolloClient<Cache> {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
       uri: "https://graphql.fauna.com/graphql", // Server URL (must be absolute)
       credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY}`,
+        Authorization: `Bearer ${
+          token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY
+        }`,
       },
     }),
     cache: new InMemoryCache({}),
@@ -23,9 +37,9 @@ function createApolloClient(): ApolloClient<Cache> {
 }
 
 export function initializeApollo(
-  initialState: InitialState = null
+  { token, ...initialState }: InitialState = null
 ): ApolloClient<Cache> {
-  const _apolloClient = apolloClient ?? createApolloClient();
+  const _apolloClient = apolloClient ?? createApolloClient({ token });
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -45,8 +59,19 @@ export function initializeApollo(
 }
 
 export function useApollo(initialState: InitialState): ApolloClient<Cache> {
-  const store = React.useMemo(() => initializeApollo(initialState), [
-    initialState,
-  ]);
+  const { user = { token: "" } } = useCurrentUser();
+
+  const store = React.useMemo(
+    () => initializeApollo({ ...initialState, token: user.token }),
+    [initialState, user.token]
+  );
+
   return store;
 }
+
+export const ApolloProvider: React.FC<{
+  initialState?: InitialState;
+}> = ({ children, initialState = {} }) => {
+  const client = useApollo(initialState);
+  return <AP client={client}>{children}</AP>;
+};
