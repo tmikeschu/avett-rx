@@ -5,8 +5,6 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { removeFragmentSpreadFromDocument } from "@apollo/client/utilities";
-import { useAuth0 } from "@auth0/auth0-react";
 
 import { Any } from "./types";
 import useCurrentUser from "./use-current-user";
@@ -24,8 +22,8 @@ function createApolloClient({
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: "https://graphql.fauna.com/graphql", // Server URL (must be absolute)
-      credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
+      uri: process.env.NEXT_PUBLIC_FAUNA_GRAPHQL_URI,
+      credentials: "same-origin",
       headers: {
         Authorization: `Bearer ${
           token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY

@@ -13,7 +13,7 @@ const onRedirectCallback = (appState: AppState): void => {
   Router.replace(appState?.returnTo || "/");
 };
 
-const MyApp: React.FC<AppProps<{
+const AvettRxApp: React.FC<AppProps<{
   initialApolloState: InitialState;
 }>> = ({ Component, pageProps }) => {
   return (
@@ -32,4 +32,4 @@ const MyApp: React.FC<AppProps<{
   );
 };
 
-export default MyApp;
+export default AvettRxApp;

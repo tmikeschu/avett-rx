@@ -1,7 +1,13 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LogoutButton: React.FC = () => {
+export const LoginButton: React.FC = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export const LogoutButton: React.FC = () => {
   const { logout } = useAuth0();
 
   return (
@@ -10,5 +16,3 @@ const LogoutButton: React.FC = () => {
     </button>
   );
 };
-
-export default LogoutButton;
