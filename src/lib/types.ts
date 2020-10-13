@@ -1,12 +1,8 @@
+import { User } from "api";
+
 //eslint-disable-next-line
 export type Any = any;
 
-export type AuthedUser = {
+export interface AuthedUser extends User {
   token: string;
-  nickname: string;
-  name: string;
-  picture: string;
-  updated_at: string;
-  email: string;
-  email_verified: boolean;
-};
+}

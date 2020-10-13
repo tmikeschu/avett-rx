@@ -17,7 +17,9 @@ type Tag {
 
 type User {
   email: String! @unique
+  nickname: String
   name: String
+  picture: String
 }
 
 type Query {
