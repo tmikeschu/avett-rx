@@ -6,17 +6,16 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
-    "prettier/react",
-    "plugin:react-hooks/recommended"
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "ga": "readonly"
+    "SharedArrayBuffer": "readonly"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -30,7 +29,6 @@
   "plugins": ["@typescript-eslint", "simple-import-sort"],
   "rules": {
     "react/prop-types": "off",
-    "react/display-name": "off",
     "simple-import-sort/sort": [
       "error",
       {
@@ -41,11 +39,11 @@
           // Style imports.
           ["^.+\\.s?css$"],
 
-          // Packages. emotion and react related packages come first.
-          ["^@emotion/core", "^react", "graphql", "^@?\\w"],
+          // Packages. React related packages come first.
+          ["^react", "^@?\\w"],
 
           // Internal packages. should match any direct child of ./src
-          ["^(assets|api|components|features|hooks|lib|pages|config)(/.*|$)"],
+          ["^(api|components|features|hooks|lib|pages|config)(/.*|$)"],
 
           // Parent imports. Put `..` last.
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
@@ -55,5 +53,10 @@
         ]
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
