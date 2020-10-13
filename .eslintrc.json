@@ -24,26 +24,13 @@
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "simple-import-sort"],
   "rules": {
     "react/prop-types": "off",
     "react/display-name": "off",
-    "@typescript-eslint/no-var-requires": "warn",
-    "@typescript-eslint/ban-ts-comment": "warn",
-    "@typescript-eslint/ban-ts-ignore": "off",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
-      }
-    ],
-    "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_", "varsIgnorePattern": "nah" }
-    ],
     "simple-import-sort/sort": [
       "error",
       {

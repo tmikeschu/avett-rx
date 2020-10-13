@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "types:build": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config codegen.yml -r dotenv/config",
-    "types:watch": "yarn types:build --watch"
+    "types:watch": "yarn types:build --watch",
+    "lint": "eslint --ext .ts,.tsx src/"
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
