@@ -42,23 +42,21 @@ Demo.args = {
 export const Suite: Story = () => (
   <div>
     {COLORS.map((c) => (
-      <div key={c} className="mb-4">
-        <h2 className="text-xl mr-4">{capitalize(c)}</h2>
-        {VARIANTS.map((v) => (
-          <div key={v} className="flex items-end mb-4">
-            {SIZES.map((s) => (
-              <Button
-                size={s}
-                color={c}
-                key={`${c}:${v}:${s}`}
-                className="mr-4"
-                variant={v}
-              >
-                {capitalize(v)}: {s}
-              </Button>
-            ))}
-          </div>
-        ))}
+      <div key={c} className="mb-4 items-end flex flex-wrap">
+        <h2 className="text-xl mr-4 w-24">{capitalize(c)}</h2>
+        {VARIANTS.map((v) =>
+          SIZES.map((s) => (
+            <Button
+              size={s}
+              color={c}
+              key={`${c}:${v}:${s}`}
+              className="mr-4"
+              variant={v}
+            >
+              {capitalize(v)}: {s}
+            </Button>
+          ))
+        )}
       </div>
     ))}
   </div>
