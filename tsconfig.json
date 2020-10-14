@@ -15,7 +15,8 @@
     "baseUrl": "./src",
     "paths": {
       "*": ["*", "../__generated__/*"]
-    }
+    },
+    "strict": true
   },
   "include": [
     "next-env.d.ts",
