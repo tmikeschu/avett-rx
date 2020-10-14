@@ -20,8 +20,14 @@ module.exports = {
         primary: {
           default: "#131665",
         },
+        light: {
+          default: "#f7f7f7",
+        },
+        dark: {
+          default: "#0e0e0e",
+        },
         secondary: {
-          default: "BDB5F5",
+          default: "#BDB5F5",
         },
         success: {
           default: "#83AF9B",
