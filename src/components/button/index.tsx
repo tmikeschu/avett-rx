@@ -1,39 +1,129 @@
 import * as React from "react";
 
-export const VARIANTS = [
+export const COLORS = [
   "primary",
   "secondary",
-  "primaryOutlined",
   "cancel",
+  "warning",
+  "danger",
+  "success",
 ] as const;
+type Color = typeof COLORS[number];
+
+export const VARIANTS = ["solid", "outline", "link"] as const;
 type Variant = typeof VARIANTS[number];
 
 export type Props = {
-  variant: Variant;
+  color?: Color;
+  variant?: Variant;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<Props> = ({ variant, className = "", ...props }) => {
+const Button: React.FC<Props> = ({
+  color = "primary",
+  variant = "solid",
+  className = "",
+  ...props
+}) => {
   return (
     <button
       {...props}
       className={[
-        "py-2 px-4 rounded",
+        "",
         props.disabled
           ? "cursor-not-allowed opacity-25"
           : "hover:opacity-75 focus:opacity-75 focus:outline-none",
+        variant === "solid" ? "rounded py-2 px-4" : "",
+        variant === "outline"
+          ? "rounded border border-solid py-2 px-4 bg-light"
+          : "",
+        variant === "link"
+          ? "border-b border-solid bg-none py-0 px-0 my-2 mx-4"
+          : "",
         (() => {
-          switch (variant) {
-            case "primary":
-              return "bg-primary text-light border-primary";
+          switch (color) {
+            case "primary": {
+              switch (variant) {
+                case "solid":
+                  return "bg-primary text-light border-primary";
 
-            case "secondary":
-              return "bg-secondary text-dark border-secondary";
+                case "outline":
+                case "link":
+                  return "text-primary border-primary";
 
-            case "primaryOutlined":
-              return "border-primary border border-solid bg-light text-primary";
+                default:
+                  return "bg-primary text-light border-primary";
+              }
+            }
 
-            case "cancel":
-              return "border-gray-600 border border-solid bg-light text-gray-600";
+            case "secondary": {
+              switch (variant) {
+                case "solid":
+                  return "bg-secondary border-secondary text-light";
+
+                case "outline":
+                case "link":
+                  return "text-secondary border-secondary";
+
+                default:
+                  return "bg-secondary border-secondary";
+              }
+            }
+
+            case "cancel": {
+              switch (variant) {
+                case "solid":
+                  return "bg-gray-600 border-gray-600 text-light";
+
+                case "outline":
+                case "link":
+                  return "border-gray-600 text-gray-600";
+
+                default:
+                  return "bg-gray-600 border-gray-600";
+              }
+            }
+
+            case "warning": {
+              switch (variant) {
+                case "solid":
+                  return "bg-warning text-dark border-warning";
+
+                case "outline":
+                case "link":
+                  return "border-warning text-black";
+
+                default:
+                  return "bg-warning text-dark border-warning";
+              }
+            }
+
+            case "danger": {
+              switch (variant) {
+                case "solid":
+                  return "bg-error text-light border-error";
+
+                case "outline":
+                case "link":
+                  return "border-error text-error";
+
+                default:
+                  return "bg-error text-light border-error";
+              }
+            }
+
+            case "success": {
+              switch (variant) {
+                case "solid":
+                  return "bg-success text-light border-success";
+
+                case "outline":
+                case "link":
+                  return "border-success text-success";
+
+                default:
+                  return "bg-success text-light border-success";
+              }
+            }
 
             default:
               return "bg-gray-500 text-dark";

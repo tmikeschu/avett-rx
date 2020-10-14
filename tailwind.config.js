@@ -21,13 +21,13 @@ module.exports = {
           default: "#131665",
         },
         light: {
-          default: "#f7f7f7",
+          default: "#fafafa",
         },
         dark: {
           default: "#0e0e0e",
         },
         secondary: {
-          default: "#BDB5F5",
+          default: "#5B7EB8",
         },
         success: {
           default: "#83AF9B",
