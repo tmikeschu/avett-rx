@@ -10,17 +10,22 @@ export const COLORS = [
 ] as const;
 type Color = typeof COLORS[number];
 
+export const SIZES = ["sm", "md", "lg"] as const;
+type Size = typeof SIZES[number];
+
 export const VARIANTS = ["solid", "outline", "link"] as const;
 type Variant = typeof VARIANTS[number];
 
 export type Props = {
   color?: Color;
   variant?: Variant;
+  size?: Size;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<Props> = ({
   color = "primary",
   variant = "solid",
+  size = "md",
   className = "",
   ...props
 }) => {
@@ -28,17 +33,47 @@ const Button: React.FC<Props> = ({
     <button
       {...props}
       className={[
-        "",
+        (() => {
+          switch (size) {
+            case "sm":
+              return "text-sm";
+            case "md":
+              return "text-base";
+            case "lg":
+              return "text-lg";
+          }
+        })(),
         props.disabled
           ? "cursor-not-allowed opacity-25"
           : "hover:opacity-75 focus:opacity-75 focus:outline-none",
-        variant === "solid" ? "rounded py-2 px-4" : "",
-        variant === "outline"
-          ? "rounded border border-solid py-2 px-4 bg-light"
-          : "",
+        variant === "solid" ? "rounded" : "",
+        variant === "outline" ? "rounded border border-solid bg-light" : "",
         variant === "link"
-          ? "border-b border-solid bg-none py-0 px-0 my-2 mx-4"
-          : "",
+          ? [
+              "border-b border-solid bg-none p-0",
+              (() => {
+                switch (size) {
+                  case "sm":
+                    return "";
+                  case "md":
+                    return "";
+                  case "lg":
+                    return "";
+                }
+              })(),
+            ]
+          : [
+              (() => {
+                switch (size) {
+                  case "sm":
+                    return "px-2 py-1";
+                  case "md":
+                    return "px-4 py-2";
+                  case "lg":
+                    return "px-8 py-4";
+                }
+              })(),
+            ],
         (() => {
           switch (color) {
             case "primary": {
@@ -130,7 +165,9 @@ const Button: React.FC<Props> = ({
           }
         })(),
         className,
-      ].join(" ")}
+      ]
+        .map((x) => (Array.isArray(x) ? x.join(" ") : x))
+        .join(" ")}
     />
   );
 };

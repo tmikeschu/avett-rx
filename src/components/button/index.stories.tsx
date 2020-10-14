@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import Button, { COLORS, Props, VARIANTS } from ".";
+import Button, { COLORS, Props, SIZES, VARIANTS } from ".";
 
 export default {
   title: "Components/Button",
@@ -36,17 +36,28 @@ Demo.args = {
   variant: "solid",
   children: "Submit",
   disabled: false,
+  size: "md",
 } as Args;
 
 export const Suite: Story = () => (
   <div>
     {COLORS.map((c) => (
-      <div key={c}>
-        <h2>{capitalize(c)}</h2>
+      <div key={c} className="mb-4">
+        <h2 className="text-xl mr-4">{capitalize(c)}</h2>
         {VARIANTS.map((v) => (
-          <Button color={c} key={`${c}:${v}`} className="mr-4 mb-4" variant={v}>
-            {capitalize(v)}
-          </Button>
+          <div key={v} className="flex items-end mb-4">
+            {SIZES.map((s) => (
+              <Button
+                size={s}
+                color={c}
+                key={`${c}:${v}:${s}`}
+                className="mr-4"
+                variant={v}
+              >
+                {capitalize(v)}: {s}
+              </Button>
+            ))}
+          </div>
         ))}
       </div>
     ))}
