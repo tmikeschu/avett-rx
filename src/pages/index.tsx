@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <div className={styles.container}>
       <Head>
         <title>Avett Rx</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/avettrx.svg" />
       </Head>
 
       <main className={styles.main}>
