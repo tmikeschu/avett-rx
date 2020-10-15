@@ -1,14 +1,7 @@
 import * as React from "react";
 
-export const COLORS = [
-  "primary",
-  "secondary",
-  "cancel",
-  "warning",
-  "danger",
-  "success",
-] as const;
-type Color = typeof COLORS[number];
+import Text from "components/text";
+import { Color } from "lib/constants";
 
 export const SIZES = ["sm", "md", "lg"] as const;
 type Size = typeof SIZES[number];
@@ -27,6 +20,7 @@ const Button: React.FC<Props> = ({
   variant = "solid",
   size = "md",
   className = "",
+  children,
   ...props
 }) => {
   return (
@@ -132,7 +126,7 @@ const Button: React.FC<Props> = ({
               }
             }
 
-            case "danger": {
+            case "error": {
               switch (variant) {
                 case "solid":
                   return "bg-error text-light border-error";
@@ -168,7 +162,13 @@ const Button: React.FC<Props> = ({
       ]
         .map((x) => (Array.isArray(x) ? x.join(" ") : x))
         .join(" ")}
-    />
+    >
+      {typeof children === "string" ? (
+        <Text variant="button">{children}</Text>
+      ) : (
+        children
+      )}
+    </button>
   );
 };
 

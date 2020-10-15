@@ -38,6 +38,9 @@ module.exports = {
         warning: {
           default: "#F9CDAD",
         },
+        cancel: {
+          default: "#808080",
+        },
       },
     },
   },
