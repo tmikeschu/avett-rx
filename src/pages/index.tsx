@@ -4,6 +4,7 @@ import * as React from "react";
 import Head from "next/head";
 
 import { useGetTagsQuery } from "api";
+import Text from "components/text";
 
 const Home: React.FC = () => {
   const { data, loading } = useGetTagsQuery();
@@ -17,11 +18,11 @@ const Home: React.FC = () => {
       </Head>
 
       <main className={styles.main}>
-        <h2>Tags</h2>
+        <Text variant="h2">Tags</Text>
         {loading ? (
-          <span>Loading...</span>
+          <Text>Loading...</Text>
         ) : (
-          tags.map((tag) => <div key={tag._id}>{tag.name}</div>)
+          tags.map((tag) => (tag ? <div key={tag._id}>{tag.name}</div> : null))
         )}
       </main>
     </div>
