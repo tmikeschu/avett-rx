@@ -1,0 +1,80 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import Text, { VARIANTS } from "./";
+
+<Meta title="Components/Text" component={Text} />
+
+# Text
+
+Text components are defined by their `variant` and `color` properties. The default variant is `body1` and the default color is inherited.
+
+<Text>This text itself is using the defaults!</Text>
+
+You can also use an `as` prop to render the component with the _appearance_ of a `variant` but the _identity_ of something else.
+
+You might want to render a `span` with big text, similar to the `h1` variant.
+
+<Text variant="h1" as="span">
+  Special span!
+</Text>
+
+<Canvas>
+  <Story name="Notifications">
+    <Text color="success">Success message</Text>
+    <Text color="error">Error message</Text>
+    <Text color="warning" as="span">
+      Warning message
+    </Text>
+  </Story>
+  <Story name="Color">
+    <Text color="primary" as="span">
+      C
+    </Text>
+    <Text color="secondary" as="span">
+      O
+    </Text>
+    <Text color="success" as="span">
+      L
+    </Text>
+    <Text color="error" as="span">
+      O
+    </Text>
+    <Text color="warning" as="span">
+      R
+    </Text>
+    <Text color="cancel" as="span">
+      F
+    </Text>
+    <Text color="dark" as="span">
+      U
+    </Text>
+    <Text className="bg-dark" color="light" as="span">
+      L
+    </Text>
+  </Story>
+  <Story name="Variants">
+    <div>
+      {VARIANTS.map((v) => (
+        <div key={v}>
+          <Text variant={v}>
+            {(() => {
+              return (
+                {
+                  h1: "Heading 1",
+                  h2: "Heading 2",
+                  h3: "Heading 3",
+                  h4: "Heading 4",
+                  h5: "Heading 5",
+                  h6: "Heading 6",
+                  button: "Button",
+                  overline: "Overline",
+                  subtitle: "Subtitle",
+                  caption: "Caption",
+                }[v] || v
+              );
+            })()}
+          </Text>
+        </div>
+      ))}
+    </div>
+  </Story>
+</Canvas>

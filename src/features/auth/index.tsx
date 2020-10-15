@@ -6,14 +6,21 @@ import Button from "components/button";
 export const LoginButton: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
 
-  return <Button onClick={() => loginWithRedirect()}>Log In</Button>;
+  return (
+    <Button variant="link" onClick={() => loginWithRedirect()}>
+      Log In
+    </Button>
+  );
 };
 
 export const LogoutButton: React.FC = () => {
   const { logout } = useAuth0();
 
   return (
-    <Button onClick={() => logout({ returnTo: window.location.origin })}>
+    <Button
+      variant="link"
+      onClick={() => logout({ returnTo: window.location.origin })}
+    >
       Log Out
     </Button>
   );

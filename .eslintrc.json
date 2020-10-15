@@ -54,6 +54,12 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": "*.js",
+      "parser": "esprima"
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"
