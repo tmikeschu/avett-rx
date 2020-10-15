@@ -5,18 +5,16 @@ import Text, { VARIANTS } from "./";
 
 # Text
 
-With `MDX` we can define a story for `Text` right in the middle of our Markdown documentation even
+Text components are defined by their `variant` and `color` properties. The default variant is `body1` and the default color is inherited.
 
-<Text>
-  Cookie cotton candy sugar plum dessert caramels cupcake. Sweet croissant
-  cookie pastry lemon drops. Halvah danish dessert. Topping sweet roll jelly
-  beans candy. Sweet pudding fruitcake chocolate cake. Marshmallow fruitcake
-  dessert fruitcake liquorice ice cream macaroon macaroon sweet. Chocolate bar
-  danish lemon drops soufflé sweet. Tart jelly beans sweet roll. Tiramisu icing
-  danish. Sweet roll danish cupcake dessert marzipan gummies cake lemon drops
-  cotton candy. Liquorice jujubes tiramisu danish dessert apple pie jelly beans.
-  Oat cake cake marzipan. Wafer pastry gummi bears dragée bonbon cupcake tart
-  tiramisu.
+<Text>This text itself is using the defaults!</Text>
+
+You can also use an `as` prop to render the component with the _appearance_ of a `variant` but the _identity_ of something else.
+
+You might want to render a `span` with big text, similar to the `h1` variant.
+
+<Text variant="h1" as="span">
+  Special span!
 </Text>
 
 <Canvas>
