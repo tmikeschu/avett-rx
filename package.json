@@ -14,7 +14,7 @@
     "format": "prettier --write \"src/**/*\"",
     "schema:update": "./scripts/update-schema.sh",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o public/storybook"
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
