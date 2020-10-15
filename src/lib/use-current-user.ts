@@ -5,7 +5,9 @@ import { AuthedUser } from "lib/types";
 const FAUNA_SECRET_KEY = "https://faunadb.com/id/secret";
 
 export default function useCurrentUser(): { user?: AuthedUser } {
-  const { user } = useAuth0() as { user: Omit<AuthedUser, "token"> };
+  const { user } = useAuth0() as {
+    user: Omit<AuthedUser, "token"> & { [FAUNA_SECRET_KEY]: string };
+  };
   return {
     user: user ? { ...user, token: user[FAUNA_SECRET_KEY] } : undefined,
   };
