@@ -20,7 +20,14 @@ With `MDX` we can define a story for `Text` right in the middle of our Markdown 
 </Text>
 
 <Canvas>
-  <Story name="color">
+  <Story name="Notifications">
+    <Text color="success">Success message</Text>
+    <Text color="error">Error message</Text>
+    <Text color="warning" as="span">
+      Warning message
+    </Text>
+  </Story>
+  <Story name="Color">
     <Text color="primary" as="span">
       C
     </Text>
@@ -46,7 +53,7 @@ With `MDX` we can define a story for `Text` right in the middle of our Markdown 
       L
     </Text>
   </Story>
-  <Story name="variants">
+  <Story name="Variants">
     <div>
       {VARIANTS.map((v) => (
         <div key={v}>

@@ -63,7 +63,7 @@ function Text<T extends TextElement>({
               secondary: "text-secondary",
               success: "text-success",
               error: "text-error",
-              warning: "text-warning",
+              warning: "text-dark border-warning border-b-4 border-solid",
               dark: "text-dark",
               light: "text-light",
             } as Record<Color, string>)[color] || ""
