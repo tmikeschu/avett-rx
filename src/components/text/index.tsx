@@ -48,7 +48,7 @@ type Props<T extends TextElement> = (T extends HTMLHeadingElement
 function Text<T extends TextElement>({
   variant = "body1",
   className = "",
-  color,
+  color = "dark",
   as,
   ...props
 }: Props<T>): React.ReactElement {
@@ -57,33 +57,29 @@ function Text<T extends TextElement>({
     <ComponentToUse
       {...props}
       className={joinClassNames([
-        color
-          ? ({
-              cancel: "text-cancel",
-              primary: "text-primary",
-              secondary: "text-secondary",
-              success: "text-success",
-              error: "text-error",
-              warning: "text-dark border-warning border-b-4 border-solid",
-              dark: "text-dark",
-              light: "text-light",
-            } as Record<Color, string>)[color] || ""
-          : "",
-        variant
-          ? ({
-              h1: "text-4xl tracking-tighter font-display leading-tight",
-              h2: "text-2xl tracking-tighter font-display leading-tight",
-              h3: "text-xl tracking-tighter font-display leading-tight",
-              h4: "text-lg tracking-tight font-display leading-tight",
-              h5: "text-sm tracking-tight font-display leading-tight",
-              h6: "text-xs font-display leading-tight",
-              subtitle: "text-sm font-body",
-              body1: "leading-normal font-body",
-              overline: "uppercase text-sm font-body",
-              caption: "text-xs text-gray-600 font-body",
-              button: "font-bold text-base sm:text-lg font-body uppercase",
-            } as Record<Variant, string>)[variant] || ""
-          : "",
+        ({
+          cancel: "text-cancel",
+          primary: "text-primary",
+          secondary: "text-secondary",
+          success: "text-success",
+          error: "text-error",
+          warning: "text-dark border-warning border-b-4 border-solid",
+          dark: "text-dark",
+          light: "text-light",
+        } as Record<Color, string>)[color],
+        ({
+          h1: "text-4xl tracking-tighter font-display leading-tight",
+          h2: "text-2xl tracking-tighter font-display leading-tight",
+          h3: "text-xl tracking-tighter font-display leading-tight",
+          h4: "text-lg tracking-tight font-display leading-tight",
+          h5: "text-sm tracking-tight font-display leading-tight",
+          h6: "text-xs font-display leading-tight",
+          subtitle: "text-sm font-body",
+          body1: "leading-normal font-body",
+          overline: "uppercase text-sm font-body",
+          caption: "text-xs text-gray-600 font-body",
+          button: "font-bold text-base sm:text-lg font-body uppercase",
+        } as Record<Variant, string>)[variant],
         className,
       ])}
     />

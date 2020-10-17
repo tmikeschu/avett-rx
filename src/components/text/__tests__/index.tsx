@@ -11,7 +11,7 @@ describe("<Text />", () => {
     const p = getByText(/snapshot/i);
     expect(p).toMatchInlineSnapshot(`
       <p
-        class="leading-normal font-body"
+        class="text-dark leading-normal font-body"
       >
         Snapshot
       </p>
@@ -27,7 +27,7 @@ describe("<Text />", () => {
     const span = getByText(/snapshot/i);
     expect(span).toMatchInlineSnapshot(`
       <span
-        class="text-4xl tracking-tighter font-display leading-tight"
+        class="text-dark text-4xl tracking-tighter font-display leading-tight"
       >
         Snapshot
       </span>
