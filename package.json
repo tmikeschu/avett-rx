@@ -16,7 +16,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o public/storybook",
     "test": "yarn jest",
-    "test:watch": "yarn jest --watch"
+    "test:watch": "yarn jest --watch",
+    "test:coverage": "yarn jest --coverage",
+    "test:watch:coverage": "yarn jest --coverage --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
