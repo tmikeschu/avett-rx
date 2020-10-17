@@ -16,7 +16,8 @@
     "paths": {
       "*": ["*", "../__generated__/*"]
     },
-    "strict": true
+    "strict": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "next-env.d.ts",
