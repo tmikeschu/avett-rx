@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Text from "components/text";
 import { Color } from "lib/constants";
+import { joinClassNames } from "lib/utils";
 
 export const SIZES = ["sm", "md", "lg"] as const;
 type Size = typeof SIZES[number];
@@ -26,7 +27,7 @@ const Button: React.FC<Props> = ({
   return (
     <button
       {...props}
-      className={[
+      className={joinClassNames([
         (() => {
           switch (size) {
             case "sm":
@@ -159,9 +160,7 @@ const Button: React.FC<Props> = ({
           }
         })(),
         className,
-      ]
-        .map((x) => (Array.isArray(x) ? x.join(" ") : x))
-        .join(" ")}
+      ])}
     >
       {typeof children === "string" ? (
         <Text variant="button">{children}</Text>

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Color } from "lib/constants";
+import { joinClassNames } from "lib/utils";
 
 export const VARIANTS = [
   "body1",
@@ -55,7 +56,7 @@ function Text<T extends TextElement>({
   return (
     <ComponentToUse
       {...props}
-      className={[
+      className={joinClassNames([
         color
           ? ({
               cancel: "text-cancel",
@@ -84,9 +85,7 @@ function Text<T extends TextElement>({
             } as Record<Variant, string>)[variant] || ""
           : "",
         className,
-      ]
-        .map((x) => (Array.isArray(x) ? x.join(" ") : x))
-        .join(" ")}
+      ])}
     />
   );
 }
