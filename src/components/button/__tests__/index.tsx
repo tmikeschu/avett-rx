@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { COLORS } from "lib/constants";
 import * as utils from "test";
 
-import Button, { VARIANTS } from "../";
+import Button, { BUTTON_COLORS, SIZES, VARIANTS } from "../";
 
 describe("<Button />", () => {
   it("matches snapshot", () => {
@@ -14,7 +13,7 @@ describe("<Button />", () => {
         class="text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-primary text-light border-primary"
       >
         <span
-          class="font-bold text-base sm:text-lg font-body uppercase"
+          class="text-dark font-bold text-base sm:text-lg font-body uppercase"
         >
           Snapshot
         </span>
@@ -28,25 +27,43 @@ describe("<Button />", () => {
         disabled=""
       >
         <span
-          class="font-bold text-base sm:text-lg font-body uppercase"
+          class="text-dark font-bold text-base sm:text-lg font-body uppercase"
         >
           Snapshot
         </span>
+      </button>
+    `);
+
+    rerender(
+      <Button disabled={true}>
+        <pre>Snapshot</pre>
+      </Button>
+    );
+    expect(button).toMatchInlineSnapshot(`
+      <button
+        class="text-base cursor-not-allowed opacity-25 rounded px-4 py-2 bg-primary text-light border-primary"
+        disabled=""
+      >
+        <pre>
+          Snapshot
+        </pre>
       </button>
     `);
   });
 
   describe("variants", () => {
     VARIANTS.forEach((variant) => {
-      COLORS.forEach((color) => {
-        it(`Variant: ${variant}, color: ${color} matches snapshot`, () => {
-          const { getByRole } = utils.render(
-            <Button variant={variant} color={color}>
-              Snapshot
-            </Button>
-          );
-          const button = getByRole("button");
-          expect(button.className).toMatchSnapshot();
+      BUTTON_COLORS.forEach((color) => {
+        SIZES.forEach((size) => {
+          it(`Variant: ${variant}, color: ${color}, size: ${size} matches snapshot`, () => {
+            const { getByRole } = utils.render(
+              <Button variant={variant} color={color} size={size}>
+                Snapshot
+              </Button>
+            );
+            const button = getByRole("button");
+            expect(button.className).toMatchSnapshot();
+          });
         });
       });
     });

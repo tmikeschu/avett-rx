@@ -1,8 +1,13 @@
 import * as React from "react";
 
 import Text from "components/text";
-import { Color } from "lib/constants";
+import { Color, COLORS } from "lib/constants";
 import { joinClassNames } from "lib/utils";
+
+export type ButtonColor = Exclude<Color, "dark" | "light">;
+export const BUTTON_COLORS = COLORS.filter(
+  (c) => c !== "dark" && c !== "light"
+) as ButtonColor[];
 
 export const SIZES = ["sm", "md", "lg"] as const;
 type Size = typeof SIZES[number];
@@ -11,7 +16,7 @@ export const VARIANTS = ["solid", "outline", "link"] as const;
 type Variant = typeof VARIANTS[number];
 
 export type Props = {
-  color?: Color;
+  color?: ButtonColor;
   variant?: Variant;
   size?: Size;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -70,18 +75,18 @@ const Button: React.FC<Props> = ({
               })(),
             ],
         (() => {
+          /* eslint-disable no-fallthrough */
           switch (color) {
             case "primary": {
               switch (variant) {
-                case "solid":
+                case "solid": {
                   return "bg-primary text-light border-primary";
+                }
 
                 case "outline":
-                case "link":
+                case "link": {
                   return "text-primary border-primary";
-
-                default:
-                  return "bg-primary text-light border-primary";
+                }
               }
             }
 
@@ -93,9 +98,6 @@ const Button: React.FC<Props> = ({
                 case "outline":
                 case "link":
                   return "text-secondary border-secondary";
-
-                default:
-                  return "bg-secondary border-secondary";
               }
             }
 
@@ -107,56 +109,49 @@ const Button: React.FC<Props> = ({
                 case "outline":
                 case "link":
                   return "border-gray-600 text-gray-600";
-
-                default:
-                  return "bg-gray-600 border-gray-600";
               }
             }
 
             case "warning": {
               switch (variant) {
-                case "solid":
+                case "solid": {
                   return "bg-warning text-dark border-warning";
+                }
 
                 case "outline":
-                case "link":
+                case "link": {
                   return "border-warning text-black";
-
-                default:
-                  return "bg-warning text-dark border-warning";
+                }
               }
             }
 
             case "error": {
               switch (variant) {
-                case "solid":
+                case "solid": {
                   return "bg-error text-light border-error";
+                }
 
                 case "outline":
-                case "link":
+                case "link": {
                   return "border-error text-error";
-
-                default:
-                  return "bg-error text-light border-error";
+                }
               }
             }
 
             case "success": {
               switch (variant) {
-                case "solid":
+                case "solid": {
                   return "bg-success text-light border-success";
+                }
 
                 case "outline":
-                case "link":
+                case "link": {
                   return "border-success text-success";
-
-                default:
-                  return "bg-success text-light border-success";
+                }
+                //this is an easter egg
               }
             }
-
-            default:
-              return "bg-gray-500 text-dark";
+            /* eslint-enable no-fallthrough */
           }
         })(),
         className,

@@ -1,49 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> variants Variant: link, color: cancel matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-gray-600 text-gray-600"`;
+exports[`<Button /> variants Variant: link, color: cancel, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: link, color: dark matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: link, color: cancel, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: link, color: error matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-error text-error"`;
+exports[`<Button /> variants Variant: link, color: cancel, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: link, color: light matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: link, color: error, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-error text-error"`;
 
-exports[`<Button /> variants Variant: link, color: primary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-primary border-primary"`;
+exports[`<Button /> variants Variant: link, color: error, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-error text-error"`;
 
-exports[`<Button /> variants Variant: link, color: secondary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-secondary border-secondary"`;
+exports[`<Button /> variants Variant: link, color: error, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-error text-error"`;
 
-exports[`<Button /> variants Variant: link, color: success matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-success text-success"`;
+exports[`<Button /> variants Variant: link, color: primary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-primary border-primary"`;
 
-exports[`<Button /> variants Variant: link, color: warning matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-warning text-black"`;
+exports[`<Button /> variants Variant: link, color: primary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-primary border-primary"`;
 
-exports[`<Button /> variants Variant: outline, color: cancel matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-gray-600 text-gray-600"`;
+exports[`<Button /> variants Variant: link, color: primary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-primary border-primary"`;
 
-exports[`<Button /> variants Variant: outline, color: dark matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: link, color: secondary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-secondary border-secondary"`;
 
-exports[`<Button /> variants Variant: outline, color: error matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-error text-error"`;
+exports[`<Button /> variants Variant: link, color: secondary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-secondary border-secondary"`;
 
-exports[`<Button /> variants Variant: outline, color: light matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: link, color: secondary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 text-secondary border-secondary"`;
 
-exports[`<Button /> variants Variant: outline, color: primary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 text-primary border-primary"`;
+exports[`<Button /> variants Variant: link, color: success, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-success text-success"`;
 
-exports[`<Button /> variants Variant: outline, color: secondary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 text-secondary border-secondary"`;
+exports[`<Button /> variants Variant: link, color: success, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-success text-success"`;
 
-exports[`<Button /> variants Variant: outline, color: success matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-success text-success"`;
+exports[`<Button /> variants Variant: link, color: success, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-success text-success"`;
 
-exports[`<Button /> variants Variant: outline, color: warning matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-warning text-black"`;
+exports[`<Button /> variants Variant: link, color: warning, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-warning text-black"`;
 
-exports[`<Button /> variants Variant: solid, color: cancel matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-gray-600 border-gray-600 text-light"`;
+exports[`<Button /> variants Variant: link, color: warning, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-warning text-black"`;
 
-exports[`<Button /> variants Variant: solid, color: dark matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: link, color: warning, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-warning text-black"`;
 
-exports[`<Button /> variants Variant: solid, color: error matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-error text-light border-error"`;
+exports[`<Button /> variants Variant: outline, color: cancel, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: solid, color: light matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-gray-500 text-dark"`;
+exports[`<Button /> variants Variant: outline, color: cancel, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: solid, color: primary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-primary text-light border-primary"`;
+exports[`<Button /> variants Variant: outline, color: cancel, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 border-gray-600 text-gray-600"`;
 
-exports[`<Button /> variants Variant: solid, color: secondary matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-secondary border-secondary text-light"`;
+exports[`<Button /> variants Variant: outline, color: error, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 border-error text-error"`;
 
-exports[`<Button /> variants Variant: solid, color: success matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-success text-light border-success"`;
+exports[`<Button /> variants Variant: outline, color: error, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-error text-error"`;
 
-exports[`<Button /> variants Variant: solid, color: warning matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-warning text-dark border-warning"`;
+exports[`<Button /> variants Variant: outline, color: error, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 border-error text-error"`;
+
+exports[`<Button /> variants Variant: outline, color: primary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 text-primary border-primary"`;
+
+exports[`<Button /> variants Variant: outline, color: primary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 text-primary border-primary"`;
+
+exports[`<Button /> variants Variant: outline, color: primary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 text-primary border-primary"`;
+
+exports[`<Button /> variants Variant: outline, color: secondary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 text-secondary border-secondary"`;
+
+exports[`<Button /> variants Variant: outline, color: secondary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 text-secondary border-secondary"`;
+
+exports[`<Button /> variants Variant: outline, color: secondary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 text-secondary border-secondary"`;
+
+exports[`<Button /> variants Variant: outline, color: success, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 border-success text-success"`;
+
+exports[`<Button /> variants Variant: outline, color: success, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-success text-success"`;
+
+exports[`<Button /> variants Variant: outline, color: success, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 border-success text-success"`;
+
+exports[`<Button /> variants Variant: outline, color: warning, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-8 py-4 border-warning text-black"`;
+
+exports[`<Button /> variants Variant: outline, color: warning, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-4 py-2 border-warning text-black"`;
+
+exports[`<Button /> variants Variant: outline, color: warning, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded border border-solid bg-light px-2 py-1 border-warning text-black"`;
+
+exports[`<Button /> variants Variant: solid, color: cancel, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-gray-600 border-gray-600 text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: cancel, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-gray-600 border-gray-600 text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: cancel, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-gray-600 border-gray-600 text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: error, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-error text-light border-error"`;
+
+exports[`<Button /> variants Variant: solid, color: error, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-error text-light border-error"`;
+
+exports[`<Button /> variants Variant: solid, color: error, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-error text-light border-error"`;
+
+exports[`<Button /> variants Variant: solid, color: primary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-primary text-light border-primary"`;
+
+exports[`<Button /> variants Variant: solid, color: primary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-primary text-light border-primary"`;
+
+exports[`<Button /> variants Variant: solid, color: primary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-primary text-light border-primary"`;
+
+exports[`<Button /> variants Variant: solid, color: secondary, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-secondary border-secondary text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: secondary, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-secondary border-secondary text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: secondary, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-secondary border-secondary text-light"`;
+
+exports[`<Button /> variants Variant: solid, color: success, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-success text-light border-success"`;
+
+exports[`<Button /> variants Variant: solid, color: success, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-success text-light border-success"`;
+
+exports[`<Button /> variants Variant: solid, color: success, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-success text-light border-success"`;
+
+exports[`<Button /> variants Variant: solid, color: warning, size: lg matches snapshot 1`] = `"text-lg hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-8 py-4 bg-warning text-dark border-warning"`;
+
+exports[`<Button /> variants Variant: solid, color: warning, size: md matches snapshot 1`] = `"text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-warning text-dark border-warning"`;
+
+exports[`<Button /> variants Variant: solid, color: warning, size: sm matches snapshot 1`] = `"text-sm hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-2 py-1 bg-warning text-dark border-warning"`;
