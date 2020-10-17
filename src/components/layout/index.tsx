@@ -5,7 +5,7 @@ import { useRouter } from "next/dist/client/router";
 import Text from "components/text";
 import { LoginButton, LogoutButton } from "features/auth";
 
-const VISITOR_VIEWS = ["/"] as const;
+export const VISITOR_VIEWS = ["/"] as const;
 
 const Layout: React.FC = ({ children }) => {
   const { asPath } = useRouter();
