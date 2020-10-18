@@ -12,11 +12,18 @@ module.exports = {
   //   },
   // },
   moduleNameMapper: {
-    "^(components|features|lib|test)/(.*)$": "<rootDir>/src/$1/$2",
+    "^(components|features|lib|test|mocks)/(.*)$": "<rootDir>/src/$1/$2",
     "^(test)$": "<rootDir>/src/$1",
+    "^(mocks)$": "<rootDir>/src/$1",
     "^(api)$": "<rootDir>/__generated__/$1",
     "\\.(css)$": "<rootDir>/__mocks__/styleMock.js",
   },
   setupFilesAfterEnv: ["<rootDir>/src/test/setup-env.ts"],
-  coveragePathIgnorePatterns: ["/node_modules/", "src/test"],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "src/test",
+    "src/mocks",
+    "src/lib/apollo-client.tsx",
+    "__generated__",
+  ],
 };

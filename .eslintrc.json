@@ -49,7 +49,7 @@
           ["^react", "^@?\\w"],
 
           // Internal packages. should match any direct child of ./src
-          ["^(api|components|features|lib|test)(/.*|$)"],
+          ["^(api|components|features|lib|test|mocks)(/.*|$)"],
 
           // Parent imports. Put `..` last.
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
