@@ -16,6 +16,8 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
       - "fragment-matcher"
+      - '@tmikeschu/graphql-typescript-factories'
+      - '@tmikeschu/graphql-typescript-response-factories'
   __generated__/api.d.ts:
     config:
       apolloReactHooksImportFrom: "@apollo/client"
