@@ -10,3 +10,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: yarn test:ci
+        env:
+          NEXT_PUBLIC_FAUNA_GRAPHQL_URI: ${{ secrets.FAUNA_GRAPHQL_URI }}
+          FAUNA_ADMIN_KEY: ${{ secrets.FAUNA_ADMIN_KEY }}
