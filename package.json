@@ -20,7 +20,12 @@
     "test": "yarn jest",
     "test:watch": "yarn jest --watch",
     "test:coverage": "yarn jest --coverage",
-    "test:watch:coverage": "yarn jest --coverage --watch"
+    "test:watch:coverage": "yarn jest --coverage --watch",
+    "cy:open": "yarn cypress open",
+    "cy:run": "yarn cypress run",
+    "test:cy-open": "start-server-and-test start-server http://localhost:3000 cy:open",
+    "test:cy-run": "start-server-and-test start-server http://localhost:3000 cy:run",
+    "start-server": "yarn dev:e2e"
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
@@ -44,6 +49,7 @@
     "@storybook/addon-essentials": "^6.0.26",
     "@storybook/addon-links": "^6.0.26",
     "@storybook/react": "^6.0.26",
+    "@testing-library/cypress": "^7.0.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.8",
@@ -57,6 +63,7 @@
     "babel-jest": "^26.5.2",
     "babel-loader": "^8.1.0",
     "cross-fetch": "^3.0.6",
+    "cypress": "^5.4.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-jest-dom": "^3.2.3",
@@ -74,6 +81,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
     "react-is": "^16.13.1",
+    "start-server-and-test": "^1.11.5",
     "tailwindcss": "^1.9.2",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3",
