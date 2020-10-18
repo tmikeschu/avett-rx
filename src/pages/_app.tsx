@@ -8,6 +8,11 @@ import Router from "next/router";
 
 import Layout from "components/layout";
 import { ApolloProvider, InitialState } from "lib/apollo-client";
+import mockServiceWorker from "mocks";
+
+if (process.env.MOCK_SERVICE_WORKER === "1") {
+  mockServiceWorker();
+}
 
 const onRedirectCallback = (appState: AppState): void => {
   Router.replace(appState?.returnTo || "/");
