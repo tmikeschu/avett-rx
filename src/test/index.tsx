@@ -2,6 +2,8 @@ import React from "react";
 import { render, RenderResult } from "@testing-library/react";
 import { NextRouter } from "next/router";
 
+import { ApolloProvider } from "lib/apollo-client";
+
 import RouterProvider from "./router-provider";
 
 type AllTheProvidersProps = {
@@ -16,7 +18,9 @@ const AllTheProviders = ({
   const _AllTheProviders: React.FC = ({ children }) => {
     return (
       <RouterProvider router={router}>
-        <Wrapper>{children}</Wrapper>
+        <ApolloProvider>
+          <Wrapper>{children}</Wrapper>
+        </ApolloProvider>
       </RouterProvider>
     );
   };

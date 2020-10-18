@@ -29,6 +29,9 @@ function createApolloClient({
           token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY
         }`,
       },
+      ...(process.env.NODE_ENV === "test"
+        ? { fetch: require("cross-fetch") }
+        : {}),
     }),
     cache: new InMemoryCache({}),
   });
