@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "run-p types:watch next:dev",
     "next:dev": "next dev",
+    "dev:e2e": "run-p types:watch next:e2e",
+    "next:e2e": "MOCK_SERVICE_WORKER=1 next dev",
     "prebuild": "yarn types:build",
     "build": "next build",
     "start": "next start",
