@@ -29,9 +29,10 @@ describe("<Layout />", () => {
 
   it("shows log out to authed users", () => {
     mockIsLoggedIn = true;
-    const { getByRole, queryByRole } = utils.render(<Layout />);
-    const login = queryByRole("button", { name: /log in/i });
-    const logout = getByRole("button", { name: /log out/i });
+    const { getByTestId } = utils.render(<Layout />);
+    const menu = getByTestId("desktop-menu");
+    const login = utils.queryByRole(menu, "button", { name: /log in/i });
+    const logout = utils.getByRole(menu, "button", { name: /log out/i });
     expect(logout).toBeInTheDocument();
     expect(login).toBeNull();
   });
@@ -64,17 +65,18 @@ describe("<Layout />", () => {
 
   it("has stateful login/logout buttons", () => {
     mockIsLoggedIn = false;
-    const { getByRole, rerender } = utils.render(<Layout />, {
+    const { getByTestId, rerender } = utils.render(<Layout />, {
       router: {
         asPath: VISITOR_VIEWS[0],
       },
     });
-    const login = getByRole("button", { name: /log in/i });
+    const menu = getByTestId("desktop-menu");
+    const login = utils.getByRole(menu, "button", { name: /log in/i });
     utils.user.click(login);
     expect(mockIsLoggedIn).toBe(true);
 
     rerender(<Layout />);
-    const logout = getByRole("button", { name: /log out/i });
+    const logout = utils.getByRole(menu, "button", { name: /log out/i });
     utils.user.click(logout);
     expect(mockIsLoggedIn).toBe(false);
   });

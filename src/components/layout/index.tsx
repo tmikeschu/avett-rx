@@ -30,6 +30,10 @@ const Layout: React.FC = ({ children }) => {
           <Text variant="h1">Avett Rx</Text>
         </div>
 
+        <section data-testid="desktop-menu" className="hidden lg:block">
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        </section>
+
         <Button
           className="lg:hidden z-10"
           style={{ border: "none" }}
@@ -40,12 +44,8 @@ const Layout: React.FC = ({ children }) => {
           <Hamburger />
         </Button>
 
-        <section className="hidden lg:block">
-          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-        </section>
-
         <section
-          data-testid="menu"
+          data-testid="mobile-menu"
           className={joinClassNames([
             "top-0 left-0 justify-end flex lg:hidden absolute z-20 h-screen w-screen",
             "transition-transform ease-in duration-300 transform",
