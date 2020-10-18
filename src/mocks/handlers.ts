@@ -1,19 +1,19 @@
-import { graphql, rest } from "msw";
+import { graphql } from "msw";
 
-import { GetTagsQuery, GetTagsQueryVariables } from "../../__generated__/api";
+import { GetTagsQuery, GetTagsQueryVariables, newGetTagsData } from "api";
 
 export const handlers = [
   graphql.query<GetTagsQuery, GetTagsQueryVariables>(
     "GetTags",
     (_req, res, ctx) => {
       return res(
-        ctx.data({
-          __typename: "Query",
-          allTags: {
-            __typename: "TagPage",
-            data: [{ _id: "aoeu", name: "😭", __typename: "Tag" }, null],
-          },
-        })
+        ctx.data(
+          newGetTagsData({
+            allTags: {
+              data: [{ name: "😭" }, null],
+            },
+          })
+        )
       );
     }
   ),
