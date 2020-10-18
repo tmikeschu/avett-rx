@@ -62,7 +62,7 @@ describe("<Layout />", () => {
     expect(text).toBeNull();
   });
 
-  it("hides content for non root views", () => {
+  it("has stateful login/logout buttons", () => {
     mockIsLoggedIn = false;
     const { getByRole, rerender } = utils.render(<Layout />, {
       router: {
