@@ -1,5 +1,6 @@
 import React from "react";
 import { render, RenderResult } from "@testing-library/react";
+import fetch from "cross-fetch";
 import { NextRouter } from "next/router";
 
 import { ApolloProvider } from "lib/apollo-client";
@@ -18,7 +19,7 @@ const AllTheProviders = ({
   const _AllTheProviders: React.FC = ({ children }) => {
     return (
       <RouterProvider router={router}>
-        <ApolloProvider>
+        <ApolloProvider options={{ httpOptions: { fetch } }}>
           <Wrapper>{children}</Wrapper>
         </ApolloProvider>
       </RouterProvider>
