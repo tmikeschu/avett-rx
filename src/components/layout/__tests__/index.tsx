@@ -8,7 +8,12 @@ let mockIsLoggedIn = false;
 
 jest.mock("@auth0/auth0-react", () => {
   return {
-    useAuth0: () => ({ isAuthenticated: mockIsLoggedIn }),
+    useAuth0: () => ({
+      isAuthenticated: mockIsLoggedIn,
+      loginWithRedirect: () => (mockIsLoggedIn = true),
+      logout: () => (mockIsLoggedIn = false),
+      user: {},
+    }),
   };
 });
 
@@ -55,5 +60,22 @@ describe("<Layout />", () => {
     });
     const text = queryByTestId(/content/i);
     expect(text).toBeNull();
+  });
+
+  it("hides content for non root views", () => {
+    mockIsLoggedIn = false;
+    const { getByRole, rerender } = utils.render(<Layout />, {
+      router: {
+        asPath: VISITOR_VIEWS[0],
+      },
+    });
+    const login = getByRole("button", { name: /log in/i });
+    utils.user.click(login);
+    expect(mockIsLoggedIn).toBe(true);
+
+    rerender(<Layout />);
+    const logout = getByRole("button", { name: /log out/i });
+    utils.user.click(logout);
+    expect(mockIsLoggedIn).toBe(false);
   });
 });
