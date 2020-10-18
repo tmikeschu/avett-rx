@@ -1,6 +1,11 @@
 import { graphql } from "msw";
 
-import { GetTagsQuery, GetTagsQueryVariables, newGetTagsData } from "api";
+import {
+  GetTagsQuery,
+  GetTagsQueryVariables,
+  newGetTagsData,
+  newTag,
+} from "api";
 
 export const handlers = [
   graphql.query<GetTagsQuery, GetTagsQueryVariables>(
@@ -10,7 +15,7 @@ export const handlers = [
         ctx.data(
           newGetTagsData({
             allTags: {
-              data: [{ name: "😭" }, null],
+              data: [newTag({ name: "😭" }), null],
             },
           })
         )
