@@ -26,6 +26,7 @@
     "test:cy-open": "start-server-and-test start-server http://localhost:3000 cy:open",
     "test:cy-run": "start-server-and-test start-server http://localhost:3000 cy:run",
     "start-server": "yarn dev:e2e",
+    "pretest:ci": "yarn types:build",
     "test:ci": "CI=true yarn test && yarn test:cy-run"
   },
   "dependencies": {
