@@ -25,7 +25,7 @@ const Layout: React.FC = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      <nav className="p-4 flex items-center justify-between">
+      <nav className="p-4 flex items-center justify-between relative">
         <div>
           <Text variant="h1">Avett Rx</Text>
         </div>
