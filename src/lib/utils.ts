@@ -10,6 +10,6 @@ export const joinClassNames = (structure: ClassName[]): string => {
     .trim();
 };
 
-export const TypedKey = <U extends string>(
-  map: Record<U, string>
-): Record<U, string> => map;
+export const TypedKey = <T extends string>(
+  map: Record<T, string>
+): Record<T, string> => map;
