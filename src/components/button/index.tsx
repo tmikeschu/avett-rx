@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Text from "components/text";
 import { Color, COLORS } from "lib/constants";
-import { joinClassNames } from "lib/utils";
+import { joinClassNames, TypedKey } from "lib/utils";
 
 export type ButtonColor = Exclude<Color, "dark" | "light">;
 export const BUTTON_COLORS = COLORS.filter(
@@ -20,10 +20,6 @@ export type Props = {
   variant?: Variant;
   size?: Size;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
-
-const TypedKey = <U extends string>(
-  map: Record<U, string>
-): Record<U, string> => map;
 
 const Button: React.FC<Props> = ({
   color = "primary",

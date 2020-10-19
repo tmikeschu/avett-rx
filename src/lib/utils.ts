@@ -9,3 +9,7 @@ export const joinClassNames = (structure: ClassName[]): string => {
     .replace(/\s\s+/g, " ")
     .trim();
 };
+
+export const TypedKey = <U extends string>(
+  map: Record<U, string>
+): Record<U, string> => map;

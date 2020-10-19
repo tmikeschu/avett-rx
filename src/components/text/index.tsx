@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Color } from "lib/constants";
-import { joinClassNames } from "lib/utils";
+import { joinClassNames, TypedKey } from "lib/utils";
 
 export const VARIANTS = [
   "body1",
@@ -57,7 +57,7 @@ function Text<T extends TextElement>({
     <ComponentToUse
       {...props}
       className={joinClassNames([
-        ({
+        TypedKey<Color>({
           cancel: "text-cancel",
           primary: "text-primary",
           secondary: "text-secondary",
@@ -66,8 +66,8 @@ function Text<T extends TextElement>({
           warning: "text-dark border-warning border-b-4 border-solid",
           dark: "text-dark",
           light: "text-light",
-        } as Record<Color, string>)[color],
-        ({
+        })[color],
+        TypedKey<Variant>({
           h1: "text-4xl tracking-tighter font-display leading-tight",
           h2: "text-2xl tracking-tighter font-display leading-tight",
           h3: "text-xl tracking-tighter font-display leading-tight",
@@ -79,7 +79,7 @@ function Text<T extends TextElement>({
           overline: "uppercase text-sm font-body",
           caption: "text-xs text-gray-600 font-body",
           button: "font-bold text-base sm:text-lg font-body uppercase",
-        } as Record<Variant, string>)[variant],
+        })[variant],
         className,
       ])}
     />
