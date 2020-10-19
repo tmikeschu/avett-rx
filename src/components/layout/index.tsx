@@ -53,6 +53,8 @@ const Layout: React.FC = ({ children }) => {
           ])}
         >
           <div
+            data-testid="close-menu"
+            role="button"
             className={`w-full h-full z-0 transition-opacity bg-primary duration-300 ease ${
               showMenu ? "opacity-75" : "opacity-0"
             }`}
