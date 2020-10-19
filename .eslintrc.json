@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -26,7 +27,12 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "jest-dom",
+    "testing-library"
+  ],
   "rules": {
     "react/prop-types": "off",
     "simple-import-sort/sort": [
@@ -43,7 +49,7 @@
           ["^react", "^@?\\w"],
 
           // Internal packages. should match any direct child of ./src
-          ["^(api|components|features|hooks|lib|pages|config)(/.*|$)"],
+          ["^(api|components|features|lib|test|mocks)(/.*|$)"],
 
           // Parent imports. Put `..` last.
           ["^\\.\\.(?!/?$)", "^\\.\\./?$"],

@@ -13,3 +13,9 @@ jobs:
         env:
           NEXT_PUBLIC_FAUNA_GRAPHQL_URI: ${{ secrets.FAUNA_GRAPHQL_URI }}
           FAUNA_ADMIN_KEY: ${{ secrets.FAUNA_ADMIN_KEY }}
+      - name: screenshot upload
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots

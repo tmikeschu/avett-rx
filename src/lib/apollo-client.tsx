@@ -3,6 +3,7 @@ import {
   ApolloClient,
   ApolloProvider as AP,
   HttpLink,
+  HttpOptions,
   InMemoryCache,
 } from "@apollo/client";
 
@@ -14,11 +15,15 @@ export type InitialState = Record<string, Any>;
 
 let apolloClient: ApolloClient<Cache>;
 
+type CreateClientOptions = {
+  token?: string;
+  httpOptions?: HttpOptions;
+};
+
 function createApolloClient({
   token,
-}: {
-  token?: string;
-} = {}): ApolloClient<Cache> {
+  httpOptions = {},
+}: CreateClientOptions = {}): ApolloClient<Cache> {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
@@ -29,16 +34,18 @@ function createApolloClient({
           token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY
         }`,
       },
+      ...httpOptions,
     }),
     cache: new InMemoryCache({}),
   });
 }
 
-export function initializeApollo({
-  token,
-  ...initialState
-}: InitialState = {}): ApolloClient<Cache> {
-  const _apolloClient = apolloClient ?? createApolloClient({ token });
+export function initializeApollo(
+  { token, ...initialState }: InitialState = {},
+  options: CreateClientOptions = {}
+): ApolloClient<Cache> {
+  const _apolloClient =
+    apolloClient ?? createApolloClient({ token, ...options });
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -57,12 +64,15 @@ export function initializeApollo({
   return _apolloClient;
 }
 
-export function useApollo(initialState: InitialState): ApolloClient<Cache> {
+export function useApollo(
+  initialState: InitialState,
+  options: CreateClientOptions = {}
+): ApolloClient<Cache> {
   const { user = { token: "" } } = useCurrentUser();
 
   const store = React.useMemo(
-    () => initializeApollo({ ...initialState, token: user.token }),
-    [initialState, user.token]
+    () => initializeApollo(initialState, { ...options, token: user.token }),
+    [initialState, user.token, options]
   );
 
   return store;
@@ -70,7 +80,8 @@ export function useApollo(initialState: InitialState): ApolloClient<Cache> {
 
 export const ApolloProvider: React.FC<{
   initialState?: InitialState;
-}> = ({ children, initialState = {} }) => {
-  const client = useApollo(initialState);
+  options?: CreateClientOptions;
+}> = ({ children, initialState = {}, options }) => {
+  const client = useApollo(initialState, options);
   return <AP client={client}>{children}</AP>;
 };

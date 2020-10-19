@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import { COLORS } from "lib/constants";
-
-import Button, { Props, SIZES, VARIANTS } from ".";
+import Button, { BUTTON_COLORS, Props, SIZES, VARIANTS } from ".";
 
 export default {
   title: "Components/Button",
@@ -13,7 +11,7 @@ export default {
     color: {
       control: {
         type: "select",
-        options: COLORS,
+        options: BUTTON_COLORS,
       },
     },
     variant: {
@@ -43,7 +41,7 @@ Demo.args = {
 
 export const Suite: Story = () => (
   <div>
-    {COLORS.filter((c) => c !== "dark" && c !== "light").map((c) => (
+    {BUTTON_COLORS.map((c) => (
       <div key={c} className="mb-4 items-end flex flex-wrap">
         <h2 className="text-xl mr-4 mb-4 w-24">{capitalize(c)}</h2>
         {VARIANTS.map((v) =>
