@@ -21,6 +21,10 @@ export type Props = {
   size?: Size;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+const TypedKey = <U extends string>(
+  map: Record<U, string>
+): Record<U, string> => map;
+
 const Button: React.FC<Props> = ({
   color = "primary",
   variant = "solid",
@@ -33,125 +37,55 @@ const Button: React.FC<Props> = ({
     <button
       {...props}
       className={joinClassNames([
-        (() => {
-          switch (size) {
-            case "sm":
-              return "text-sm";
-            case "md":
-              return "text-base";
-            case "lg":
-              return "text-lg";
-          }
-        })(),
+        TypedKey<Size>({
+          sm: "text-sm",
+          md: "text-base",
+          lg: "text-lg",
+        })[size],
         props.disabled
           ? "cursor-not-allowed opacity-25"
           : "hover:opacity-75 focus:opacity-75 focus:outline-none",
         variant === "solid" ? "rounded" : "",
         variant === "outline" ? "rounded border border-solid bg-light" : "",
         variant === "link"
-          ? [
-              "border-b border-solid bg-none p-0",
-              (() => {
-                switch (size) {
-                  case "sm":
-                    return "";
-                  case "md":
-                    return "";
-                  case "lg":
-                    return "";
-                }
-              })(),
-            ]
-          : [
-              (() => {
-                switch (size) {
-                  case "sm":
-                    return "px-2 py-1";
-                  case "md":
-                    return "px-4 py-2";
-                  case "lg":
-                    return "px-8 py-4";
-                }
-              })(),
-            ],
+          ? "border-b border-solid bg-none p-0"
+          : TypedKey<Size>({
+              sm: "px-2 py-1",
+              md: "px-4 py-2",
+              lg: "px-8 py-4",
+            })[size],
         (() => {
-          /* eslint-disable no-fallthrough */
-          switch (color) {
-            case "primary": {
-              switch (variant) {
-                case "solid": {
-                  return "bg-primary text-light border-primary";
-                }
-
-                case "outline":
-                case "link": {
-                  return "text-primary border-primary";
-                }
-              }
+          switch (variant) {
+            case "solid": {
+              return TypedKey<ButtonColor>({
+                primary: "bg-primary text-light border-primary",
+                secondary: "bg-secondary border-secondary text-light",
+                cancel: "bg-gray-600 border-gray-600 text-light",
+                warning: "bg-warning text-dark border-warning",
+                error: "bg-error text-light border-error",
+                success: "bg-success text-light border-success",
+              })[color];
             }
-
-            case "secondary": {
-              switch (variant) {
-                case "solid":
-                  return "bg-secondary border-secondary text-light";
-
-                case "outline":
-                case "link":
-                  return "text-secondary border-secondary";
-              }
+            case "outline": {
+              return TypedKey<ButtonColor>({
+                primary: "text-primary border-primary",
+                secondary: "text-secondary border-secondary",
+                cancel: "border-cancel text-cancel",
+                warning: "border-warning text-black",
+                success: "border-success text-success",
+                error: "border-error text-error",
+              })[color];
             }
-
-            case "cancel": {
-              switch (variant) {
-                case "solid":
-                  return "bg-gray-600 border-gray-600 text-light";
-
-                case "outline":
-                case "link":
-                  return "border-gray-600 text-gray-600";
-              }
+            case "link": {
+              return TypedKey<ButtonColor>({
+                primary: "text-primary border-primary",
+                secondary: "text-secondary border-secondary",
+                cancel: "border-cancel text-cancel",
+                warning: "border-warning text-black",
+                success: "border-success text-success",
+                error: "border-error text-error",
+              })[color];
             }
-
-            case "warning": {
-              switch (variant) {
-                case "solid": {
-                  return "bg-warning text-dark border-warning";
-                }
-
-                case "outline":
-                case "link": {
-                  return "border-warning text-black";
-                }
-              }
-            }
-
-            case "error": {
-              switch (variant) {
-                case "solid": {
-                  return "bg-error text-light border-error";
-                }
-
-                case "outline":
-                case "link": {
-                  return "border-error text-error";
-                }
-              }
-            }
-
-            case "success": {
-              switch (variant) {
-                case "solid": {
-                  return "bg-success text-light border-success";
-                }
-
-                case "outline":
-                case "link": {
-                  return "border-success text-success";
-                }
-                //this is an easter egg
-              }
-            }
-            /* eslint-enable no-fallthrough */
           }
         })(),
         className,
