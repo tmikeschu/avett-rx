@@ -1,6 +1,6 @@
 type ClassName = string | null | undefined | ClassName[];
 
-export const joinClassNames = (structure: Array<ClassName>): string => {
+export const joinClassNames = (structure: ClassName[]): string => {
   return structure
     .map((className) =>
       Array.isArray(className) ? joinClassNames(className) : className
