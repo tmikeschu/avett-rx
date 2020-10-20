@@ -21,4 +21,3 @@ generates:
   __generated__/graphql.schema.json:
     plugins:
       - "introspection"
-      - "fragment-matcher"
