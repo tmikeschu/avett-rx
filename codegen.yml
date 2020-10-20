@@ -23,3 +23,5 @@ generates:
   __generated__/possibleTypes.json:
     plugins:
       - "fragment-matcher"
+    config:
+      apolloClientVersion: 3
