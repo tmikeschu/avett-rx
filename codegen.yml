@@ -15,9 +15,11 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
-      - "fragment-matcher"
       - '@tmikeschu/graphql-typescript-factories'
       - '@tmikeschu/graphql-typescript-response-factories'
   __generated__/graphql.schema.json:
     plugins:
       - "introspection"
+  __generated__/possibleTypes.json:
+    plugins:
+      - "fragment-matcher"
