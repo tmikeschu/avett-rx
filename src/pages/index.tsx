@@ -1,5 +1,3 @@
-import styles from "../styles/Home.module.css";
-
 import * as React from "react";
 import Head from "next/head";
 
@@ -7,13 +5,13 @@ import ViewTags from "features/view-tags";
 
 const Home: React.FC = () => {
   return (
-    <div className={styles.container}>
+    <div className="min-h-screen px-2 flex flex-col items-center justify-center">
       <Head>
         <title>Avett Rx</title>
         <link rel="icon" href="/avettrx.svg" />
       </Head>
 
-      <main className={styles.main}>
+      <main className="px-20 flex-1 flex flex-col justify-center items-center">
         <ViewTags />
       </main>
     </div>
