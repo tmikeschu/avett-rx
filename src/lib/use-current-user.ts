@@ -1,14 +1,17 @@
+import * as React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { AuthedUser } from "lib/types";
+import { User } from "api";
 
 const FAUNA_SECRET_KEY = "https://faunadb.com/id/secret";
 
-export default function useCurrentUser(): { user?: AuthedUser } {
+export default function useCurrentUser(): { user?: User } {
   const { user } = useAuth0() as {
-    user: Omit<AuthedUser, "token"> & { [FAUNA_SECRET_KEY]: string };
+    user: User & { [FAUNA_SECRET_KEY]: string };
   };
-  return {
-    user: user ? { ...user, token: user[FAUNA_SECRET_KEY] } : undefined,
-  };
+  const token = user ? user[FAUNA_SECRET_KEY] : "";
+  React.useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token]);
+  return { user: user || undefined };
 }

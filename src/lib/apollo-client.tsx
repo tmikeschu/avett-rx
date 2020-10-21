@@ -2,54 +2,58 @@ import * as React from "react";
 import {
   ApolloClient,
   ApolloProvider as AP,
-  HttpLink,
+  createHttpLink,
   HttpOptions,
   InMemoryCache,
 } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 import { Any } from "./types";
-import useCurrentUser from "./use-current-user";
 
 type Cache = Record<string, Any>;
 export type InitialState = Record<string, Any>;
 
 let apolloClient: ApolloClient<Cache>;
-let prevToken = "";
 
 type CreateClientOptions = {
-  token?: string;
   httpOptions?: HttpOptions;
 };
 
 function createApolloClient({
-  token,
   httpOptions = {},
 }: CreateClientOptions = {}): ApolloClient<Cache> {
-  return new ApolloClient({
-    ssrMode: typeof window === "undefined",
-    link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_FAUNA_GRAPHQL_URI,
-      credentials: "same-origin",
+  const httpLink = createHttpLink({
+    uri: process.env.NEXT_PUBLIC_FAUNA_GRAPHQL_URI,
+    credentials: "same-origin",
+    ...httpOptions,
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem("token");
+    return {
       headers: {
-        Authorization: `Bearer ${
+        ...headers,
+        authorization: `Bearer ${
           token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY
         }`,
       },
-      ...httpOptions,
-    }),
+    };
+  });
+
+  return new ApolloClient({
+    ssrMode: typeof window === "undefined",
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache({}),
   });
 }
 
 export function initializeApollo(
-  { token, ...initialState }: InitialState = {},
+  initialState: InitialState = {},
   options: CreateClientOptions = {}
 ): ApolloClient<Cache> {
-  const _apolloClient =
-    apolloClient && token === prevToken
-      ? apolloClient
-      : createApolloClient({ token, ...options });
-  prevToken = token;
+  const _apolloClient = apolloClient
+    ? apolloClient
+    : createApolloClient({ ...options });
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -72,12 +76,9 @@ export function useApollo(
   initialState: InitialState,
   options: CreateClientOptions = {}
 ): ApolloClient<Cache> {
-  const { user = { token: "" } } = useCurrentUser();
-
-  const store = React.useMemo(
-    () => initializeApollo(initialState, { ...options, token: user.token }),
-    [initialState, user.token, options]
-  );
+  const store = React.useMemo(() => {
+    return initializeApollo(initialState, options);
+  }, [initialState, options]);
 
   return store;
 }
