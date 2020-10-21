@@ -10,10 +10,10 @@ describe("<Button />", () => {
     const button = getByRole("button");
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="text-base hover:opacity-75 focus:opacity-75 focus:outline-none rounded px-4 py-2 bg-primary text-light border-primary"
+        class="hover:opacity-75 focus:opacity-75 focus:outline-none rounded bg-primary text-light border-primary px-4 py-2 text-base"
       >
         <span
-          class="text-dark font-bold text-base sm:text-lg font-body uppercase"
+          class="font-bold font-body uppercase"
         >
           Snapshot
         </span>
@@ -23,11 +23,11 @@ describe("<Button />", () => {
     rerender(<Button disabled={true}>Snapshot</Button>);
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="text-base cursor-not-allowed opacity-25 rounded px-4 py-2 bg-primary text-light border-primary"
+        class="cursor-not-allowed opacity-25 rounded bg-primary text-light border-primary px-4 py-2 text-base"
         disabled=""
       >
         <span
-          class="text-dark font-bold text-base sm:text-lg font-body uppercase"
+          class="font-bold font-body uppercase"
         >
           Snapshot
         </span>
@@ -41,7 +41,7 @@ describe("<Button />", () => {
     );
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="text-base cursor-not-allowed opacity-25 rounded px-4 py-2 bg-primary text-light border-primary"
+        class="cursor-not-allowed opacity-25 rounded bg-primary text-light border-primary px-4 py-2 text-base"
         disabled=""
       >
         <pre>

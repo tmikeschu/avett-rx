@@ -16,21 +16,21 @@ exports[`<Text /> variants and colors variant: body1, color: success matches sna
 
 exports[`<Text /> variants and colors variant: body1, color: warning matches snapshot 1`] = `"text-dark border-warning border-b-4 border-solid leading-normal font-body"`;
 
-exports[`<Text /> variants and colors variant: button, color: cancel matches snapshot 1`] = `"text-cancel font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: cancel matches snapshot 1`] = `"text-cancel font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: dark matches snapshot 1`] = `"text-dark font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: dark matches snapshot 1`] = `"text-dark font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: error matches snapshot 1`] = `"text-error font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: error matches snapshot 1`] = `"text-error font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: light matches snapshot 1`] = `"text-light font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: light matches snapshot 1`] = `"text-light font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: primary matches snapshot 1`] = `"text-primary font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: primary matches snapshot 1`] = `"text-primary font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: secondary matches snapshot 1`] = `"text-secondary font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: secondary matches snapshot 1`] = `"text-secondary font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: success matches snapshot 1`] = `"text-success font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: success matches snapshot 1`] = `"text-success font-bold font-body uppercase"`;
 
-exports[`<Text /> variants and colors variant: button, color: warning matches snapshot 1`] = `"text-dark border-warning border-b-4 border-solid font-bold text-base sm:text-lg font-body uppercase"`;
+exports[`<Text /> variants and colors variant: button, color: warning matches snapshot 1`] = `"text-dark border-warning border-b-4 border-solid font-bold font-body uppercase"`;
 
 exports[`<Text /> variants and colors variant: caption, color: cancel matches snapshot 1`] = `"text-cancel text-xs text-gray-600 font-body"`;
 

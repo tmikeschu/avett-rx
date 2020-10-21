@@ -48,7 +48,7 @@ type Props<T extends TextElement> = (T extends HTMLHeadingElement
 function Text<T extends TextElement>({
   variant = "body1",
   className = "",
-  color = "dark",
+  color,
   as,
   ...props
 }: Props<T>): React.ReactElement {
@@ -57,16 +57,18 @@ function Text<T extends TextElement>({
     <ComponentToUse
       {...props}
       className={joinClassNames([
-        TypedKey<Color>({
-          cancel: "text-cancel",
-          primary: "text-primary",
-          secondary: "text-secondary",
-          success: "text-success",
-          error: "text-error",
-          warning: "text-dark border-warning border-b-4 border-solid",
-          dark: "text-dark",
-          light: "text-light",
-        })[color],
+        color
+          ? TypedKey<Color>({
+              cancel: "text-cancel",
+              primary: "text-primary",
+              secondary: "text-secondary",
+              success: "text-success",
+              error: "text-error",
+              warning: "text-dark border-warning border-b-4 border-solid",
+              dark: "text-dark",
+              light: "text-light",
+            })[color]
+          : "",
         TypedKey<Variant>({
           h1: "text-4xl tracking-tighter font-display leading-tight",
           h2: "text-2xl tracking-tighter font-display leading-tight",
@@ -78,7 +80,7 @@ function Text<T extends TextElement>({
           body1: "leading-normal font-body",
           overline: "uppercase text-sm font-body",
           caption: "text-xs text-gray-600 font-body",
-          button: "font-bold text-base sm:text-lg font-body uppercase",
+          button: "font-bold font-body uppercase",
         })[variant],
         className,
       ])}
