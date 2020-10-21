@@ -8,7 +8,7 @@ fragment PharmacySong on Song {
   }
 }
 
-query SongForTag($tagID: ID!) {
+query SongsForTag($tagID: ID!) {
   songsForTag(tagID: $tagID) {
     data {
       ...PharmacySong

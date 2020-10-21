@@ -3,7 +3,7 @@ import * as React from "react";
 import {
   PharmacySongFragment,
   useGetTagsQuery,
-  useSongForTagLazyQuery,
+  useSongsForTagLazyQuery,
 } from "api";
 import Button from "components/button";
 import Text from "components/text";
@@ -14,7 +14,7 @@ const Pharmacy: React.FC = () => {
   const [songs, setSongs] = React.useState<PharmacySongFragment[]>([]);
   const [song, setSong] = React.useState<PharmacySongFragment | null>(null);
   const { data, loading } = useGetTagsQuery();
-  const [getSong, { data: songData }] = useSongForTagLazyQuery();
+  const [getSong, { data: songData }] = useSongsForTagLazyQuery();
   const tags = data?.allTags?.data || [];
 
   React.useEffect(() => {
