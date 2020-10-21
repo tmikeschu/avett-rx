@@ -14,6 +14,7 @@ type Cache = Record<string, Any>;
 export type InitialState = Record<string, Any>;
 
 let apolloClient: ApolloClient<Cache>;
+let prevToken = "";
 
 type CreateClientOptions = {
   token?: string;
@@ -45,7 +46,10 @@ export function initializeApollo(
   options: CreateClientOptions = {}
 ): ApolloClient<Cache> {
   const _apolloClient =
-    apolloClient ?? createApolloClient({ token, ...options });
+    apolloClient && token === prevToken
+      ? apolloClient
+      : createApolloClient({ token, ...options });
+  prevToken = token;
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
