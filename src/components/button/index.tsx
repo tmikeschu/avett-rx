@@ -107,9 +107,9 @@ const Button: React.FC<Props> = ({
                   error: "text-error",
                 })[color],
                 TypedKey<Size>({
-                  sm: "w-4 h-4",
-                  md: "w-6 h-6",
-                  lg: "w-8 h-8",
+                  sm: "w-4 h-4 text-sm",
+                  md: "w-6 h-6 text-base",
+                  lg: "w-8 h-8 text-xl",
                 })[size],
               ];
             }

@@ -1,40 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> variants Variant: icon, color: cancel, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: cancel, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: cancel, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: cancel, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: cancel, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: cancel, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-cancel w-4 h-4 text-sm"`;
 
-exports[`<Button /> variants Variant: icon, color: error, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: error, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: error, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: error, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: error, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: error, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-error w-4 h-4 text-sm"`;
 
-exports[`<Button /> variants Variant: icon, color: primary, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: primary, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: primary, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: primary, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: primary, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: primary, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-primary w-4 h-4 text-sm"`;
 
-exports[`<Button /> variants Variant: icon, color: secondary, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: secondary, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: secondary, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: secondary, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: secondary, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: secondary, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-secondary w-4 h-4 text-sm"`;
 
-exports[`<Button /> variants Variant: icon, color: success, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: success, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: success, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: success, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: success, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: success, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-success w-4 h-4 text-sm"`;
 
-exports[`<Button /> variants Variant: icon, color: warning, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-8 h-8"`;
+exports[`<Button /> variants Variant: icon, color: warning, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-8 h-8 text-xl"`;
 
-exports[`<Button /> variants Variant: icon, color: warning, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-6 h-6"`;
+exports[`<Button /> variants Variant: icon, color: warning, size: md matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-6 h-6 text-base"`;
 
-exports[`<Button /> variants Variant: icon, color: warning, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-4 h-4"`;
+exports[`<Button /> variants Variant: icon, color: warning, size: sm matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none text-warning w-4 h-4 text-sm"`;
 
 exports[`<Button /> variants Variant: link, color: cancel, size: lg matches snapshot 1`] = `"hover:opacity-75 focus:opacity-75 focus:outline-none border-b border-solid bg-none p-0 border-cancel text-cancel text-lg"`;
 
