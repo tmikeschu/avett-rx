@@ -39,7 +39,7 @@ const Layout: React.FC = ({ children }) => {
           style={{ border: "none" }}
           aria-label="menu"
           onClick={() => setShowMenu(true)}
-          variant="outline"
+          variant="icon"
         >
           <Hamburger />
         </Button>
