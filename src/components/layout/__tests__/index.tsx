@@ -12,7 +12,7 @@ jest.mock("@auth0/auth0-react", () => {
       isAuthenticated: mockIsLoggedIn,
       loginWithRedirect: () => (mockIsLoggedIn = true),
       logout: () => (mockIsLoggedIn = false),
-      user: {},
+      user: mockIsLoggedIn ? {} : undefined,
     }),
   };
 });
