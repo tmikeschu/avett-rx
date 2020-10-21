@@ -1,13 +1,14 @@
 import * as React from "react";
 
+import { joinClassNames } from "lib/utils";
+
 export type Props = React.SVGAttributes<HTMLOrSVGElement>;
-const Hamburger: React.FC<Props> = (props) => {
+const Hamburger: React.FC<Props> = ({ className, ...props }) => {
   // https://css-tricks.com/snippets/svg/svg-hamburger-menu/
   return (
     <svg
+      className={joinClassNames(["w-6 h-6", className])}
       viewBox="0 0 100 80"
-      width="1.5rem"
-      height="1.5rem"
       fill="currentColor"
       {...props}
     >

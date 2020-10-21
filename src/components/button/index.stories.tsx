@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import Hamburger from "components/hamburger";
+
 import Button, { BUTTON_COLORS, Props, SIZES, VARIANTS } from ".";
 
 export default {
@@ -53,7 +55,11 @@ export const Suite: Story = () => (
               className="mr-4 mb-4"
               variant={v}
             >
-              {`${capitalize(v)}: ${s}`}
+              {v === "icon" ? (
+                <Hamburger className="w-full h-full" />
+              ) : (
+                `${capitalize(v)}: ${s}`
+              )}
             </Button>
           ))
         )}
