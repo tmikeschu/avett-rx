@@ -30,9 +30,8 @@ describe("<ViewTags />", () => {
         }
       )
     );
-    const { findByText, getByRole } = utils.render(<ViewTags />);
+    const { findByText } = utils.render(<ViewTags />);
 
-    expect(getByRole("heading", { name: /tags/i })).toBeInTheDocument();
     expect(await findByText(/testing tag/)).toBeInTheDocument();
   });
 });

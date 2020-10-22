@@ -10,7 +10,9 @@ describe("Mobile UI", () => {
 
     cy.findByRole("button", { name: /log in/i }).should("be.visible");
 
-    cy.findByTestId("close-menu").click("left", { force: true });
+    cy.findByRole("button", { name: "close-menu" }).click("left", {
+      force: true,
+    });
 
     cy.findByTestId("mobile-menu").should("be.hidden");
 

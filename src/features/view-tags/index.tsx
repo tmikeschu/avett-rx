@@ -8,14 +8,19 @@ const ViewTags: React.FC = () => {
   const tags = (data && data.allTags.data) || [];
 
   return (
-    <div>
-      <Text variant="h2">Tags</Text>
+    <ul className="flex w-full overflow-x-scroll justify-center">
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        tags.map((tag) => (tag ? <div key={tag._id}>{tag.name}</div> : null))
+        tags.map((tag) =>
+          tag ? (
+            <li className="mr-4 last:mr-0 text-2xl" key={tag._id}>
+              {tag.name}
+            </li>
+          ) : null
+        )
       )}
-    </div>
+    </ul>
   );
 };
 

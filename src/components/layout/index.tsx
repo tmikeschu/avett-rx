@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import Button from "components/button";
 import Hamburger from "components/hamburger";
+import Link from "components/link";
 import Text from "components/text";
 import { LoginButton, LogoutButton } from "features/auth";
 import useCurrentUser from "lib/use-current-user";
@@ -11,8 +12,20 @@ import { joinClassNames } from "lib/utils";
 
 export const VISITOR_VIEWS = ["/"] as const;
 
+const LINKS = [["/pharmacy", "Pharmacy"]];
+
 const Layout: React.FC = ({ children }) => {
-  const { asPath } = useRouter();
+  const { asPath, events } = useRouter();
+  React.useEffect(() => {
+    const handle = () => {
+      setShowMenu(false);
+    };
+    events.on("routeChangeComplete", handle);
+
+    return () => {
+      events.off("routeChangeComplete", handle);
+    };
+  }, [events]);
   const { user } = useCurrentUser();
   const openView = VISITOR_VIEWS.some((pattern) =>
     new RegExp(pattern).test(asPath)
@@ -31,10 +44,29 @@ const Layout: React.FC = ({ children }) => {
 
         <nav className="p-4 flex items-center justify-between relative">
           <div>
-            <Text variant="h1">Avett Rx</Text>
+            <Link href="/">
+              <Text variant="h1">Avett Rx</Text>
+            </Link>
           </div>
 
-          <section data-testid="desktop-menu" className="hidden lg:block">
+          <section
+            data-testid="desktop-menu"
+            className="hidden lg:flex items-center flex-1 justify-between ml-8"
+          >
+            <div>
+              {LINKS.map((link) => (
+                <Link
+                  key={link[0]}
+                  href={link[0]}
+                  className={joinClassNames([
+                    "text-primary border-primary border-b border-solid inline pb-1 mr-4 last:mr-0",
+                    asPath === link[0] ? "font-bold" : "",
+                  ])}
+                >
+                  {link[1]}
+                </Link>
+              ))}
+            </div>
             {user ? <LogoutButton /> : <LoginButton />}
           </section>
 
@@ -57,7 +89,7 @@ const Layout: React.FC = ({ children }) => {
             ])}
           >
             <div
-              data-testid="close-menu"
+              aria-label="close-menu"
               role="button"
               className={`w-full h-full z-0 transition-opacity bg-primary duration-300 ease ${
                 showMenu ? "opacity-75" : "opacity-0"
@@ -69,9 +101,20 @@ const Layout: React.FC = ({ children }) => {
               }}
             />
             <div
-              className={`p-4 absolute top-0 z-10 right-0 h-full w-64 bg-light`}
+              className={`flex flex-col p-4 absolute top-0 z-10 right-0 h-full w-64 bg-light justify-between`}
             >
-              {user ? <LogoutButton /> : <LoginButton />}
+              <div className="flex flex-col">
+                {LINKS.map((link) => (
+                  <Link
+                    key={link[0]}
+                    href={link[0]}
+                    className="text-primary border-primary border-b border-solid inline pb-2"
+                  >
+                    {link[1]}
+                  </Link>
+                ))}
+              </div>
+              <div>{user ? <LogoutButton /> : <LoginButton />}</div>
             </div>
           </section>
         </nav>
