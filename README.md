@@ -1,30 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Avett Rx
 
-## Getting Started
+Avett Rx "prescribes" you a song by The Avett Brothers based on how you're feeling.
 
-First, run the development server:
+## Setup
+
+```
+yarn install
+```
+
+## Test
+
+```
+# for the whole enchilada
+yarn test:ci
+
+# unit and integration
+yarn test
+yarn test:watch # with live reload
+yarn test:coverage # with coverage report
+
+# e2e
+yarn test:cy-open # with GUI
+yarn test:cy-run # headless
+```
+
+## GraphQL Schema Updates
+
+After editing `schema.graphql`, upload it to FaunaDB via:
+
+```
+yarn schema:update
+```
+
+## GraphQL Code Generator
+
+Autogenerate TypeScript types based on the GraphQL schema and types.
+
+```
+yarn types:build # for a quick update
+yarn types:watch # during active development
+```
+
+## Local development
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Deploy
 
-## Learn More
+### Local prod build
 
-To learn more about Next.js, take a look at the following resources:
+```
+yarn build
+yarn start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Previews and Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+All pushed changes are auto-deployed on Vercel.
 
-## Deploy on Vercel
+## Tools
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- [Cypress](https://www.cypress.io/)
+- [GrahpQL Code Generator](https://graphql-code-generator.com/)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [FaunaDB](https://fauna.com/)
+- [Auth0](https://auth0.com/)
+- [Prettier](https://prettier.io/)
+- [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint)
+- [Husky](https://github.com/typicode/husky)
+- [Lint Staged](https://github.com/okonet/lint-staged)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Mock Service Worker](https://mswjs.io/)
+- [Vercel](https://vercel.com)
+- [Storybook](https://storybook.js.org/)
