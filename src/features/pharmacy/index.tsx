@@ -73,20 +73,28 @@ const Pharmacy: React.FC = () => {
         </>
       )}
 
-      {song ? (
-        <div className="mt-4">
-          <div className="mb-4">
-            <Text variant="h3" className="">
-              {song.title}
-            </Text>
-            <Text variant="caption">From: {song.album.title}</Text>
-          </div>
+      <div className="mt-4">
+        {song ? (
+          <>
+            <div className="mb-4">
+              <Text variant="h3" className="">
+                {song.title}
+              </Text>
+              <Text variant="caption">From: {song.album.title}</Text>
+            </div>
 
-          <Text variant="body1" className="text-sm italic">
-            {nl2br(song.lyrics)}
-          </Text>
-        </div>
-      ) : null}
+            <Text variant="body1" className="text-sm italic">
+              {nl2br(song.lyrics)}
+            </Text>
+          </>
+        ) : tagID ? (
+          <div className="mb-4">
+            <Text variant="subtitle" className="">
+              Oh no 😢. We haven&apos;t tagged any songs with this yet.
+            </Text>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };

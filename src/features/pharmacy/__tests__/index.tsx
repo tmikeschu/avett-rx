@@ -22,4 +22,14 @@ describe("<Pharmacy />", () => {
     expect(getByText(/make me sanguine/i)).toBeInTheDocument();
     expect(getByText(/from: the gleam/i)).toBeInTheDocument();
   });
+
+  it("has an empty state", async () => {
+    const { findByText, getByText } = utils.render(<Pharmacy />);
+
+    await findByText(/select.*feeling/i);
+
+    const btn = getByText("🥰");
+    user.click(btn);
+    expect(await findByText(/haven't.*tagged/)).toBeInTheDocument();
+  });
 });
