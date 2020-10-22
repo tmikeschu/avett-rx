@@ -40,6 +40,7 @@ export const handlers = [
                   lyrics: "Make me sanguine\nHelp me genuinely",
                   album: newAlbum({ title: "The Gleam" }),
                 }),
+                null,
               ],
             },
           })

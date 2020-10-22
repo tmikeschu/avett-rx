@@ -80,4 +80,31 @@ describe("<Layout />", () => {
     utils.user.click(logout);
     expect(mockIsLoggedIn).toBe(false);
   });
+
+  it("handles route changes", async () => {
+    const onMock = jest.fn((event, fn) => fn());
+    const offMock = jest.fn();
+    const { unmount } = utils.render(<Layout />, {
+      router: {
+        asPath: "/",
+        events: {
+          on: onMock,
+          off: offMock,
+          emit: jest.fn(),
+        },
+      },
+    });
+    expect(onMock).toHaveBeenCalledTimes(1);
+    expect(onMock).toHaveBeenCalledWith(
+      "routeChangeComplete",
+      expect.any(Function)
+    );
+
+    unmount();
+    expect(offMock).toHaveBeenCalledTimes(1);
+    expect(offMock).toHaveBeenCalledWith(
+      "routeChangeComplete",
+      expect.any(Function)
+    );
+  });
 });

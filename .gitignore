@@ -39,3 +39,4 @@ __generated__
 .eslintcache
 
 cypress/videos
+cypress/screenshots
