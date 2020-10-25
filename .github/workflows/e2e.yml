@@ -14,7 +14,7 @@ jobs:
           NEXT_PUBLIC_FAUNA_GRAPHQL_URI: ${{ secrets.FAUNA_GRAPHQL_URI }}
           FAUNA_ADMIN_KEY: ${{ secrets.FAUNA_ADMIN_KEY }}
           MAGIC_SECRET_KEY: ${{ secrets.MAGIC_SECRET_KEY }}
-          MAGIC_PUBLISHABLE_KEY: ${{ secrets.MAGIC_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY: ${{ secrets.MAGIC_PUBLISHABLE_KEY }}
       - name: screenshot upload
         uses: actions/upload-artifact@v1
         if: failure()
