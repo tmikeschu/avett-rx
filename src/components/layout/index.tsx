@@ -3,7 +3,7 @@ import Router, { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 
 import Button from "components/button";
-import Hamburger from "components/hamburger";
+import Hamburger from "components/icons/hamburger";
 import Link from "components/link";
 import Text from "components/text";
 import { LoginButton, LogoutButton } from "features/auth";

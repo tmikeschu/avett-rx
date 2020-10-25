@@ -3,11 +3,11 @@ import { Meta, Story } from "@storybook/react";
 
 import { Color, COLORS } from "lib/constants";
 
-import Hamburger, { Props } from ".";
+import Close, { Props } from ".";
 
 export default {
-  title: "Components/Hamburger",
-  component: Hamburger,
+  title: "Icons/Close",
+  component: Close,
   argTypes: {
     color: {
       control: {
@@ -23,7 +23,7 @@ type Args = Props & {
 };
 
 const Template: Story<Args> = ({ color, ...args }) => (
-  <Hamburger className={`text-${color}`} {...args} />
+  <Close className={`text-${color}`} {...args} />
 );
 
 export const Demo = Template.bind({});

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Meta, Story } from "@storybook/react";
 
-import Hamburger from "components/hamburger";
+import Hamburger from "components/icons/hamburger";
 
 import Button, { BUTTON_COLORS, Props, SIZES, VARIANTS } from ".";
 
