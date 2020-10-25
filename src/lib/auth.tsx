@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Magic } from "magic-sdk";
-import Router from "next/router";
 
 import { Any } from "./types";
 import useCurrentUser from "./use-current-user";
