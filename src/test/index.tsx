@@ -4,24 +4,29 @@ import fetch from "cross-fetch";
 import { NextRouter } from "next/router";
 
 import { ApolloProvider } from "lib/apollo-client";
+import { AuthContext, MockAuthProvider } from "lib/auth";
 
 import RouterProvider from "./router-provider";
 
 type AllTheProvidersProps = {
   router?: Partial<NextRouter>;
+  auth?: Partial<AuthContext>;
   wrapper?: React.FC;
 };
 
 const AllTheProviders = ({
   router,
+  auth = {},
   wrapper: Wrapper = ({ children }) => <>{children}</>,
 }: AllTheProvidersProps) => {
   const _AllTheProviders: React.FC = ({ children }) => {
     return (
       <RouterProvider router={router}>
-        <ApolloProvider options={{ httpOptions: { fetch } }}>
-          <Wrapper>{children}</Wrapper>
-        </ApolloProvider>
+        <MockAuthProvider initialState={auth}>
+          <ApolloProvider options={{ httpOptions: { fetch } }}>
+            <Wrapper>{children}</Wrapper>
+          </ApolloProvider>
+        </MockAuthProvider>
       </RouterProvider>
     );
   };
@@ -31,10 +36,15 @@ const AllTheProviders = ({
 type RenderParams = Parameters<typeof render>;
 const customRender = (
   ui: RenderParams[0],
-  { router, wrapper, ...options }: RenderParams[1] & AllTheProvidersProps = {}
+  {
+    router,
+    wrapper,
+    auth,
+    ...options
+  }: RenderParams[1] & AllTheProvidersProps = {}
 ): RenderResult =>
   render(ui, {
-    wrapper: AllTheProviders({ router, wrapper }),
+    wrapper: AllTheProviders({ router, wrapper, auth }),
     ...options,
   });
 

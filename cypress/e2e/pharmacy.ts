@@ -4,7 +4,6 @@ describe("Pharmacy", () => {
     cy.findByRole("button", { name: "menu" }).click();
     cy.findByRole("link", { name: /pharmacy/i }).click();
     cy.url().should("match", /\/pharmacy/);
-    cy.findByRole("heading", { name: /pharmacy/i }).should("exist");
     cy.findByRole("heading", { name: /avett\s?rx/i }).click();
     cy.url().should("match", /\/$/);
   });
@@ -13,7 +12,6 @@ describe("Pharmacy", () => {
     cy.viewport("macbook-13").visit("/");
     cy.findByRole("link", { name: /pharmacy/i }).click();
     cy.url().should("match", /\/pharmacy/);
-    cy.findByRole("heading", { name: /pharmacy/i }).should("exist");
     cy.findByRole("heading", { name: /avett\s?rx/i }).click();
     cy.url().should("match", /\/$/);
   });

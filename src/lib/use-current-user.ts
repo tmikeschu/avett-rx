@@ -1,17 +1,42 @@
 import * as React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import Router from "next/router";
+import useSWR from "swr";
 
-import { User } from "api";
+import { Any } from "./types";
 
-const FAUNA_SECRET_KEY = "https://faunadb.com/id/secret";
+const fetcher = (url: string): Promise<{ user: Any }> =>
+  fetch(url)
+    .then((r) => r.json())
+    .then((data) => {
+      return { user: data?.user || null };
+    });
 
-export default function useCurrentUser(): { user?: User } {
-  const { user } = useAuth0() as {
-    user: User & { [FAUNA_SECRET_KEY]: string };
-  };
-  const token = user ? user[FAUNA_SECRET_KEY] : "";
+export default function useCurrentUser({
+  redirectTo,
+  redirectIfFound,
+}: { redirectTo?: string; redirectIfFound?: boolean } = {}): Any | null {
+  const { data, error } = useSWR("/api/user", fetcher);
+  const user = data?.user;
+  const finished = Boolean(data);
+  const hasUser = Boolean(user);
+
   React.useEffect(() => {
-    localStorage.setItem("token", token);
-  }, [token]);
-  return { user: user || undefined };
+    if (!redirectTo || !finished) return;
+    if (
+      // If redirectTo is set, redirect if the user was not found.
+      (redirectTo && !redirectIfFound && !hasUser) ||
+      // If redirectIfFound is also set, redirect if the user was found
+      (redirectIfFound && hasUser)
+    ) {
+      Router.push(redirectTo);
+    }
+  }, [redirectTo, redirectIfFound, finished, hasUser]);
+
+  React.useEffect(() => {
+    if (user) {
+      localStorage.setItem("faunaToken", user.faunaToken);
+    }
+  }, [user]);
+
+  return error ? null : user;
 }

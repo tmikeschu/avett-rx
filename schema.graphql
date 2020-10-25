@@ -17,15 +17,12 @@ type Tag {
 
 type User {
   email: String! @unique
-  nickname: String
-  name: String
-  picture: String
 }
 
 type Query {
   allTags: [Tag!]!
   allAlbums: [Album!]!
   allSongs: [Song!]!
-  songsForTag(tagID: ID!): [Song]!
+  songsForTag(tagID: ID!): [Song!]!
     @resolver(name: "songs_for_tag", paginated: true)
 }

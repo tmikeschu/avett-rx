@@ -29,7 +29,7 @@ function createApolloClient({
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("faunaToken");
     return {
       headers: {
         ...headers,

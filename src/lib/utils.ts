@@ -29,3 +29,16 @@ export const nl2br = (str: string): Array<string | React.ReactElement> => {
     return line;
   });
 };
+
+export function createUsableContext<T>(): readonly [
+  () => T,
+  React.Context<T | undefined>
+] {
+  const ctx = React.createContext<T | undefined>(undefined);
+  function useCtx() {
+    const c = React.useContext(ctx);
+    if (!c) throw new Error("useCtx must be inside a Provider with a value");
+    return c;
+  }
+  return [useCtx, ctx] as const;
+}

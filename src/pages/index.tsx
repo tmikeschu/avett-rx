@@ -7,7 +7,7 @@ import ViewTags from "features/view-tags";
 
 const Home: React.FC = () => {
   return (
-    <div className="min-h-screen px-2 flex flex-col items-center justify-center">
+    <div className="px-2 flex flex-col items-center justify-center">
       <Head>
         <title>Avett Rx</title>
         <link rel="icon" href="/avettrx.svg" />

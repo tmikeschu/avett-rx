@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useRouter } from "next/dist/client/router";
+import Router, { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 
 import Button from "components/button";
@@ -7,7 +7,7 @@ import Hamburger from "components/hamburger";
 import Link from "components/link";
 import Text from "components/text";
 import { LoginButton, LogoutButton } from "features/auth";
-import useCurrentUser from "lib/use-current-user";
+import { useAuth } from "lib/auth";
 import { joinClassNames } from "lib/utils";
 
 export const VISITOR_VIEWS = ["/"] as const;
@@ -15,7 +15,9 @@ export const VISITOR_VIEWS = ["/"] as const;
 const LINKS = [["/pharmacy", "Pharmacy"]];
 
 const Layout: React.FC = ({ children }) => {
-  const { asPath, events } = useRouter();
+  const { pathname, events, query, back } = useRouter();
+  const { status, user } = useAuth();
+  const isLoading = status === "loading";
   React.useEffect(() => {
     const handle = () => {
       setShowMenu(false);
@@ -26,15 +28,20 @@ const Layout: React.FC = ({ children }) => {
       events.off("routeChangeComplete", handle);
     };
   }, [events]);
-  const { user } = useCurrentUser();
-  const openView = VISITOR_VIEWS.some((pattern) =>
-    new RegExp(pattern).test(asPath)
-  );
+  const openView = VISITOR_VIEWS.some((path) => path === pathname);
   const [showMenu, setShowMenu] = React.useState(false);
 
-  return openView || user ? (
-    <div className="w-screen bg-primary bg-opacity-25">
-      <div className="max-w-screen-md mx-auto w-full overflow-x-hidden bg-light">
+  React.useEffect(() => {
+    if (query.code && query.state) {
+      Router.push("/").then(() => {
+        window.location.reload();
+      });
+    }
+  }, [query.code, query.state, pathname]);
+
+  return (
+    <div className="w-screen min-h-screen bg-primary bg-opacity-25">
+      <div className="max-w-screen-md min-h-screen mx-auto w-full overflow-x-hidden bg-light">
         <Head>
           <meta
             name="viewport"
@@ -60,7 +67,7 @@ const Layout: React.FC = ({ children }) => {
                   href={link[0]}
                   className={joinClassNames([
                     "text-primary border-primary border-b border-solid inline pb-1 mr-4 last:mr-0",
-                    asPath === link[0] ? "font-bold" : "",
+                    pathname === link[0] ? "font-bold" : "",
                   ])}
                 >
                   {link[1]}
@@ -118,11 +125,26 @@ const Layout: React.FC = ({ children }) => {
             </div>
           </section>
         </nav>
-        <main>{children}</main>
+        {openView || (!isLoading && user) ? (
+          children
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full p-4">
+            <Text color="error">
+              Whoops! You have to be logged in to see that page.
+            </Text>
+            <Button
+              size="sm"
+              variant="link"
+              color="cancel"
+              className="mt-4"
+              onClick={() => back()}
+            >
+              Back
+            </Button>
+          </div>
+        )}
       </div>
     </div>
-  ) : (
-    <LoginButton />
   );
 };
 
