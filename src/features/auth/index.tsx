@@ -11,8 +11,10 @@ export const LoginButton: React.FC = () => {
   const { login } = useAuth();
   const [showForm, setShowForm] = React.useState(false);
   const [email, setEmail] = React.useState("");
-  const [isValid, setIsValid] = React.useState(false);
+  const [validForm, setValidForm] = React.useState(false);
   const ref = React.useRef<HTMLFormElement>(null);
+
+  const canSubmit = email && validForm;
 
   return (
     <>
@@ -29,7 +31,7 @@ export const LoginButton: React.FC = () => {
           <Button
             form={FORM_ID}
             type="submit"
-            disabled={!isValid}
+            disabled={!canSubmit}
             color="success"
           >
             Get login link
@@ -40,7 +42,7 @@ export const LoginButton: React.FC = () => {
           ref={ref}
           id={FORM_ID}
           className="w-full"
-          onChange={() => setIsValid(ref.current?.checkValidity() || false)}
+          onChange={() => setValidForm(ref.current?.checkValidity() || false)}
           onSubmit={(e) => {
             e.preventDefault();
             login(email);
