@@ -26,16 +26,6 @@ a {
   box-sizing: border-box;
 }
 
-[data-reach-dialog-content] {
-  @apply w-10/12 !important;
-}
-
-@screen sm {
-  [data-reach-dialog-content] {
-    @apply w-1/2 !important;
-  }
-}
-
 input[type="email"]:invalid {
   @apply border-error border-solid border;
 }
