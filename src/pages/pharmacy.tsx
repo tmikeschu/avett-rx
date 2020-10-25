@@ -5,7 +5,7 @@ import Pharmacy from "features/pharmacy";
 
 const PharmacyPage: React.FC = () => {
   return (
-    <div className="min-h-screen px-4 flex flex-col items-center justify-center">
+    <div className="px-4 flex flex-col items-center justify-center">
       <Head>
         <title>Avett Rx</title>
         <link rel="icon" href="/avettrx.svg" />

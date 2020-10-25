@@ -1,0 +1,5 @@
+.DialogContent {
+  &[data-reach-dialog-content] {
+    width: initial;
+  }
+}
