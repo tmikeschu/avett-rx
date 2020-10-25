@@ -6,8 +6,11 @@ import Layout, { VISITOR_VIEWS } from "..";
 
 describe("<Layout />", () => {
   it("shows log in to unauthed users", () => {
-    const { getByRole, queryByRole } = utils.render(<Layout />);
-    const login = getByRole("button", { name: /log in/i });
+    const { queryByRole, getByTestId } = utils.render(<Layout />, {
+      router: { pathname: "/" },
+    });
+    const menu = getByTestId("desktop-menu");
+    const login = utils.getByRole(menu, "button", { name: /log in/i });
     const logout = queryByRole("button", { name: /log out/i });
     expect(login).toBeInTheDocument();
     expect(logout).toBeNull();

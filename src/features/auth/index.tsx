@@ -24,9 +24,7 @@ export const LoginButton: React.FC = () => {
           className="flex flex-col justify-center items-center"
           onSubmit={(e) => {
             e.preventDefault();
-            login(email).then(() => {
-              setShowForm(false);
-            });
+            login(email);
           }}
         >
           <input
