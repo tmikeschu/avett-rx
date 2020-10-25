@@ -22,7 +22,7 @@ const main: NextApiHandler = async (req, res) => {
 
     const token = await encryptSession(session);
     setTokenCookie(res, token);
-    res.status(200).send({ done: true });
+    res.status(200).send({ done: true, session });
   } catch (error) {
     res.status(error.status || 500).end(error.message);
   }

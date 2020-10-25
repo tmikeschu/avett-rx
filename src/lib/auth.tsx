@@ -40,7 +40,7 @@ const login = async (email: string): Promise<void> => {
       body: JSON.stringify(body),
     });
     if (res.status === 200) {
-      Router.push("/");
+      return res.json();
     } else {
       throw new Error(await res.text());
     }
@@ -54,7 +54,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     status: "loading",
     user: undefined,
     client: M,
-    login,
+    login: async (email: string) => {
+      const user = await login(email);
+      setState((s) => ({ ...s, user }));
+    },
     logout: async () => {
       await logout();
       setState((s) => ({ ...s, user: undefined }));
