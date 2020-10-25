@@ -40,7 +40,7 @@ const Layout: React.FC = ({ children }) => {
   }, [query.code, query.state, pathname]);
 
   return (
-    <div className="w-screen min-h-screen bg-primary bg-opacity-25">
+    <div className="w-screen min-h-screen bg-primary bg-opacity-25 relative">
       <div className="max-w-screen-md min-h-screen mx-auto w-full overflow-x-hidden bg-light">
         <Head>
           <meta
@@ -49,7 +49,7 @@ const Layout: React.FC = ({ children }) => {
           />
         </Head>
 
-        <nav className="p-4 flex items-center justify-between relative">
+        <nav className="p-4 flex items-center justify-between">
           <div>
             <Link href="/">
               <Text variant="h1">Avett Rx</Text>

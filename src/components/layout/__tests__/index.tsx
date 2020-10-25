@@ -50,7 +50,7 @@ describe("<Layout />", () => {
   });
 
   it("has stateful login/logout buttons", async () => {
-    const { getByTestId, getByPlaceholderText, getByRole } = utils.render(
+    const { getByTestId, getByLabelText, getByRole } = utils.render(
       <Layout />,
       {
         router: {
@@ -61,7 +61,7 @@ describe("<Layout />", () => {
     const menu = getByTestId("desktop-menu");
     const login = utils.getByRole(menu, "button", { name: /log in/i });
     utils.user.click(login);
-    const input = getByPlaceholderText(/email/i);
+    const input = getByLabelText(/email/i);
     utils.user.type(input, "blah@blah.blag");
     utils.user.click(getByRole("button", { name: /login link/i }));
 
