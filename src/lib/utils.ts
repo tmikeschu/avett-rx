@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Any } from "./types";
+
 type ClassName = string | null | undefined | ClassName[];
 
 export const joinClassNames = (structure: ClassName[]): string => {
@@ -41,4 +43,9 @@ export function createUsableContext<T>(): readonly [
     return c;
   }
   return [useCtx, ctx] as const;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function noop(..._args: Any[]): void {
+  void 0;
 }

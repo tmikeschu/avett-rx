@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Text from "components/text";
 import { Color } from "lib/constants";
-import { joinClassNames, TypedKey } from "lib/utils";
+import { joinClassNames, noop, TypedKey } from "lib/utils";
 
 export type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   color?: Color;
@@ -13,10 +13,11 @@ const TextField: React.FC<Props> = ({
   color = "primary",
   className,
   children,
+  onChange = noop,
   ...props
 }) => {
+  const [isValid, setIsValid] = React.useState(true);
   const ref = React.useRef<HTMLInputElement>(null);
-  const isValid = props.value ? ref.current?.checkValidity() : true;
   return (
     <label className="relative block w-full">
       <Text
@@ -45,6 +46,10 @@ const TextField: React.FC<Props> = ({
             : "border-error",
           className,
         ])}
+        onChange={(e) => {
+          setIsValid(ref.current?.checkValidity() || true);
+          onChange(e);
+        }}
         {...props}
       />
     </label>
