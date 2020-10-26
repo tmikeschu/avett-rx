@@ -16,9 +16,9 @@ const LoadingCircle: React.FC<Props> = ({
       className={joinClassNames([
         "animate-spin -ml-1 mr-3 h-5 w-5",
         TypedKey<"sm" | "md" | "lg">({
-          sm: "w-5 h-5",
-          md: "w-8 h-8",
-          lg: "w-12 h-12",
+          sm: "w-4 h-4",
+          md: "w-6 h-6",
+          lg: "w-10 h-10",
         })[size],
         className,
       ])}

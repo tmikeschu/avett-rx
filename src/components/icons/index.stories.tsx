@@ -3,6 +3,7 @@ import { Meta, Story } from "@storybook/react";
 
 import Close from "components/icons/close";
 import Hamburger from "components/icons/hamburger";
+import LoadingCircle from "components/icons/loading-circle";
 import { Color, COLORS } from "lib/constants";
 import { joinClassNames, TypedKey } from "lib/utils";
 
@@ -36,6 +37,7 @@ const Template: Story<{ color: Color }> = (args) => {
     >
       <Hamburger />
       <Close />
+      <LoadingCircle />
     </div>
   );
 };
