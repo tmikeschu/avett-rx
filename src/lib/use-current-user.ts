@@ -2,6 +2,7 @@ import * as React from "react";
 import Router from "next/router";
 import useSWR from "swr";
 
+import { Route } from "./routes";
 import { Any } from "./types";
 
 const fetcher = (url: string): Promise<{ user: Any }> =>
@@ -14,8 +15,8 @@ const fetcher = (url: string): Promise<{ user: Any }> =>
 export default function useCurrentUser({
   redirectTo,
   redirectIfFound,
-}: { redirectTo?: string; redirectIfFound?: boolean } = {}): Any | null {
-  const { data, error } = useSWR("/api/user", fetcher);
+}: { redirectTo?: Route; redirectIfFound?: boolean } = {}): Any | null {
+  const { data, error } = useSWR(Route.ApiUser, fetcher);
   const user = data?.user;
   const finished = Boolean(data);
   const hasUser = Boolean(user);

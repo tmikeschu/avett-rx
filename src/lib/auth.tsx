@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Magic } from "magic-sdk";
 
+import { Route } from "./routes";
 import { Any } from "./types";
 import useCurrentUser from "./use-current-user";
 import { createUsableContext } from "./utils";
@@ -20,7 +21,7 @@ export type AuthContext = {
 export const [useAuth, AuthContext] = createUsableContext<AuthContext>();
 
 const logout = async () => {
-  fetch("/api/logout");
+  fetch(Route.ApiLogout);
 };
 
 const login = async (email: string): Promise<void> => {
@@ -30,7 +31,7 @@ const login = async (email: string): Promise<void> => {
     const didToken = await M?.auth.loginWithMagicLink({
       email: body.email,
     });
-    const res = await fetch("/api/login", {
+    const res = await fetch(Route.ApiLogin, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

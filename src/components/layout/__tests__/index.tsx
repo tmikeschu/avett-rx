@@ -1,8 +1,9 @@
 import * as React from "react";
 
+import { VISITOR_VIEWS } from "lib/routes";
 import * as utils from "test";
 
-import Layout, { VISITOR_VIEWS } from "..";
+import Layout from "..";
 
 describe("<Layout />", () => {
   it("shows log in to unauthed users", () => {
@@ -26,7 +27,7 @@ describe("<Layout />", () => {
   });
 
   describe("visitor views", () => {
-    VISITOR_VIEWS.forEach((view) => {
+    Object.keys(VISITOR_VIEWS).forEach((view) => {
       it(`shows the content to an unauthed user for the "${view}" view`, () => {
         const { getByText } = utils.render(<Layout>content</Layout>, {
           router: {

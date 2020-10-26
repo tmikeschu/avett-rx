@@ -1,5 +1,5 @@
 import * as React from "react";
-import Router, { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/dist/client/router";
 import Head from "next/head";
 
 import Button from "components/button";
@@ -8,14 +8,13 @@ import Link from "components/link";
 import Text from "components/text";
 import { LoginButton, LogoutButton } from "features/auth";
 import { useAuth } from "lib/auth";
+import { isVisitorView } from "lib/routes";
 import { joinClassNames } from "lib/utils";
-
-export const VISITOR_VIEWS = ["/"] as const;
 
 const LINKS = [["/pharmacy", "Pharmacy"]];
 
 const Layout: React.FC = ({ children }) => {
-  const { pathname, events, query, back } = useRouter();
+  const { pathname, events, back } = useRouter();
   const { status, user } = useAuth();
   const isLoading = status === "loading";
   React.useEffect(() => {
@@ -28,16 +27,8 @@ const Layout: React.FC = ({ children }) => {
       events.off("routeChangeComplete", handle);
     };
   }, [events]);
-  const openView = VISITOR_VIEWS.some((path) => path === pathname);
+  const openView = isVisitorView(pathname);
   const [showMenu, setShowMenu] = React.useState(false);
-
-  React.useEffect(() => {
-    if (query.code && query.state) {
-      Router.push("/").then(() => {
-        window.location.reload();
-      });
-    }
-  }, [query.code, query.state, pathname]);
 
   return (
     <div className="w-screen min-h-screen bg-primary bg-opacity-25 relative">
