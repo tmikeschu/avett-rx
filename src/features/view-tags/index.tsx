@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useGetTagsQuery } from "api";
-import Text from "components/text";
+import Loading from "components/loading";
 
 const ViewTags: React.FC = () => {
   const { data, loading } = useGetTagsQuery();
@@ -10,7 +10,7 @@ const ViewTags: React.FC = () => {
   return (
     <ul className="flex w-full overflow-x-scroll justify-center">
       {loading ? (
-        <Text>Loading...</Text>
+        <Loading />
       ) : (
         tags.map((tag) =>
           tag ? (

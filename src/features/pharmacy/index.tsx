@@ -6,6 +6,7 @@ import {
   useSongsForTagLazyQuery,
 } from "api";
 import Button from "components/button";
+import Loading from "components/loading";
 import Text from "components/text";
 import { nl2br, randomElement } from "lib/utils";
 
@@ -14,7 +15,10 @@ const Pharmacy: React.FC = () => {
   const [songs, setSongs] = React.useState<PharmacySongFragment[]>([]);
   const [song, setSong] = React.useState<PharmacySongFragment | null>(null);
   const { data, loading } = useGetTagsQuery();
-  const [getSong, { data: songData }] = useSongsForTagLazyQuery();
+  const [
+    getSong,
+    { data: songData, loading: songsLoading },
+  ] = useSongsForTagLazyQuery();
   const tags = data?.allTags?.data || [];
 
   React.useEffect(() => {
@@ -33,7 +37,7 @@ const Pharmacy: React.FC = () => {
         Pharmacy
       </Text>
       {loading ? (
-        <Text variant="caption">Loading...</Text>
+        <Loading />
       ) : (
         <>
           <Text variant="subtitle">Select a feeling</Text>
@@ -74,7 +78,9 @@ const Pharmacy: React.FC = () => {
       )}
 
       <div className="mt-4">
-        {song ? (
+        {songsLoading ? (
+          <Loading />
+        ) : song ? (
           <>
             <div className="mb-4">
               <Text variant="h3" className="">
@@ -87,7 +93,7 @@ const Pharmacy: React.FC = () => {
               {nl2br(song.lyrics)}
             </Text>
           </>
-        ) : tagID ? (
+        ) : tagID && !songsLoading ? (
           <div className="mb-4">
             <Text variant="subtitle" className="">
               Oh no 😢. We haven&apos;t tagged any songs with this yet.

@@ -30,6 +30,8 @@ describe("<Pharmacy />", () => {
 
     const btn = getByText("🥰");
     user.click(btn);
-    expect(await findByText(/haven't.*tagged/)).toBeInTheDocument();
+    await utils.waitFor(() =>
+      expect(getByText(/haven't.*tagged/)).toBeInTheDocument()
+    );
   });
 });
