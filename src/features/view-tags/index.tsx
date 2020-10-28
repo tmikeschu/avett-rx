@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { useGetTagsQuery } from "api";
 import Loading from "components/loading";
+import Text from "components/text";
 
 const ViewTags: React.FC = () => {
   const { data, loading } = useGetTagsQuery();
@@ -11,6 +12,8 @@ const ViewTags: React.FC = () => {
     <ul className="flex w-full overflow-x-scroll justify-center">
       {loading ? (
         <Loading />
+      ) : tags.length === 0 ? (
+        <Text>Oh no! It looks like there are no tags to show. 😢</Text>
       ) : (
         tags.map((tag) =>
           tag ? (

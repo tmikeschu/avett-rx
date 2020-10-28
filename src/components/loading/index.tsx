@@ -18,6 +18,7 @@ const Loading: React.FC<Props> = ({
 }) => {
   return (
     <Text
+      data-testid="loading"
       as="span"
       variant="caption"
       color={color}
