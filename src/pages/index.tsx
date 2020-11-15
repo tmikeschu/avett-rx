@@ -1,38 +1,52 @@
 import * as React from "react";
+import { Flex, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 
 import Link from "components/link";
-import Text from "components/text";
 import ViewTags from "features/view-tags";
 
 const Home: React.FC = () => {
   return (
-    <div className="px-2 flex flex-col items-center justify-center">
+    <Flex justify="center" align="center" px={2} direction="column">
       <Head>
         <title>Avett Rx</title>
         <link rel="icon" href="/avettrx.svg" />
       </Head>
 
-      <main className="px-20 flex-1 flex flex-col mt-48 items-center text-center">
-        <Text variant="h2" className="mb-4">
+      <Flex
+        as="main"
+        px={20}
+        flex={1}
+        direction="column"
+        mt={48}
+        align="center"
+        textAlign="center"
+      >
+        <Heading as="h2" mb={4} fontSize="6xl" letterSpacing="-0.05rem">
           Welcome to Avett Rx.
-        </Text>
-        <Text variant="h3" className="mb-4">
+        </Heading>
+        <Heading as="h3" mb={6} fontSize="3xl" lineHeight="1.2">
           You&apos;ve got the feels,
           <br />
           they&apos;ve got the tunes.
-        </Text>
+        </Heading>
         <ViewTags />
         <Link
           href="/pharmacy"
-          className="underline mt-4 bg-primary px-2 py-1 rounded"
+          mt={6}
+          px={4}
+          py={2}
+          rounded="0.25rem"
+          backgroundColor="purple.700"
+          color="white"
+          textTransform="uppercase"
+          fontWeight="bold"
+          _hover={{ backgroundColor: "purple.600" }}
         >
-          <Text className="mt-8" variant="button" color="light">
-            Get a prescription
-          </Text>
+          Get a prescription
         </Link>
-      </main>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 

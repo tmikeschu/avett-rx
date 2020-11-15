@@ -1,29 +1,35 @@
 import * as React from "react";
+import { List, ListItem, Spinner, Text } from "@chakra-ui/react";
 
 import { useGetTagsQuery } from "api";
-import Loading from "components/loading";
-import Text from "components/text";
 
 const ViewTags: React.FC = () => {
   const { data, loading } = useGetTagsQuery();
   const tags = (data && data.allTags.data) || [];
 
   return (
-    <ul className="flex w-full overflow-x-scroll justify-center">
+    <List display="flex" w="100%" overflowX="auto" justifyContent="center">
       {loading ? (
-        <Loading />
+        <Spinner color="purple.600" />
       ) : tags.length === 0 ? (
-        <Text>Oh no! It looks like there are no tags to show. 😢</Text>
+        <Text color="gray.500">
+          Oh no! It looks like there are no tags to show. 😢
+        </Text>
       ) : (
         tags.map((tag) =>
           tag ? (
-            <li className="mr-4 last:mr-0 text-2xl" key={tag._id}>
+            <ListItem
+              key={tag._id}
+              _notLast={{ mr: 4 }}
+              fontSize="3xl"
+              size="xl"
+            >
               {tag.name}
-            </li>
+            </ListItem>
           ) : null
         )
       )}
-    </ul>
+    </List>
   );
 };
 
