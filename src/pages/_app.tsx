@@ -1,7 +1,9 @@
 import "../styles/globals.css";
 
 import * as React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
+import { theme } from "styles/theme";
 
 import Layout from "components/layout";
 import { ApolloProvider, InitialState } from "lib/apollo-client";
@@ -16,13 +18,15 @@ const AvettRxApp: React.FC<AppProps<{
   initialApolloState: InitialState;
 }>> = ({ Component, pageProps }) => {
   return (
-    <AuthProvider>
-      <ApolloProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ApolloProvider>
-    </AuthProvider>
+    <ChakraProvider theme={theme}>
+      <AuthProvider>
+        <ApolloProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ApolloProvider>
+      </AuthProvider>
+    </ChakraProvider>
   );
 };
 
