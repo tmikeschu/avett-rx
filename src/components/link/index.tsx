@@ -1,19 +1,34 @@
 import * as React from "react";
+import { Link as ChLink, LinkProps as ChProps, Text } from "@chakra-ui/react";
 import NextLink, { LinkProps } from "next/link";
 
 import { joinClassNames } from "lib/utils";
 
-const Link: React.FC<
-  LinkProps & {
-    className?: string;
-    aProps?: React.HTMLProps<HTMLAnchorElement>;
-  }
-> = ({ className, aProps = {}, children, ...props }) => {
+const Link: React.FC<LinkProps & ChProps> = ({
+  className,
+  children,
+  passHref,
+  href,
+  as,
+  shallow,
+  replace,
+  prefetch,
+  scroll,
+  ...props
+}) => {
   return (
-    <NextLink {...props}>
-      <a {...aProps} className={joinClassNames([className])}>
-        {children}
-      </a>
+    <NextLink
+      href={href}
+      shallow={shallow}
+      as={as}
+      passHref={passHref}
+      replace={replace}
+      prefetch={prefetch}
+      scroll={scroll}
+    >
+      <ChLink {...props} className={joinClassNames([className])}>
+        <Text>{children}</Text>
+      </ChLink>
     </NextLink>
   );
 };
