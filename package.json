@@ -31,7 +31,7 @@
     "test:ci": "CI=true yarn test && yarn test:cy-run"
   },
   "dependencies": {
-    "@apollo/client": "^3.2.6",
+    "@apollo/client": "^3.2.7",
     "@hapi/iron": "^6.0.0",
     "@magic-sdk/admin": "^1.2.2",
     "@reach/dialog": "^0.11.2",
