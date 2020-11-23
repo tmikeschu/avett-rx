@@ -90,7 +90,7 @@
     "postcss-flexbugs-fixes": "^5.0.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.0",
-    "react-is": "^16.13.1",
+    "react-is": "^17.0.1",
     "start-server-and-test": "^1.11.6",
     "tailwindcss": "^1.9.6",
     "ts-jest": "^26.4.4",
