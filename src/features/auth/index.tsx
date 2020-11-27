@@ -1,10 +1,10 @@
 import React from "react";
+import { Box, Button, ChakraComponent, Input, Text } from "@chakra-ui/react";
 
-import Button from "components/button";
 import { Dialog } from "components/dialog";
-import Text from "components/text";
-import TextField from "components/text-field";
 import { useAuth } from "lib/auth";
+
+const FormBox = Box as ChakraComponent<"form">;
 
 const FORM_ID = "login-form";
 export const LoginButton: React.FC = () => {
@@ -37,30 +37,30 @@ export const LoginButton: React.FC = () => {
             Get login link
           </Button>
         }
+      ></Dialog>
+      <FormBox
+        ref={ref}
+        as="form"
+        id={FORM_ID}
+        className="w-full"
+        onChange={() => setValidForm(ref.current?.checkValidity() || false)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          login(email);
+        }}
       >
-        <form
-          ref={ref}
-          id={FORM_ID}
-          className="w-full"
-          onChange={() => setValidForm(ref.current?.checkValidity() || false)}
-          onSubmit={(e) => {
+        <Input
+          type="email"
+          placeholder="coolperson@coolorg.org"
+          value={email}
+          onChange={(e) => {
             e.preventDefault();
-            login(email);
+            setEmail(e.target.value);
           }}
         >
-          <TextField
-            type="email"
-            placeholder="coolperson@coolorg.org"
-            value={email}
-            onChange={(e) => {
-              e.preventDefault();
-              setEmail(e.target.value);
-            }}
-          >
-            Email
-          </TextField>
-        </form>
-      </Dialog>
+          Email
+        </Input>
+      </FormBox>
     </>
   );
 };
