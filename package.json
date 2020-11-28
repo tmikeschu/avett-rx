@@ -46,7 +46,7 @@
     "swr": "^0.3.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.9",
     "@graphql-codegen/cli": "1.19.2",
     "@graphql-codegen/fragment-matcher": "2.0.0",
     "@graphql-codegen/introspection": "1.18.0",
