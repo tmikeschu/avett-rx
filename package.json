@@ -54,7 +54,7 @@
     "@graphql-codegen/typescript-document-nodes": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.10",
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
-    "@storybook/addon-actions": "^6.1.1",
+    "@storybook/addon-actions": "^6.1.8",
     "@storybook/addon-essentials": "^6.1.5",
     "@storybook/addon-links": "^6.1.5",
     "@storybook/react": "^6.1.7",
