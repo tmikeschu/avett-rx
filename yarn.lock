@@ -1742,15 +1742,15 @@
     tslib "~2.0.1"
     upper-case "2.0.1"
 
-"@graphql-codegen/typescript-document-nodes@1.17.8":
-  version "1.17.8"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-document-nodes/-/typescript-document-nodes-1.17.8.tgz#824d0c5bca903e6b2a1d762ba88f5244f054c52a"
-  integrity sha512-mT1FfpW9zfeyLGimMZH5EQVLmo57GIxY3ui3o/D67yAiTWt5TXTjOXnW9e+lGvw8i5gsPtpSTKOT4L00DHOpiQ==
+"@graphql-codegen/typescript-document-nodes@1.17.9":
+  version "1.17.9"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-document-nodes/-/typescript-document-nodes-1.17.9.tgz#ac4f35b216617d6cf8b4056adc9c36f3b1b63f7c"
+  integrity sha512-4sSztahbc0YzoWbSlu/LA99f+gsXNYmXYucy7oEGdTsIDDAsaXoL/ZA7qzu+CwugPEOrP+3ZQiJqg+Btt6sfNQ==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^1.17.8"
-    "@graphql-codegen/visitor-plugin-common" "^1.17.13"
+    "@graphql-codegen/plugin-helpers" "^1.18.2"
+    "@graphql-codegen/visitor-plugin-common" "^1.17.20"
     auto-bind "~4.0.0"
-    tslib "~2.0.0"
+    tslib "~2.0.1"
 
 "@graphql-codegen/typescript-operations@1.17.12":
   version "1.17.12"
@@ -1795,7 +1795,7 @@
     auto-bind "~4.0.0"
     tslib "~2.0.1"
 
-"@graphql-codegen/visitor-plugin-common@^1.17.13", "@graphql-codegen/visitor-plugin-common@^1.17.16", "@graphql-codegen/visitor-plugin-common@^1.17.20":
+"@graphql-codegen/visitor-plugin-common@^1.17.16", "@graphql-codegen/visitor-plugin-common@^1.17.20":
   version "1.17.20"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.17.20.tgz#cff95cdd49cef270b3811fdb141a412ffe2bdfd7"
   integrity sha512-buIpcNNyTqVubknancX8m9jARCZsUA5eKuskg+CylWKL/8CSaD2Tiq7CfbbNO10o7XIgRrPtJMl1c9hQ6N4ytw==
