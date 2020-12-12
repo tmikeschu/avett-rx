@@ -1,9 +1,0 @@
-.Dialog__content {
-  @apply w-10/12 !important;
-}
-
-@screen sm {
-  .Dialog__content {
-    @apply w-1/2 !important;
-  }
-}

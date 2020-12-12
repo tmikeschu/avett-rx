@@ -1,8 +1,0 @@
-query GetTags {
-  allTags {
-    data {
-      _id
-      name
-    }
-  }
-}
