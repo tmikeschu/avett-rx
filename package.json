@@ -97,7 +97,7 @@
     "start-server-and-test": "^1.11.6",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.3",
-    "vercel": "^20.1.4"
+    "vercel": "^21.0.1"
   },
   "husky": {
     "hooks": {
