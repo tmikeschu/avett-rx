@@ -26,9 +26,13 @@ const Link: React.FC<LinkProps & ChProps> = ({
       prefetch={prefetch}
       scroll={scroll}
     >
-      <ChLink {...props} className={joinClassNames([className])}>
-        <Text>{children}</Text>
-      </ChLink>
+      {typeof children === "string" ? (
+        <ChLink {...props} className={joinClassNames([className])}>
+          <Text>{children}</Text>
+        </ChLink>
+      ) : (
+        children
+      )}
     </NextLink>
   );
 };
