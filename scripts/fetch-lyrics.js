@@ -5,7 +5,6 @@ const fs = require("fs");
 
 dotenv.config({ path: ".env.local" });
 
-// 643 songs total, 223 with an album
 const TOTAL_PAGES = 5;
 const MAX_PER_PAGE = 50;
 const BASE_URL = "https://api.genius.com";
@@ -51,15 +50,26 @@ const main = async () => {
         },
       })
         .then((res) => res.json())
-        .then((x) => {
-          const { id, url, title, album } = x.response.song;
+        .then(async (json) => {
+          const { id, url, title, album } = json.response.song;
+
           if (album) {
+            const lyrics = await fetch(url)
+              .then((res) => res.text())
+              .then((html) => {
+                const dom = new jsdom.JSDOM(html);
+                const text = dom.window.document.querySelector(".lyrics")
+                  .textContent;
+                return text.trim();
+              });
+
             return {
               id,
               url,
               title,
               albumTitle: album.name,
               albumId: album.id,
+              lyrics,
             };
           }
           return null;
@@ -69,33 +79,7 @@ const main = async () => {
     return data.filter(Boolean);
   });
 
-  const songLyrics = (
-    await Promise.all(
-      songs.map((s) =>
-        fetch(s.url)
-          .then((res) => res.text())
-          .then((html) => {
-            const dom = new jsdom.JSDOM(html);
-            const text = dom.window.document.querySelector(".lyrics")
-              .textContent;
-            return [s.id, text.trim()];
-          })
-      )
-    )
-  ).reduce((acc, [id, lyrics]) => {
-    acc[id] = lyrics;
-    return acc;
-  }, {});
-
-  const songsWithLyrics = songs.map((s) => {
-    s.lyrics = songLyrics[s.id];
-    return s;
-  });
-  fs.writeFileSync(
-    "./songs-with-lyrics.json",
-    JSON.stringify(songsWithLyrics),
-    "utf8"
-  );
+  fs.writeFileSync("./songs-with-lyrics.json", JSON.stringify(songs), "utf8");
 };
 
 main();
