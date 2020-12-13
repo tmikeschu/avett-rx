@@ -23,7 +23,8 @@
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "__generated__/**/*.tsx"
+    "__generated__/**/*.tsx",
+    "scripts"
   ],
   "exclude": ["node_modules"]
 }
