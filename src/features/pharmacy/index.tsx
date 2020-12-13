@@ -1,107 +1,218 @@
 import * as React from "react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  IconButton,
+  List,
+  ListItem,
+  Skeleton,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 import {
-  PharmacySongFragment,
+  GetTagsQueryResult,
+  SongsForTagQueryResult,
   useGetTagsQuery,
   useSongsForTagLazyQuery,
 } from "api";
-import Button from "components/button";
-import Loading from "components/loading";
-import Text from "components/text";
+import EmptyVoid from "components/drawings/empty-void";
+import Heartbroken from "components/drawings/heartbroken";
+import { renderResult } from "lib/render-result";
 import { nl2br, randomElement } from "lib/utils";
 
+type Tag = NonNullable<
+  NonNullable<GetTagsQueryResult["data"]>["allTags"]["data"][0]
+>;
+
+type Song = NonNullable<
+  NonNullable<SongsForTagQueryResult["data"]>["songsForTag"]["data"][0]
+>;
+
 const Pharmacy: React.FC = () => {
-  const [tagID, setTagID] = React.useState("");
-  const [songs, setSongs] = React.useState<PharmacySongFragment[]>([]);
-  const [song, setSong] = React.useState<PharmacySongFragment | null>(null);
-  const { data, loading } = useGetTagsQuery();
-  const [
-    getSong,
-    { data: songData, loading: songsLoading },
-  ] = useSongsForTagLazyQuery();
-  const tags = data?.allTags?.data || [];
+  const { back } = useRouter();
+  const result = useGetTagsQuery();
+  return (
+    <Flex direction="column" alignItems="flex-start">
+      <IconButton
+        mb={8}
+        alignSelf="flex-start"
+        aria-label="back"
+        icon={<ArrowBackIcon />}
+        onClick={() => {
+          back();
+        }}
+      />
+
+      <Heading mb={4}>The Pharmacy</Heading>
+
+      {renderResult<GetTagsQueryResult, Tag[]>(result, {
+        Loading,
+        Failure,
+        Success,
+        Empty,
+        isEmpty: (data) => data.allTags.data.length === 0,
+        successSelector: (data) =>
+          data.allTags.data.filter((d) => d?._id) as Tag[],
+      })}
+    </Flex>
+  );
+};
+
+const Loading: React.FC = () => {
+  return <Spinner color="purple.500" data-testid="loading" />;
+};
+
+type FetchError = NonNullable<GetTagsQueryResult["error"]>;
+const Failure: React.FC<{ error: FetchError }> = ({ error }) => {
+  console.error(error);
+  return (
+    <Text color="red.600" backgroundColor="red.100" px={4} py={2} rounded="md">
+      Oh no! Something went wrong fetching tags.
+    </Text>
+  );
+};
+
+const Empty = () => {
+  return (
+    <Flex direction="column" alignItems="flex-start" width="100%">
+      <Text
+        mb={4}
+        color="yellow.600"
+        backgroundColor="yellow.100"
+        px={4}
+        py={2}
+        rounded="md"
+      >
+        Oh snap! We don&apos;t have any tags to show yet.
+      </Text>
+      <Box color="purple.300" height={300} width={300} maxWidth="100%">
+        <EmptyVoid />
+      </Box>
+    </Flex>
+  );
+};
+
+const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
+  const [selectedTagId, setSelectedTagId] = React.useState("");
+  const [getSongsForTag, songsResult] = useSongsForTagLazyQuery();
 
   React.useEffect(() => {
-    if (songData?.songsForTag?.data) {
-      const rando = randomElement(songData.songsForTag.data);
-      setSongs(
-        songData.songsForTag.data.filter(Boolean) as PharmacySongFragment[]
-      );
-      setSong(rando || null);
+    if (selectedTagId.length > 0) {
+      getSongsForTag({
+        variables: {
+          tagID: selectedTagId,
+        },
+      });
     }
-  }, [songData]);
+  }, [selectedTagId, getSongsForTag]);
 
   return (
-    <div className="w-full">
-      <Text variant="h2" className="mb-4">
-        Pharmacy
+    <Flex direction="column" width="100%">
+      <Text>Select a feeling</Text>
+      <List
+        mb={4}
+        display="flex"
+        overflowX="auto"
+        maxWidth="100%"
+        py={4}
+        px={2}
+      >
+        {tags.map((tag) => (
+          <ListItem key={tag._id} _notLast={{ mr: 4 }}>
+            <Button
+              isLoading={songsResult.loading && selectedTagId === tag._id}
+              colorScheme="purple"
+              variant="outline"
+              borderColor={
+                selectedTagId === tag._id ? "purple.600" : "purple.200"
+              }
+              onClick={() => {
+                setSelectedTagId(tag._id);
+              }}
+            >
+              {tag.name}
+            </Button>
+          </ListItem>
+        ))}
+      </List>
+
+      {songsResult.called === true
+        ? renderResult(songsResult, {
+            Loading: SongLoading,
+            Failure: SongFailure,
+            Success: SongData,
+            Empty: SongEmpty,
+            isEmpty: (data) => !data.songsForTag.data.some(Boolean),
+            successSelector: (data) =>
+              randomElement(data.songsForTag.data.filter(Boolean)) as Song,
+          })
+        : null}
+    </Flex>
+  );
+};
+
+export const SongLoading: React.FC = () => {
+  return (
+    <Flex direction="column" align="flex-start" data-testid="loading">
+      <Skeleton height="3" width="16" mb="1" />
+      <Skeleton height="2" width="32" mb="2" />
+
+      {Array.from({ length: 10 }, (_, i) => (
+        <Skeleton key={i} height="2" width="40" _notLast={{ mb: 1 }} />
+      ))}
+    </Flex>
+  );
+};
+
+export const SongEmpty: React.FC = () => {
+  return (
+    <Flex direction="column" alignItems="flex-start" width="100%">
+      <Text
+        mb={4}
+        color="yellow.600"
+        backgroundColor="yellow.100"
+        px={4}
+        py={2}
+        rounded="md"
+      >
+        Oh snap! We don&apos;t have any songs for that tag yet.
       </Text>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <Text variant="subtitle">Select a feeling</Text>
-          <ul className="flex">
-            {tags.map((tag) =>
-              tag ? (
-                <li
-                  key={tag._id}
-                  className={`mr-4 ${
-                    tag._id === tagID ? "bg-primary bg-opacity-25 rounded" : ""
-                  }`}
-                >
-                  <Button
-                    variant="icon"
-                    size="lg"
-                    onClick={() => {
-                      if (!song || tag._id !== tagID) {
-                        setTagID(tag._id);
-                        getSong({ variables: { tagID: tag._id } });
-                      } else {
-                        let rando: PharmacySongFragment | undefined;
-                        if (songs.length > 1) {
-                          while (!rando || rando._id === song._id) {
-                            rando = randomElement(songs);
-                          }
-                          setSong(rando || null);
-                        }
-                      }
-                    }}
-                  >
-                    {tag.name}
-                  </Button>
-                </li>
-              ) : null
-            )}
-          </ul>
-        </>
-      )}
+      <Box color="purple.300" height={300} width={300} maxWidth="100%">
+        <Heartbroken />
+      </Box>
+    </Flex>
+  );
+};
 
-      <div className="mt-4">
-        {songsLoading ? (
-          <Loading />
-        ) : song ? (
-          <>
-            <div className="mb-4">
-              <Text variant="h3" className="">
-                {song.title}
-              </Text>
-              <Text variant="caption">From: {song.album.title}</Text>
-            </div>
+export type SongData = Song;
+export const SongData: React.FC<{ data: SongData }> = ({ data: song }) => {
+  return (
+    <Flex direction="column">
+      <Text as="h3" fontWeight="bold" lineHeight="shorter" color="purple.700">
+        {song.title}
+      </Text>
+      <Text color="gray.500" fontSize="sm">
+        From: {song.album.title}
+      </Text>
+      <Text mt={2} fontStyle="italic" color="purp">
+        {nl2br(song.lyrics)}
+      </Text>
+    </Flex>
+  );
+};
 
-            <Text variant="body1" className="text-sm italic">
-              {nl2br(song.lyrics)}
-            </Text>
-          </>
-        ) : tagID && !songsLoading ? (
-          <div className="mb-4">
-            <Text variant="subtitle" className="">
-              Oh no 😢. We haven&apos;t tagged any songs with this yet.
-            </Text>
-          </div>
-        ) : null}
-      </div>
-    </div>
+export type SongError = NonNullable<SongsForTagQueryResult["error"]>;
+export const SongFailure: React.FC<{ error: FetchError }> = ({ error }) => {
+  console.error(error);
+  return (
+    <Text color="red.600" backgroundColor="red.100" px={4} py={2} rounded="md">
+      Oh no! Something went wrong fetching tags.
+    </Text>
   );
 };
 

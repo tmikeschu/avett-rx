@@ -1,20 +1,20 @@
 import * as React from "react";
+import { Flex } from "@chakra-ui/react";
+import { NextPage } from "next";
 import Head from "next/head";
 
 import Pharmacy from "features/pharmacy";
 
-const PharmacyPage: React.FC = () => {
+const PharmacyPage: NextPage = () => {
   return (
-    <div className="px-4 flex flex-col items-center justify-center">
+    <Flex minHeight="100vh" p="4" direction="column" maxWidth="lg" mx="auto">
       <Head>
-        <title>Avett Rx</title>
-        <link rel="icon" href="/avettrx.svg" />
+        <title>Avett Rx: Pharmacy</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex-1 flex flex-col w-full">
-        <Pharmacy />
-      </main>
-    </div>
+      <Pharmacy />
+    </Flex>
   );
 };
 

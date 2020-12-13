@@ -12,7 +12,9 @@ import {
   SongsForTagQueryVariables,
 } from "api";
 
-const tags = ["😭", "🥰", null].map((name) => (name ? newTag({ name }) : null));
+const tags = ["test tag", "test tag 2", null].map((name) =>
+  name ? newTag({ name }) : null
+);
 
 const songs = [
   {

@@ -1,38 +1,50 @@
 import * as React from "react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { NextPage } from "next";
 import Head from "next/head";
 
 import Link from "components/link";
-import Text from "components/text";
 import ViewTags from "features/view-tags";
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   return (
-    <div className="px-2 flex flex-col items-center justify-center">
+    <Flex
+      minHeight="100vh"
+      px="2"
+      direction="column"
+      justify="center"
+      align="center"
+    >
       <Head>
         <title>Avett Rx</title>
-        <link rel="icon" href="/avettrx.svg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="px-20 flex-1 flex flex-col mt-48 items-center text-center">
-        <Text variant="h2" className="mb-4">
-          Welcome to Avett Rx.
-        </Text>
-        <Text variant="h3" className="mb-4">
-          You&apos;ve got the feels,
-          <br />
-          they&apos;ve got the tunes.
-        </Text>
-        <ViewTags />
-        <Link
-          href="/pharmacy"
-          className="underline mt-4 bg-primary px-2 py-1 rounded"
+      <Flex py="20" flex="1" direction="column" justify="center" align="center">
+        <Heading
+          m="0"
+          lineHeight="shorter"
+          fontSize={["4xl", "6xl"]}
+          textAlign="center"
         >
-          <Text className="mt-8" variant="button" color="light">
+          Welcome to Avett Rx
+        </Heading>
+
+        <Text m="0" fontSize="xl" textAlign="center" mb={4}>
+          You&apos;ve got the feels.
+          <br />
+          They&apos;ve got the tunes.
+        </Text>
+
+        <ViewTags />
+
+        <Link href="/pharmacy">
+          <Button variant="link" colorScheme="purple" mt={4}>
             Get a prescription
-          </Text>
+          </Button>
         </Link>
-      </main>
-    </div>
+      </Flex>
+    </Flex>
   );
 };
 
