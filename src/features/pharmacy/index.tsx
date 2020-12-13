@@ -189,7 +189,8 @@ export const SongEmpty: React.FC = () => {
   );
 };
 
-export const SongData: React.FC<{ data: Song }> = ({ data: song }) => {
+export type SongData = Song;
+export const SongData: React.FC<{ data: SongData }> = ({ data: song }) => {
   return (
     <Flex direction="column">
       <Text as="h3" fontWeight="bold" lineHeight="shorter" color="purple.700">

@@ -1,11 +1,10 @@
 import React from "react";
 import { render, RenderResult } from "@testing-library/react";
-import fetch from "cross-fetch";
 import { NextRouter } from "next/router";
 
-import { ApolloProvider } from "lib/apollo-client";
 import { AuthContext, MockAuthProvider } from "lib/auth";
 
+import { ApolloProvider } from "./apollo-provider";
 import RouterProvider from "./router-provider";
 
 type AllTheProvidersProps = {
@@ -23,7 +22,7 @@ const AllTheProviders = ({
     return (
       <RouterProvider router={router}>
         <MockAuthProvider initialState={auth}>
-          <ApolloProvider options={{ httpOptions: { fetch } }}>
+          <ApolloProvider>
             <Wrapper>{children}</Wrapper>
           </ApolloProvider>
         </MockAuthProvider>
