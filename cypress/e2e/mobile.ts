@@ -1,23 +1,19 @@
 describe("Mobile UI", () => {
-  it("has a hamburger nav menu", () => {
+  const getFontSize = ($el: JQuery<HTMLElement>): number =>
+    parseInt($el.css("font-size"), 10);
+
+  it("has a smaller header size on mobile", () => {
     cy.viewport("iphone-6").visit("/");
+    cy.findByRole("heading", { name: /avett rx/i }).then(($el) => {
+      const fontOnMobile = getFontSize($el);
 
-    cy.findByTestId("mobile-menu").should("be.hidden");
+      cy.viewport("macbook-13")
+        .findByRole("heading", { name: /avett rx/i })
+        .then(($el) => {
+          const fontOnLaptop = getFontSize($el);
 
-    cy.findByRole("button", { name: "menu" }).click();
-
-    cy.findByTestId("mobile-menu").should("be.visible");
-
-    cy.findByRole("button", { name: /log in/i }).should("be.visible");
-
-    cy.findByRole("button", { name: "close-menu" }).click("left", {
-      force: true,
+          expect(fontOnMobile).to.be.lessThan(fontOnLaptop);
+        });
     });
-
-    cy.findByTestId("mobile-menu").should("be.hidden");
-
-    cy.viewport("macbook-11");
-
-    cy.findByRole("button", { name: "menu" }).should("not.be.visible");
   });
 });

@@ -1,18 +1,11 @@
 describe("Pharmacy", () => {
-  it("mobile: can be visited from home via nav and return to home with logo", () => {
+  it("can be visited from homescreen button", () => {
     cy.viewport("iphone-6").visit("/");
-    cy.findByRole("button", { name: "menu" }).click();
-    cy.findByRole("link", { name: /pharmacy/i }).click();
-    cy.url().should("match", /\/pharmacy/);
-    cy.findByRole("heading", { name: /avett\s?rx/i }).click();
-    cy.url().should("match", /\/$/);
-  });
-
-  it("desktop: can be visited from home via nav and return to home with logo", () => {
-    cy.viewport("macbook-13").visit("/");
-    cy.findByRole("link", { name: /pharmacy/i }).click();
-    cy.url().should("match", /\/pharmacy/);
-    cy.findByRole("heading", { name: /avett\s?rx/i }).click();
-    cy.url().should("match", /\/$/);
+    cy.findByText(/get a prescription/i).click();
+    cy.location("pathname").should("match", /^\/pharmacy$/);
+    cy.findByRole("heading", { name: /pharmacy/i }).should("exist");
+    cy.findByText(/select a feeling/i).should("exist");
+    cy.findByRole("button", { name: /back/i }).click();
+    cy.location("pathname").should("match", /^\/$/);
   });
 });
