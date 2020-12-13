@@ -27,7 +27,8 @@
     "cy:run": "yarn cypress run",
     "test:cy-open": "start-server-and-test dev:e2e http://localhost:3000 cy:open",
     "test:cy-run": "start-server-and-test dev:ci http://localhost:3000 cy:run",
-    "test:ci": "CI=true yarn test && yarn test:cy-run"
+    "test:ci": "CI=true yarn test && yarn test:cy-run",
+    "tsc": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
