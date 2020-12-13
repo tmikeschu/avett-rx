@@ -101,15 +101,17 @@ const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
   const [selectedTagId, setSelectedTagId] = React.useState("");
   const [getSongsForTag, songsResult] = useSongsForTagLazyQuery();
 
-  React.useEffect(() => {
-    if (selectedTagId.length > 0) {
+  const fetchSongs = React.useCallback(
+    (id: string) => {
       getSongsForTag({
         variables: {
-          tagID: selectedTagId,
+          tagID: id,
         },
       });
-    }
-  }, [selectedTagId, getSongsForTag]);
+      setSelectedTagId(id);
+    },
+    [getSongsForTag]
+  );
 
   return (
     <Flex direction="column" width="100%">
@@ -132,7 +134,7 @@ const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
                 selectedTagId === tag._id ? "purple.600" : "purple.200"
               }
               onClick={() => {
-                setSelectedTagId(tag._id);
+                fetchSongs(tag._id);
               }}
             >
               {tag.name}
