@@ -1,49 +1,47 @@
 import * as React from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { NextPage } from "next";
 import Head from "next/head";
 
 import Link from "components/link";
 import ViewTags from "features/view-tags";
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   return (
-    <Flex justify="center" align="center" px={2} direction="column">
+    <Flex
+      minHeight="100vh"
+      px="2"
+      direction="column"
+      justify="center"
+      align="center"
+    >
       <Head>
         <title>Avett Rx</title>
-        <link rel="icon" href="/avettrx.svg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex
-        as="main"
-        px={20}
-        flex={1}
-        direction="column"
-        mt={48}
-        align="center"
-        textAlign="center"
-      >
-        <Heading as="h2" mb={4} fontSize="6xl" letterSpacing="-0.05rem">
-          Welcome to Avett Rx.
-        </Heading>
-        <Heading as="h3" mb={6} fontSize="3xl" lineHeight="1.2">
-          You&apos;ve got the feels,
-          <br />
-          they&apos;ve got the tunes.
-        </Heading>
-        <ViewTags />
-        <Link
-          href="/pharmacy"
-          mt={6}
-          px={4}
-          py={2}
-          rounded="0.25rem"
-          backgroundColor="purple.700"
-          color="white"
-          textTransform="uppercase"
-          fontWeight="bold"
-          _hover={{ backgroundColor: "purple.600" }}
+      <Flex py="20" flex="1" direction="column" justify="center" align="center">
+        <Heading
+          m="0"
+          lineHeight="shorter"
+          fontSize={["4xl", "6xl"]}
+          textAlign="center"
         >
-          Get a prescription
+          Welcome to Avett Rx
+        </Heading>
+
+        <Text m="0" fontSize="xl" textAlign="center" mb={4}>
+          You&apos;ve got the feels.
+          <br />
+          They&apos;ve got the tunes.
+        </Text>
+
+        <ViewTags />
+
+        <Link href="/pharmacy">
+          <Button variant="link" colorScheme="purple" mt={4}>
+            Get a prescription
+          </Button>
         </Link>
       </Flex>
     </Flex>

@@ -1,36 +1,63 @@
 import * as React from "react";
 import { List, ListItem, Spinner, Text } from "@chakra-ui/react";
 
-import { useGetTagsQuery } from "api";
+import { GetTagsQueryResult, useGetTagsQuery } from "api";
+import { renderResult } from "lib/render-result";
+
+type Tag = NonNullable<
+  NonNullable<GetTagsQueryResult["data"]>["allTags"]["data"][0]
+>;
 
 const ViewTags: React.FC = () => {
-  const { data, loading } = useGetTagsQuery();
-  const tags = (data && data.allTags.data) || [];
+  const result = useGetTagsQuery();
+  return renderResult(result, {
+    Loading,
+    Failure,
+    Success,
+    Empty,
+    isEmpty: (data) => !data.allTags.data.some(Boolean),
+    successSelector: (data) => data.allTags.data.filter((d) => d?._id) as Tag[],
+  });
+};
 
+export default ViewTags;
+
+const Loading: React.FC = () => {
+  return <Spinner color="purple.500" data-testid="loading" />;
+};
+
+const Empty = () => {
   return (
-    <List display="flex" w="100%" overflowX="auto" justifyContent="center">
-      {loading ? (
-        <Spinner color="purple.600" />
-      ) : tags.length === 0 ? (
-        <Text color="gray.500">
-          Oh no! It looks like there are no tags to show. 😢
-        </Text>
-      ) : (
-        tags.map((tag) =>
-          tag ? (
-            <ListItem
-              key={tag._id}
-              _notLast={{ mr: 4 }}
-              fontSize="3xl"
-              size="xl"
-            >
-              {tag.name}
-            </ListItem>
-          ) : null
-        )
-      )}
+    <Text
+      color="yellow.600"
+      backgroundColor="yellow.100"
+      px={4}
+      py={2}
+      rounded="md"
+    >
+      Oh snap! We don&apos;t have any tags to show yet.
+    </Text>
+  );
+};
+
+const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
+  return (
+    <List display="flex" aria-label="tags list">
+      {tags.map((tag) => (
+        <ListItem key={tag._id} fontSize="4xl" _notLast={{ mr: 4 }}>
+          {tag.name}
+        </ListItem>
+      ))}
     </List>
   );
 };
 
-export default ViewTags;
+type FetchError = NonNullable<GetTagsQueryResult["error"]>;
+const Failure: React.FC<{ error: FetchError }> = ({ error }) => {
+  console.error(error);
+  return (
+    <Text color="red.600" backgroundColor="red.100" px={4} py={2} rounded="md">
+      Oh no! Something went wrong fetching that data.
+    </Text>
+  );
+};
