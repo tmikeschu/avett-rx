@@ -22,6 +22,7 @@ const Home: NextPage = () => {
 
       <Flex py="20" flex="1" direction="column" justify="center" align="center">
         <Heading
+          as="h1"
           m="0"
           lineHeight="shorter"
           fontSize={["4xl", "6xl"]}
