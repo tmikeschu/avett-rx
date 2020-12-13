@@ -2,10 +2,7 @@ import * as React from "react";
 import { Link as ChLink, LinkProps as ChProps, Text } from "@chakra-ui/react";
 import NextLink, { LinkProps } from "next/link";
 
-import { joinClassNames } from "lib/utils";
-
 const Link: React.FC<LinkProps & ChProps> = ({
-  className,
   children,
   passHref,
   href,
@@ -27,7 +24,7 @@ const Link: React.FC<LinkProps & ChProps> = ({
       scroll={scroll}
     >
       {typeof children === "string" ? (
-        <ChLink {...props} className={joinClassNames([className])}>
+        <ChLink {...props}>
           <Text>{children}</Text>
         </ChLink>
       ) : (
