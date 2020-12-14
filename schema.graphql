@@ -6,7 +6,7 @@ type Song {
 }
 
 type Album {
-  title: String!
+  title: String! @unique
   songs: [Song!]! @relation
 }
 
