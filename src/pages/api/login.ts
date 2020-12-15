@@ -1,31 +1,31 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import faunadb from "faunadb";
-import { NextApiHandler } from "next";
-
-import { setTokenCookie } from "lib/auth-cookies";
-import { encryptSession } from "lib/iron";
+import { createSession } from "lib/auth-cookies";
 import { magic } from "lib/magic";
+import { findOrCreateUserByEmail } from "lib/models/user-model";
+import { createHandlers } from "lib/rest-handlers";
 
-const { query: q } = faunadb;
-const client = new faunadb.Client({
-  secret: process.env.FAUNA_LOGIN_KEY || "",
+export default createHandlers({
+  POST: async (req, res) => {
+    const didToken = magic.utils.parseAuthorizationHeader(
+      req.headers.authorization ?? ""
+    );
+
+    magic.token.validate(didToken);
+    const { email, issuer } = await magic.users.getMetadataByToken(didToken);
+    if (!email) throw new Error("no email for token");
+    if (!issuer) throw new Error("no issuer for token");
+
+    const user = await findOrCreateUserByEmail(email);
+    if (!user) throw new Error(`unable to get user by ${email}`);
+
+    await createSession(res, {
+      token: user.secret,
+      email,
+      issuer,
+      roles: user.data.roles,
+      _id: user.data._id,
+      _ts: user.data._ts,
+    });
+
+    res.status(200).send({ done: true });
+  },
 });
-
-const main: NextApiHandler = async (req, res) => {
-  try {
-    const didToken = req.headers.authorization?.substr(7) || "";
-    const metadata = await magic.users.getMetadataByToken(didToken);
-    const faunaToken = (await client.query(
-      q.Call("user_login_or_create", req.body.email, {})
-    )) as { secret: string };
-    const session = { ...metadata, faunaToken: faunaToken.secret };
-
-    const token = await encryptSession(session);
-    setTokenCookie(res, token);
-    res.status(200).send({ done: true, session });
-  } catch (error) {
-    res.status(error.status || 500).end(error.message);
-  }
-};
-
-export default main;

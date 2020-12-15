@@ -1,31 +1,13 @@
 import { parse, serialize } from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 
-const TOKEN_NAME = "token";
+import { decrypt, encrypt } from "./iron";
+import { AuthSession } from "./types";
+
+const TOKEN_NAME = "session";
 const MAX_AGE = 60 * 60 * 8; // 8 hours
 
-export function setTokenCookie(res: NextApiResponse, token: string): void {
-  const cookie = serialize(TOKEN_NAME, token, {
-    maxAge: MAX_AGE,
-    expires: new Date(Date.now() + MAX_AGE * 1000),
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    sameSite: "lax",
-  });
-  res.setHeader("Set-Cookie", cookie);
-}
-
-export function removeTokenCookie(res: NextApiResponse): void {
-  const cookie = serialize(TOKEN_NAME, "", {
-    maxAge: -1,
-    path: "/",
-  });
-
-  res.setHeader("Set-Cookie", cookie);
-}
-
-export function parseCookies(req: NextApiRequest): NextApiRequest["cookies"] {
+function parseCookies(req: NextApiRequest) {
   // For API Routes we don't need to parse the cookies.
   if (req.cookies) return req.cookies;
 
@@ -34,7 +16,37 @@ export function parseCookies(req: NextApiRequest): NextApiRequest["cookies"] {
   return parse(cookie || "");
 }
 
-export function getTokenCookie(req: NextApiRequest): string {
+export async function createSession(
+  res: NextApiResponse,
+  data: AuthSession
+): Promise<void> {
+  const encryptedToken = await encrypt(data);
+
+  const cookie = serialize(TOKEN_NAME, encryptedToken, {
+    maxAge: MAX_AGE,
+    expires: new Date(Date.now() + MAX_AGE * 1000),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    sameSite: "lax",
+  });
+
+  res.setHeader("Set-Cookie", cookie);
+}
+
+export async function getSession(
+  req: NextApiRequest
+): Promise<AuthSession | undefined> {
   const cookies = parseCookies(req);
-  return cookies[TOKEN_NAME];
+  const result = await decrypt(cookies?.[TOKEN_NAME]);
+  return typeof result === "object" ? (result as AuthSession) : undefined;
+}
+
+export function removeSession(res: NextApiResponse): void {
+  const cookie = serialize(TOKEN_NAME, "", {
+    maxAge: -1,
+    path: "/",
+  });
+
+  res.setHeader("Set-Cookie", cookie);
 }

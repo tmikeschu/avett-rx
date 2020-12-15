@@ -1,15 +1,25 @@
-import { NextApiHandler } from "next";
-
-import { removeTokenCookie } from "lib/auth-cookies";
-import { getSession } from "lib/iron";
+import { getSession, removeSession } from "lib/auth-cookies";
 import { magic } from "lib/magic";
+import { invalidateFaunaDBToken } from "lib/models/user-model";
+import { createHandlers } from "lib/rest-handlers";
 
-const main: NextApiHandler = async (req, res) => {
-  const session = await getSession(req);
-  await magic.users.logoutByIssuer(session.issuer);
-  removeTokenCookie(res);
-  res.json({ success: true });
-  res.end();
-};
+export default createHandlers({
+  GET: async (req, res) => {
+    const result = await getSession(req);
+    const { issuer, token } = result as {
+      issuer: string;
+      token: string;
+      email: string;
+    };
 
-export default main;
+    await Promise.all([
+      magic.users.logoutByIssuer(issuer),
+      invalidateFaunaDBToken(token),
+    ]);
+
+    removeSession(res);
+
+    res.writeHead(302, { Location: "/" });
+    res.end();
+  },
+});
