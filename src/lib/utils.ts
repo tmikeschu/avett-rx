@@ -20,14 +20,18 @@ export const nl2br = (str: string): Array<string | React.ReactElement> => {
   });
 };
 
-export function createUsableContext<T>(): readonly [
-  () => T,
-  React.Context<T | undefined>
-] {
+export function createUsableContext<T>({
+  providerName,
+  useName,
+}: {
+  providerName: string;
+  useName: string;
+}): readonly [() => T, React.Context<T | undefined>] {
   const ctx = React.createContext<T | undefined>(undefined);
   function useCtx() {
     const c = React.useContext(ctx);
-    if (!c) throw new Error("useCtx must be inside a Provider with a value");
+    if (!c)
+      throw new Error(`${useName} must be inside ${providerName} with a value`);
     return c;
   }
   return [useCtx, ctx] as const;

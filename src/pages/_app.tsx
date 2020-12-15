@@ -1,10 +1,13 @@
 import "../styles/globals.css";
 
 import * as React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { theme } from "styles/theme";
+
+const queryClient = new QueryClient();
 
 import { ApolloProvider } from "lib/apollo-client";
 import { AuthProvider } from "lib/auth";
@@ -21,38 +24,42 @@ const AvettRxApp: React.FC<AppProps> = ({
 }) => {
   return (
     <ChakraProvider theme={theme}>
-      <AuthProvider>
-        <ApolloProvider initialState={initialApolloState}>
-          <Head>
-            <title>Avett Rx</title>
-            <meta name="title" content="Avett Rx" />
-            <meta
-              name="description"
-              content="You've got the feels. They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
-            />
-            <meta name="image" content={IMAGE_URI} />
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <ApolloProvider initialState={initialApolloState}>
+            <Head>
+              <title>Avett Rx</title>
+              <link rel="icon" type="image/svg+xml" href="/avettrx.svg" />
 
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://avettrx.com/" />
-            <meta property="og:title" content="Avett Rx" />
-            <meta
-              property="og:description"
-              content="You've got the feels. They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
-            />
-            <meta property="og:image" content={IMAGE_URI} />
+              <meta name="title" content="Avett Rx" />
+              <meta
+                name="description"
+                content="You've got the feels. They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
+              />
+              <meta name="image" content={IMAGE_URI} />
 
-            <meta property="twitter:card" content="summary_large_image" />
-            <meta property="twitter:url" content="https://avettrx.com/" />
-            <meta property="twitter:title" content="Avett Rx" />
-            <meta
-              property="twitter:description"
-              content="You've got the feels.  They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
-            />
-            <meta property="twitter:image" content={IMAGE_URI}></meta>
-          </Head>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </AuthProvider>
+              <meta property="og:type" content="website" />
+              <meta property="og:url" content="https://avettrx.com/" />
+              <meta property="og:title" content="Avett Rx" />
+              <meta
+                property="og:description"
+                content="You've got the feels. They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
+              />
+              <meta property="og:image" content={IMAGE_URI} />
+
+              <meta property="twitter:card" content="summary_large_image" />
+              <meta property="twitter:url" content="https://avettrx.com/" />
+              <meta property="twitter:title" content="Avett Rx" />
+              <meta
+                property="twitter:description"
+                content="You've got the feels.  They've got the tunes. Get an Avett Brothers song prescribed for whatever mood you'd like."
+              />
+              <meta property="twitter:image" content={IMAGE_URI}></meta>
+            </Head>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </AuthProvider>
+      </QueryClientProvider>
     </ChakraProvider>
   );
 };

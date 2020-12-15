@@ -1,9 +1,11 @@
 import * as React from "react";
+import { useQuery } from "react-query";
 import { Magic } from "magic-sdk";
 
+import { User } from "api";
+import { ApiResponse } from "lib/types";
+
 import { Route } from "./routes";
-import { Any } from "./types";
-import useCurrentUser from "./use-current-user";
 import { createUsableContext } from "./utils";
 
 const M =
@@ -12,17 +14,38 @@ const M =
     : new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY || "");
 
 export type AuthContext = {
-  user?: Any;
-  status: "loading" | "ready";
-  login: (email: string) => Promise<void>;
-  logout: () => Promise<void>;
+  user?: User;
+  // TODO: state machine
+  status: "loading" | "ready" | "loggingIn" | "loggingOut";
   client?: Magic;
 };
-export const [useAuth, AuthContext] = createUsableContext<AuthContext>();
+export const [useAuthContext, AuthContext] = createUsableContext<AuthContext>({
+  providerName: "AuthProvider",
+  useName: "useAuth",
+});
+
+export type AuthDispatch = {
+  login: (email: string) => Promise<void>;
+  logout: () => Promise<void>;
+};
+export const [
+  useAuthDispatch,
+  AuthDispatch,
+] = createUsableContext<AuthDispatch>({
+  providerName: "AuthProvider",
+  useName: "useAuthDispatch",
+});
 
 const logout = async () => {
   fetch(Route.ApiLogout);
 };
+
+const fetchUser = (): Promise<ApiResponse["user"]> =>
+  fetch(Route.ApiUser)
+    .then((r) => r.json())
+    .then((data: ApiResponse["user"]) => {
+      return { user: data?.user };
+    });
 
 const login = async (email: string): Promise<void> => {
   const body = { email };
@@ -49,52 +72,59 @@ const login = async (email: string): Promise<void> => {
   }
 };
 
-export const AuthProvider: React.FC = ({ children }) => {
-  const [state, setState] = React.useState<AuthContext>({
-    status: "loading",
-    user: undefined,
-    client: M,
-    login: async (email: string) => {
-      const user = await login(email);
-      setState((s) => ({ ...s, user }));
-    },
-    logout: async () => {
-      await logout();
-      setState((s) => ({ ...s, user: undefined }));
-    },
-  });
-  const currentUser = useCurrentUser();
-
-  React.useEffect(() => {
-    setState((s) => ({ ...s, status: "ready" }));
-  }, []);
-
-  React.useEffect(() => {
-    setState((s) => ({ ...s, user: currentUser }));
-  }, [currentUser]);
-
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+const reducer = (
+  state: AuthContext,
+  action: Partial<AuthContext> | ((s: AuthContext) => Partial<AuthContext>)
+): AuthContext => {
+  switch (typeof action) {
+    case "function": {
+      return { ...state, ...action(state) };
+    }
+    default: {
+      return { ...state, ...action };
+    }
+  }
 };
 
-export const MockAuthProvider: React.FC<{
-  initialState?: Partial<AuthContext>;
-}> = ({ children, initialState }) => {
-  const mockLogin = React.useCallback(async (): Promise<void> => {
-    setState((s) => ({ ...s, user: {} }));
-  }, []);
+const initialState: AuthContext = {
+  status: "loading",
+  user: undefined,
+  client: M,
+};
 
-  const mockLogout = React.useCallback(async (): Promise<void> => {
-    setState((s) => ({ ...s, user: undefined }));
-  }, []);
+export const AuthProvider: React.FC = ({ children }) => {
+  const [state, setState] = React.useReducer(reducer, initialState);
 
-  const [state, setState] = React.useState<AuthContext>({
-    status: "ready",
-    user: undefined,
-    client: undefined,
-    login: mockLogin,
-    logout: mockLogout,
-    ...initialState,
-  });
+  const { data, isLoading, refetch } = useQuery("user", fetchUser);
+  React.useEffect(() => {
+    setState({ user: data?.user });
+  }, [data]);
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+  const dispatch = React.useMemo(
+    () => ({
+      login: async (email: string) => {
+        setState({ status: "loggingIn" });
+        await login(email);
+        refetch();
+      },
+      logout: async () => {
+        setState({ status: "loggingOut" });
+        await logout();
+        setState({ user: undefined, status: "ready" });
+      },
+    }),
+    [refetch]
+  );
+
+  React.useEffect(() => {
+    setState({
+      status: isLoading ? "loading" : "ready",
+    });
+  }, [isLoading]);
+
+  return (
+    <AuthContext.Provider value={state}>
+      <AuthDispatch.Provider value={dispatch}>{children}</AuthDispatch.Provider>
+    </AuthContext.Provider>
+  );
 };
