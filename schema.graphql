@@ -17,6 +17,12 @@ type Tag {
 
 type User {
   email: String! @unique
+  roles: [Role!]!
+}
+
+enum Role {
+  basic
+  admin
 }
 
 type Query {
