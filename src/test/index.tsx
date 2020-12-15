@@ -1,35 +1,38 @@
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { render, RenderResult } from "@testing-library/react";
 import { NextRouter } from "next/router";
 
-import { AuthContext, MockAuthProvider } from "lib/auth";
+import { AuthContext, AuthProvider } from "lib/auth";
 
 import { ApolloProvider } from "./apollo-provider";
 import RouterProvider from "./router-provider";
 
+const queryClient = new QueryClient();
 type AllTheProvidersProps = {
   router?: Partial<NextRouter>;
   auth?: Partial<AuthContext>;
   wrapper?: React.FC;
 };
 
-const AllTheProviders = ({
+const makeOmniWrapper = ({
   router,
-  auth = {},
   wrapper: Wrapper = ({ children }) => <>{children}</>,
 }: AllTheProvidersProps) => {
-  const _AllTheProviders: React.FC = ({ children }) => {
+  const AllTheProviders: React.FC = ({ children }) => {
     return (
       <RouterProvider router={router}>
-        <MockAuthProvider initialState={auth}>
-          <ApolloProvider>
-            <Wrapper>{children}</Wrapper>
-          </ApolloProvider>
-        </MockAuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <ApolloProvider>
+              <Wrapper>{children}</Wrapper>
+            </ApolloProvider>
+          </AuthProvider>
+        </QueryClientProvider>
       </RouterProvider>
     );
   };
-  return _AllTheProviders;
+  return AllTheProviders;
 };
 
 type RenderParams = Parameters<typeof render>;
@@ -43,7 +46,7 @@ const customRender = (
   }: RenderParams[1] & AllTheProvidersProps = {}
 ): RenderResult =>
   render(ui, {
-    wrapper: AllTheProviders({ router, wrapper, auth }),
+    wrapper: makeOmniWrapper({ router, wrapper, auth }),
     ...options,
   });
 
