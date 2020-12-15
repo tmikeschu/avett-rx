@@ -29,13 +29,10 @@ function createApolloClient({
   });
 
   const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem("faunaToken");
     return {
       headers: {
         ...headers,
-        authorization: `Bearer ${
-          token || process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY
-        }`,
+        authorization: `Bearer ${process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY}`,
       },
     };
   });
