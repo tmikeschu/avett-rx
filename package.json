@@ -46,7 +46,7 @@
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "swr": "^0.3.9"
+    "react-query": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
