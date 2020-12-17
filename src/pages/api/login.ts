@@ -1,7 +1,7 @@
-import { createSession } from "lib/auth-cookies";
-import { magic } from "lib/magic";
-import { findOrCreateUserByEmail } from "lib/models/user-model";
-import { createHandlers } from "lib/rest-handlers";
+import { createSession } from "server/auth-cookies";
+import { magic } from "server/magic";
+import { findOrCreateUserByEmail } from "server/models/user-model";
+import { createHandlers } from "server/rest-handlers";
 
 export default createHandlers({
   POST: async (req, res) => {

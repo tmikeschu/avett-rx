@@ -1,5 +1,5 @@
-import { getSession } from "lib/auth-cookies";
-import { createHandlers } from "lib/rest-handlers";
+import { getSession } from "server/auth-cookies";
+import { createHandlers } from "server/rest-handlers";
 
 export default createHandlers({
   GET: async (req, res) => {

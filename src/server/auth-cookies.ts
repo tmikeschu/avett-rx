@@ -1,8 +1,9 @@
 import { parse, serialize } from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 
+import { AuthSession } from "lib/types";
+
 import { decrypt, encrypt } from "./iron";
-import { AuthSession } from "./types";
 
 const TOKEN_NAME = "session";
 const MAX_AGE = 60 * 60 * 8; // 8 hours
