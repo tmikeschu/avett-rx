@@ -3,6 +3,7 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { Role, User } from "api";
+import { LoginButton, LogoutButton } from "features/auth";
 import { useAuthContext } from "lib/auth";
 import { Route } from "lib/routes";
 
@@ -10,11 +11,18 @@ import { AdminMetaData } from "./meta-data";
 
 const isAdmin = (u: User): boolean => u.roles.includes(Role.Admin);
 
-type Status = "checking" | "notallowed" | "permitted";
+type Status = "nouser" | "checking" | "notallowed" | "permitted";
 const AdminLayout: React.FC = ({ children }) => {
   const router = useRouter();
   const { user } = useAuthContext();
-  const [status, setStatus] = React.useState<Status>("checking");
+  const [status, setStatus] = React.useState<Status>("nouser");
+
+  React.useEffect(() => {
+    if (user && status === "nouser") {
+      setStatus("checking");
+    }
+  }, [user, status]);
+
   React.useEffect(() => {
     if (!user) return;
 
@@ -35,22 +43,45 @@ const AdminLayout: React.FC = ({ children }) => {
         align="flex-start"
         h="full"
       >
-        {status === "permitted" ? (
-          <>
-            <AdminMetaData />
-            {children}
-          </>
-        ) : (
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            h="full"
-            w="full"
-          >
-            <Spinner color="purple.500" />
-          </Flex>
-        )}
+        {(() => {
+          switch (status) {
+            case "nouser": {
+              return (
+                <Flex
+                  align="center"
+                  justify="center"
+                  direction="column"
+                  h="full"
+                  w="full"
+                >
+                  <LoginButton />
+                </Flex>
+              );
+            }
+            case "permitted": {
+              return (
+                <>
+                  <AdminMetaData />
+                  {children}
+                  <LogoutButton />
+                </>
+              );
+            }
+            default: {
+              return (
+                <Flex
+                  direction="column"
+                  align="center"
+                  justify="center"
+                  h="full"
+                  w="full"
+                >
+                  <Spinner />
+                </Flex>
+              );
+            }
+          }
+        })()}
       </Flex>
     </Box>
   );

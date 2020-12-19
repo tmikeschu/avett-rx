@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 
-import { LoginButton, LogoutButton } from "features/auth";
 import { useAuthContext } from "lib/auth";
 
 const AdminHome: NextPage = () => {
@@ -18,13 +17,10 @@ const AdminHome: NextPage = () => {
             {user.email}
           </Text>
         </Box>
-        <LogoutButton />
       </Flex>
     </Flex>
   ) : (
-    <Flex align="center" justify="center" direction="column" h="full" w="full">
-      <LoginButton />
-    </Flex>
+    <Spinner />
   );
 };
 
