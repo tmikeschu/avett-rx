@@ -6,8 +6,8 @@ import {
   HttpOptions,
   InMemoryCache,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 
+import { Route } from "./routes";
 import { Any } from "./types";
 
 type Cache = Record<string, Any>;
@@ -23,23 +23,14 @@ function createApolloClient({
   httpOptions = {},
 }: CreateClientOptions = {}): ApolloClient<Cache> {
   const httpLink = createHttpLink({
-    uri: process.env.NEXT_PUBLIC_FAUNA_GRAPHQL_URI,
+    uri: Route.ApiGraphql,
     credentials: "same-origin",
     ...httpOptions,
   });
 
-  const authLink = setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: `Bearer ${process.env.NEXT_PUBLIC_FAUNA_VISITOR_KEY}`,
-      },
-    };
-  });
-
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: authLink.concat(httpLink),
+    link: httpLink,
     cache: new InMemoryCache({}),
   });
 }

@@ -6,9 +6,27 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
  *
  * Errors are caught and returned.
  */
-export function createHandlers(handlers: Record<string, NextApiHandler>) {
+
+export const REST_METHODS = ["GET", "POST", "PATCH", "PUT", "DELETE"] as const;
+
+export type REST_METHOD = typeof REST_METHODS[number];
+export function isRESTMethod(x: unknown): x is REST_METHOD {
+  return typeof x === "string" && REST_METHODS.includes(x as REST_METHOD);
+}
+
+export function assertRESTMethod(x: unknown): asserts x is REST_METHOD {
+  if (!isRESTMethod(x)) {
+    throw new Error(`Invalid REST method: ${x}`);
+  }
+}
+
+export function createHandlers(
+  handlers: Partial<Record<REST_METHOD, NextApiHandler>>
+) {
   return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    const handler = req.method && handlers[req.method];
+    assertRESTMethod(req.method);
+
+    const handler = handlers[req.method];
     if (handler) {
       try {
         await handler(req, res);
