@@ -64,7 +64,7 @@ const Pharmacy: React.FC = () => {
 };
 
 const Loading: React.FC = () => {
-  return <Spinner color="purple.500" data-testid="loading" />;
+  return <Spinner />;
 };
 
 type FetchError = NonNullable<GetTagsQueryResult["error"]>;
@@ -160,7 +160,13 @@ const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
 
 export const SongLoading: React.FC = () => {
   return (
-    <Flex direction="column" align="flex-start" data-testid="loading">
+    <Flex
+      direction="column"
+      align="flex-start"
+      aria-label="Loading..."
+      aria-busy="true"
+      role="alert"
+    >
       <Skeleton height="3" width="16" mb="1" />
       <Skeleton height="2" width="32" mb="2" />
 

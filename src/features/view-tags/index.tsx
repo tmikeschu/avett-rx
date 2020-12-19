@@ -23,7 +23,7 @@ const ViewTags: React.FC = () => {
 export default ViewTags;
 
 const Loading: React.FC = () => {
-  return <Spinner color="purple.500" data-testid="loading" />;
+  return <Spinner />;
 };
 
 const Empty = () => {

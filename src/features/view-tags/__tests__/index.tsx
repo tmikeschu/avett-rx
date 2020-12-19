@@ -13,8 +13,8 @@ describe("<ViewTags />", () => {
   });
 
   it("shows a loading spinner while fetching data", async () => {
-    const { getByTestId, container } = utils.render(<ViewTags />);
-    expect(getByTestId("loading")).toBeInTheDocument();
+    const { container } = utils.render(<ViewTags />);
+    expect(utils.screen.getByText(/loading.../i)).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 
@@ -27,13 +27,11 @@ describe("<ViewTags />", () => {
         }
       )
     );
-    const { findByText, container, getByTestId, queryByTestId } = utils.render(
-      <ViewTags />
-    );
-    expect(getByTestId("loading")).toBeInTheDocument();
+    const { findByText, container } = utils.render(<ViewTags />);
+    expect(utils.screen.getByText(/loading.../i)).toBeInTheDocument();
     expect(await findByText(/don't have any tags/i)).toBeInTheDocument();
     expect(container).toMatchSnapshot();
-    expect(queryByTestId("loading")).toBeNull();
+    expect(utils.screen.queryByText(/loading.../i)).not.toBeInTheDocument();
   });
 
   it("shows an error state", async () => {
@@ -46,24 +44,20 @@ describe("<ViewTags />", () => {
         }
       )
     );
-    const { findByText, container, getByTestId, queryByTestId } = utils.render(
-      <ViewTags />
-    );
-    expect(getByTestId("loading")).toBeInTheDocument();
+    const { findByText, container } = utils.render(<ViewTags />);
+    expect(utils.screen.getByText(/loading.../i)).toBeInTheDocument();
     expect(await findByText(/oh no!/i)).toBeInTheDocument();
     expect(container).toMatchSnapshot();
-    expect(queryByTestId("loading")).toBeNull();
+    expect(utils.screen.queryByText(/loading.../i)).not.toBeInTheDocument();
     jest.restoreAllMocks();
   });
 
   it("shows data after loading", async () => {
-    const { queryByTestId, getByTestId, getByRole, findByText } = utils.render(
-      <ViewTags />
-    );
-    expect(getByTestId("loading")).toBeInTheDocument();
+    const { getByRole, findByText } = utils.render(<ViewTags />);
+    expect(utils.screen.getByText(/loading.../i)).toBeInTheDocument();
 
     expect(await findByText(/test tag$/i)).toBeInTheDocument();
     expect(getByRole("list", { name: /tags list/i })).toMatchSnapshot();
-    expect(queryByTestId("loading")).toBeNull();
+    expect(utils.screen.queryByText(/loading.../i)).not.toBeInTheDocument();
   });
 });

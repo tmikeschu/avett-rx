@@ -1,7 +1,9 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ChakraProvider } from "@chakra-ui/react";
 import { render, RenderResult } from "@testing-library/react";
 import { NextRouter } from "next/router";
+import { theme } from "styles/theme";
 
 import { AuthContext, AuthProvider } from "lib/auth";
 
@@ -25,7 +27,9 @@ const makeOmniWrapper = ({
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <ApolloProvider>
-              <Wrapper>{children}</Wrapper>
+              <ChakraProvider theme={theme}>
+                <Wrapper>{children}</Wrapper>
+              </ChakraProvider>
             </ApolloProvider>
           </AuthProvider>
         </QueryClientProvider>

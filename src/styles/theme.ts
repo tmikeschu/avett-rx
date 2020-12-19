@@ -13,5 +13,10 @@ export const theme = extendTheme({
         letterSpacing: "tighter",
       },
     },
+    Spinner: {
+      baseStyle: {
+        color: "purple.500",
+      },
+    },
   },
 });
