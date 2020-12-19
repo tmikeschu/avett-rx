@@ -1,4 +1,4 @@
-import { User } from "api";
+import { Role, User } from "api";
 
 import { adminClient, getClient, q } from "../fauna";
 
@@ -8,7 +8,9 @@ export const findOrCreateUserByEmail = async (
   email: string
 ): Promise<AuthUser | undefined> => {
   return await adminClient
-    .query<AuthUser>(q.Call("user_login_or_create", email, {}))
+    .query<AuthUser>(
+      q.Call("user_login_or_create", email, { email, roles: [Role.Basic] })
+    )
     .catch(() => undefined);
 };
 
