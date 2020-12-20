@@ -10,6 +10,7 @@ const queryClient = new QueryClient();
 
 import { useRouter } from "next/router";
 
+import { ErrorBoundary } from "components/error-boundary";
 import { AdminLayout, AppLayout } from "components/layouts";
 import { ApolloProvider } from "lib/apollo-client";
 import { AuthProvider } from "lib/auth";
@@ -27,15 +28,17 @@ const AvettRxApp: React.FC<AppProps> = ({
   const Layout = router.asPath.match(/^\/admin/) ? AdminLayout : AppLayout;
   return (
     <ChakraProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <ApolloProvider initialState={initialApolloState}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ApolloProvider>
-        </AuthProvider>
-      </QueryClientProvider>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <ApolloProvider initialState={initialApolloState}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ApolloProvider>
+          </AuthProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
     </ChakraProvider>
   );
 };
