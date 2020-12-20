@@ -2,12 +2,8 @@ import * as React from "react";
 
 import { Any } from "./types";
 
-export const TypedKey = <T extends string>(
-  map: Record<T, string>
-): Record<T, string> => map;
-
 export function randomElement<T>(items: T[]): T | undefined {
-  return items[Math.floor(Math.random() * items.length)];
+  return items[Math.floor(Math.random() * (items.length - 1))];
 }
 
 const newlineRegex = /(\r\n|\r|\n)/g;
@@ -40,4 +36,16 @@ export function createUsableContext<T>({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function noop(..._args: Any[]): void {
   void 0;
+}
+
+export function isDefinedAndNonNull<T>(x: T | undefined | null): x is T {
+  return typeof x !== "undefined" && x !== null;
+}
+
+export function assertIsDefinedAndNonNull<T>(
+  x: T | undefined | null
+): asserts x is T {
+  if (!isDefinedAndNonNull(x)) {
+    throw new Error(`value null or undefined: ${x}`);
+  }
 }
