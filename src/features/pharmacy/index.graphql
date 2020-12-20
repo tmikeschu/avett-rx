@@ -4,6 +4,7 @@ fragment PharmacySong on Song {
   lyrics
 
   album {
+    _id
     title
   }
 }
