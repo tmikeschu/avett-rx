@@ -1,0 +1,38 @@
+fragment AdminPharmacySong on Song {
+  _id
+  title
+
+  album {
+    _id
+    title
+  }
+
+  tags {
+    data {
+      _id
+      name
+    }
+  }
+}
+
+query AdminAllSongs {
+  allSongs {
+    after
+    before
+    data {
+      ...AdminPharmacySong
+    }
+  }
+}
+
+query AdminAllTags {
+  allTags {
+    after
+    before
+    data {
+      _id
+      name
+    }
+  }
+}
+
