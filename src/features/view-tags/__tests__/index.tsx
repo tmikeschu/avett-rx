@@ -2,6 +2,7 @@ import * as React from "react";
 import { graphql } from "msw";
 
 import { GetTagsQuery, GetTagsQueryVariables, newGetTagsData } from "api";
+import { tags } from "mocks/data";
 import { server } from "mocks/server";
 import * as utils from "test";
 
@@ -56,7 +57,7 @@ describe("<ViewTags />", () => {
     const { getByRole, findByText } = utils.render(<ViewTags />);
     expect(utils.screen.getByText(/loading.../i)).toBeInTheDocument();
 
-    expect(await findByText(/test tag$/i)).toBeInTheDocument();
+    expect(await findByText(tags[0].name)).toBeInTheDocument();
     expect(getByRole("list", { name: /tags list/i })).toMatchSnapshot();
     expect(utils.screen.queryByText(/loading.../i)).not.toBeInTheDocument();
   });

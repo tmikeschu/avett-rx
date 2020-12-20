@@ -43,12 +43,27 @@ exports[`<ViewTags /> shows data after loading 1`] = `
   <li
     class="css-1jwz7be"
   >
-    test tag
+    🥰
   </li>
   <li
     class="css-1jwz7be"
   >
-    test tag 2
+    😭
+  </li>
+  <li
+    class="css-1jwz7be"
+  >
+    😊
+  </li>
+  <li
+    class="css-1jwz7be"
+  >
+    😔
+  </li>
+  <li
+    class="css-1jwz7be"
+  >
+    🤪
   </li>
 </ul>
 `;

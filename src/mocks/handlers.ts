@@ -1,33 +1,21 @@
 import { graphql } from "msw";
 
 import {
+  AdminAllSongsQuery,
+  AdminAllSongsQueryVariables,
+  AdminAllTagsQuery,
+  AdminAllTagsQueryVariables,
   GetTagsQuery,
   GetTagsQueryVariables,
-  newAlbum,
+  newAdminAllSongsData,
+  newAdminAllTagsData,
   newGetTagsData,
-  newSong,
   newSongsForTagData,
-  newTag,
   SongsForTagQuery,
   SongsForTagQueryVariables,
 } from "api";
 
-const tags = ["test tag", "test tag 2", null].map((name) =>
-  name ? newTag({ name }) : null
-);
-
-const songs = [
-  {
-    title: "Sanguine",
-    lyrics: "Make me sanguine\nHelp me genuinely",
-    album: newAlbum({ title: "The Gleam" }),
-  },
-  null,
-].map((s) => (s ? newSong(s) : s));
-
-if (tags[0]?.songs && songs[0]) {
-  tags[0].songs.data = [songs[0]];
-}
+import { tags } from "./data";
 
 export const handlers = [
   graphql.query<GetTagsQuery, GetTagsQueryVariables>(
@@ -54,6 +42,34 @@ export const handlers = [
           newSongsForTagData({
             songsForTag: {
               data: tag?.songs.data || [],
+            },
+          })
+        )
+      );
+    }
+  ),
+  graphql.query<AdminAllSongsQuery, AdminAllSongsQueryVariables>(
+    "AdminAllSongs",
+    (_req, res, ctx) => {
+      return res(
+        ctx.data(
+          newAdminAllSongsData({
+            allSongs: {
+              data: [],
+            },
+          })
+        )
+      );
+    }
+  ),
+  graphql.query<AdminAllTagsQuery, AdminAllTagsQueryVariables>(
+    "AdminAllTags",
+    (_req, res, ctx) => {
+      return res(
+        ctx.data(
+          newAdminAllTagsData({
+            allTags: {
+              data: tags,
             },
           })
         )

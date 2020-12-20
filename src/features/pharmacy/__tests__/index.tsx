@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { tags } from "mocks/data";
 import * as utils from "test";
 
 import Pharmacy from "..";
@@ -23,7 +24,7 @@ describe("<Pharmacy />", () => {
     expect(getByRole("heading", { name: /pharmacy/i })).toBeInTheDocument();
 
     expect(queryByText(/sanguine/i)).toBeNull();
-    const btn = getByText(/test tag$/);
+    const btn = getByText(tags[0].name);
     user.click(btn);
     expect(
       await utils.screen.findByLabelText(/loading.../i)
