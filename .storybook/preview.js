@@ -12,6 +12,7 @@ export const parameters = {
 };
 
 export const decorators = [
+  (Story) => <Story />,
   (Story) => (
     <RouterProvider>
       <ChakraProvider theme={theme}>

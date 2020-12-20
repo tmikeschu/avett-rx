@@ -4,6 +4,7 @@ export enum Route {
   ApiLogin = "/api/login",
   ApiLogout = "/api/logout",
   ApiUser = "/api/user",
+  ApiGraphql = "/api/graphql",
 }
 
 export const VISITOR_VIEWS = {

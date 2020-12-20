@@ -12,7 +12,7 @@ module.exports = {
   //   },
   // },
   moduleNameMapper: {
-    "^(components|features|lib|test|mocks)/(.*)$": "<rootDir>/src/$1/$2",
+    "^(components|features|lib|test|mocks|styles)/(.*)$": "<rootDir>/src/$1/$2",
     "^(test)$": "<rootDir>/src/$1",
     "^(mocks)$": "<rootDir>/src/$1",
     "^(api)$": "<rootDir>/__generated__/$1",

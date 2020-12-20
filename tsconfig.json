@@ -17,7 +17,8 @@
       "*": ["*", "../__generated__/*"]
     },
     "strict": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "strictBindCallApply": true
   },
   "include": [
     "next-env.d.ts",

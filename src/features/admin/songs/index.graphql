@@ -1,0 +1,53 @@
+fragment AdminTag on Tag {
+  _id
+  name
+}
+
+fragment AdminPharmacySong on Song {
+  _id
+  title
+  lyrics
+
+  album {
+    _id
+    title
+  }
+
+  tags {
+    data {
+      ...AdminTag
+    }
+  }
+}
+
+query AdminAllSongs {
+  allSongs {
+    after
+    before
+    data {
+      ...AdminPharmacySong
+    }
+  }
+}
+
+query AdminAllTags {
+  allTags {
+    after
+    before
+    data {
+      ...AdminTag
+    }
+  }
+}
+
+mutation AdminUpdateSong($id: ID!, $data: SongInput!) {
+  updateSong(id: $id, data: $data) {
+    ...AdminPharmacySong
+  }
+}
+
+mutation AdminCreateTag($data: TagInput!) {
+  createTag(data: $data) {
+    ...AdminTag
+  }
+}

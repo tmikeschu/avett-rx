@@ -64,30 +64,21 @@ const Pharmacy: React.FC = () => {
 };
 
 const Loading: React.FC = () => {
-  return <Spinner color="purple.500" data-testid="loading" />;
+  return <Spinner />;
 };
 
 type FetchError = NonNullable<GetTagsQueryResult["error"]>;
 const Failure: React.FC<{ error: FetchError }> = ({ error }) => {
   console.error(error);
   return (
-    <Text color="red.600" backgroundColor="red.100" px={4} py={2} rounded="md">
-      Oh no! Something went wrong fetching tags.
-    </Text>
+    <Text textStyle="error">Oh no! Something went wrong fetching tags.</Text>
   );
 };
 
 const Empty = () => {
   return (
     <Flex direction="column" alignItems="flex-start" width="100%">
-      <Text
-        mb={4}
-        color="yellow.600"
-        backgroundColor="yellow.100"
-        px={4}
-        py={2}
-        rounded="md"
-      >
+      <Text textStyle="warning">
         Oh snap! We don&apos;t have any tags to show yet.
       </Text>
       <Box color="purple.300" height={300} width={300} maxWidth="100%">
@@ -160,7 +151,13 @@ const Success: React.FC<{ data: Tag[] }> = ({ data: tags }) => {
 
 export const SongLoading: React.FC = () => {
   return (
-    <Flex direction="column" align="flex-start" data-testid="loading">
+    <Flex
+      direction="column"
+      align="flex-start"
+      aria-label="Loading..."
+      aria-busy="true"
+      role="alert"
+    >
       <Skeleton height="3" width="16" mb="1" />
       <Skeleton height="2" width="32" mb="2" />
 
@@ -174,14 +171,7 @@ export const SongLoading: React.FC = () => {
 export const SongEmpty: React.FC = () => {
   return (
     <Flex direction="column" alignItems="flex-start" width="100%">
-      <Text
-        mb={4}
-        color="yellow.600"
-        backgroundColor="yellow.100"
-        px={4}
-        py={2}
-        rounded="md"
-      >
+      <Text textStyle="warning">
         Oh snap! We don&apos;t have any songs for that tag yet.
       </Text>
       <Box color="purple.300" height={300} width={300} maxWidth="100%">
@@ -212,9 +202,7 @@ export type SongError = NonNullable<SongsForTagQueryResult["error"]>;
 export const SongFailure: React.FC<{ error: FetchError }> = ({ error }) => {
   console.error(error);
   return (
-    <Text color="red.600" backgroundColor="red.100" px={4} py={2} rounded="md">
-      Oh no! Something went wrong fetching tags.
-    </Text>
+    <Text textStyle="error">Oh no! Something went wrong fetching tags.</Text>
   );
 };
 
