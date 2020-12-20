@@ -20,7 +20,7 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
         </Text>
       </Flex>
 
-      <Code mb="4" layerStyle="block" colorScheme="yellow">
+      <Code mb="4" layerStyle="multiline" colorScheme="yellow">
         {error.message}
       </Code>
 
