@@ -15,7 +15,7 @@ import {
   SongsForTagQueryVariables,
 } from "api";
 
-import { tags } from "./data";
+import { songs, tags } from "./data";
 
 export const handlers = [
   graphql.query<GetTagsQuery, GetTagsQueryVariables>(
@@ -55,7 +55,7 @@ export const handlers = [
         ctx.data(
           newAdminAllSongsData({
             allSongs: {
-              data: [],
+              data: songs,
             },
           })
         )
