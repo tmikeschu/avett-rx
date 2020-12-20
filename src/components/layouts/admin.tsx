@@ -41,7 +41,8 @@ const AdminLayout: React.FC = ({ children }) => {
         maxWidth="2xl"
         mx="auto"
         align="flex-start"
-        h="full"
+        minH="full"
+        overflow="auto"
       >
         {(() => {
           switch (status) {
