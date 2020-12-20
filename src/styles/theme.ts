@@ -25,6 +25,13 @@ export const theme = extendTheme({
     },
   },
 
+  layerStyles: {
+    multiline: {
+      whiteSpace: "pre-wrap",
+      p: 4,
+    },
+  },
+
   textStyles: {
     warning: {
       color: "yellow.700",
