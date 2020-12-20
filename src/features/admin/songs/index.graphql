@@ -1,6 +1,7 @@
 fragment AdminPharmacySong on Song {
   _id
   title
+  lyrics
 
   album {
     _id
@@ -36,3 +37,8 @@ query AdminAllTags {
   }
 }
 
+mutation AdminUpdateSong($id: ID!, $data: SongInput!) {
+  updateSong(id: $id, data: $data) {
+    ...AdminPharmacySong
+  }
+}

@@ -8,6 +8,7 @@ import {
   ListItem,
   Spinner,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 
@@ -15,6 +16,7 @@ import {
   AdminAllSongsQueryResult,
   useAdminAllSongsQuery,
   useAdminAllTagsQuery,
+  useAdminUpdateSongMutation,
 } from "api";
 import { renderResult } from "lib/render-result";
 import { isDefinedAndNonNull } from "lib/utils";
@@ -57,10 +59,132 @@ const Empty = () => {
   );
 };
 
+const SongTag: React.FC<{
+  song: Pick<Song, "lyrics" | "_id" | "title">;
+  tag: NonNullable<Song["tags"]["data"][0]>;
+}> = ({ song, tag }) => {
+  tag;
+  const toast = useToast();
+  const [deleteTag, deleteResult] = useAdminUpdateSongMutation({
+    variables: {
+      id: song._id,
+      data: {
+        lyrics: song.lyrics,
+        title: song.title,
+        tags: {
+          disconnect: [tag._id],
+        },
+      },
+    },
+    onError: (e) => {
+      toast({
+        title: "An error occurred.",
+        description: e.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  return (
+    <Flex
+      bg="purple.50"
+      key={tag._id}
+      mr="2"
+      alignItems="center"
+      rounded="md"
+      pl={4}
+      py={1}
+      boxShadow="base"
+    >
+      <Text>{tag.name}</Text>
+      <IconButton
+        isLoading={deleteResult.loading}
+        onClick={() => {
+          deleteTag();
+        }}
+        _hover={{ color: "red.500" }}
+        size="sm"
+        aria-label="delete tag"
+        icon={<DeleteIcon />}
+        colorScheme="gray"
+        variant="ghost"
+      />
+    </Flex>
+  );
+};
+
+const SongTagAdd: React.FC<{
+  song: Pick<Song, "lyrics" | "_id" | "title">;
+  tag: NonNullable<Song["tags"]["data"][0]>;
+}> = ({ song, tag }) => {
+  const toast = useToast();
+  const [addTag, addResult] = useAdminUpdateSongMutation({
+    variables: {
+      id: song._id,
+      data: {
+        lyrics: song.lyrics,
+        title: song.title,
+        tags: {
+          connect: [tag._id],
+        },
+      },
+    },
+    onError: (e) => {
+      toast({
+        title: "An error occurred.",
+        description: e.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  return (
+    <Flex
+      bg="gray.50"
+      mr="2"
+      display="flex"
+      alignItems="center"
+      rounded="md"
+      pl={4}
+      py={1}
+      boxShadow="base"
+    >
+      <Text whiteSpace="nowrap">{tag.name}</Text>
+      <IconButton
+        isLoading={addResult.loading}
+        onClick={() => {
+          addTag({
+            variables: {
+              id: song._id,
+              data: {
+                lyrics: song.lyrics,
+                title: song.title,
+                tags: {
+                  connect: [tag._id],
+                },
+              },
+            },
+          });
+        }}
+        _hover={{ color: "green.500" }}
+        size="sm"
+        variant="ghost"
+        aria-label="add tag"
+        icon={<PlusSquareIcon />}
+      ></IconButton>
+    </Flex>
+  );
+};
+
 export type SongRowProps = { song: Song };
 export const SongRow: React.FC<SongRowProps> = ({ song }) => {
   const { data } = useAdminAllTagsQuery();
   const tags = (data?.allTags.data ?? []).filter(isDefinedAndNonNull);
+
   return (
     <Flex
       direction="column"
@@ -94,25 +218,14 @@ export const SongRow: React.FC<SongRowProps> = ({ song }) => {
         {song.tags.data.length > 0 ? (
           <List display="flex" overflowX="auto" pb={4}>
             {song.tags.data.filter(isDefinedAndNonNull).map((tag) => (
-              <ListItem
-                bg="purple.50"
-                key={tag._id}
-                mr="2"
-                display="flex"
-                alignItems="center"
-                rounded="md"
-                pl={4}
-                py={1}
-                boxShadow="base"
-              >
-                <Text>{tag.name}</Text>
-                <IconButton
-                  _hover={{ color: "red.500" }}
-                  size="sm"
-                  aria-label="delete tag"
-                  icon={<DeleteIcon />}
-                  colorScheme="gray"
-                  variant="ghost"
+              <ListItem key={tag._id}>
+                <SongTag
+                  song={{
+                    _id: song._id,
+                    lyrics: song.lyrics,
+                    title: song.title,
+                  }}
+                  tag={tag}
                 />
               </ListItem>
             ))}
@@ -126,25 +239,15 @@ export const SongRow: React.FC<SongRowProps> = ({ song }) => {
           {tags
             .filter((tag) => !song.tags.data.find((t) => t?._id === tag._id))
             .map((tag) => (
-              <ListItem
-                bg="gray.50"
-                key={tag._id}
-                mr="2"
-                display="flex"
-                alignItems="center"
-                rounded="md"
-                pl={4}
-                py={1}
-                boxShadow="base"
-              >
-                <Text whiteSpace="nowrap">{tag.name}</Text>
-                <IconButton
-                  _hover={{ color: "green.500" }}
-                  size="sm"
-                  variant="ghost"
-                  aria-label="add tag"
-                  icon={<PlusSquareIcon />}
-                ></IconButton>
+              <ListItem key={tag._id}>
+                <SongTagAdd
+                  song={{
+                    _id: song._id,
+                    lyrics: song.lyrics,
+                    title: song.title,
+                  }}
+                  tag={tag}
+                />
               </ListItem>
             ))}
         </List>
@@ -163,7 +266,7 @@ const Success: React.FC<{ data: Song[] }> = ({ data: songs }) => {
       px={4}
     >
       {songs.map((song) => (
-        <ListItem key={song._id}>
+        <ListItem key={song._id} mb="4">
           <SongRow song={song} />
         </ListItem>
       ))}

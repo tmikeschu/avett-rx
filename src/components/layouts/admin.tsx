@@ -35,14 +35,15 @@ const AdminLayout: React.FC = ({ children }) => {
   }, [user, router, status]);
 
   return (
-    <Box h="100vh" w="100vw">
+    <Box h="100vh" w="100vw" bg="gray.200" overflowY="auto" pb={4}>
       <Flex
         direction="column"
         maxWidth="2xl"
+        w="full"
         mx="auto"
         align="flex-start"
         minH="full"
-        overflow="auto"
+        bg="gray.200"
       >
         {(() => {
           switch (status) {
