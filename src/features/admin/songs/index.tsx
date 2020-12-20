@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DeleteIcon, PlusSquareIcon } from "@chakra-ui/icons";
+import { SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Heading,
@@ -63,7 +63,6 @@ const SongTag: React.FC<{
   song: Pick<Song, "lyrics" | "_id" | "title">;
   tag: NonNullable<Song["tags"]["data"][0]>;
 }> = ({ song, tag }) => {
-  tag;
   const toast = useToast();
   const [deleteTag, deleteResult] = useAdminUpdateSongMutation({
     variables: {
@@ -89,13 +88,12 @@ const SongTag: React.FC<{
 
   return (
     <Flex
-      bg="purple.50"
+      bg="purple.100"
       key={tag._id}
       mr="2"
       alignItems="center"
-      rounded="md"
+      rounded="full"
       pl={4}
-      py={1}
       boxShadow="base"
     >
       <Text>{tag.name}</Text>
@@ -107,7 +105,7 @@ const SongTag: React.FC<{
         _hover={{ color: "red.500" }}
         size="sm"
         aria-label="delete tag"
-        icon={<DeleteIcon />}
+        icon={<SmallCloseIcon />}
         colorScheme="gray"
         variant="ghost"
       />
@@ -148,9 +146,8 @@ const SongTagAdd: React.FC<{
       mr="2"
       display="flex"
       alignItems="center"
-      rounded="md"
+      rounded="full"
       pl={4}
-      py={1}
       boxShadow="base"
     >
       <Text whiteSpace="nowrap">{tag.name}</Text>
@@ -174,7 +171,7 @@ const SongTagAdd: React.FC<{
         size="sm"
         variant="ghost"
         aria-label="add tag"
-        icon={<PlusSquareIcon />}
+        icon={<SmallAddIcon />}
       ></IconButton>
     </Flex>
   );
@@ -182,7 +179,7 @@ const SongTagAdd: React.FC<{
 
 export type SongRowProps = { song: Song };
 export const SongRow: React.FC<SongRowProps> = ({ song }) => {
-  const { data } = useAdminAllTagsQuery();
+  const { data, loading } = useAdminAllTagsQuery();
   const tags = (data?.allTags.data ?? []).filter(isDefinedAndNonNull);
 
   return (
@@ -235,21 +232,25 @@ export const SongRow: React.FC<SongRowProps> = ({ song }) => {
             No tags for this song
           </Text>
         )}
-        <List display="flex" overflowX="auto" pb={4}>
-          {tags
-            .filter((tag) => !song.tags.data.find((t) => t?._id === tag._id))
-            .map((tag) => (
-              <ListItem key={tag._id}>
-                <SongTagAdd
-                  song={{
-                    _id: song._id,
-                    lyrics: song.lyrics,
-                    title: song.title,
-                  }}
-                  tag={tag}
-                />
-              </ListItem>
-            ))}
+        <List display="flex" overflowX="auto" pb={1}>
+          {loading ? (
+            <Spinner />
+          ) : (
+            tags
+              .filter((tag) => !song.tags.data.find((t) => t?._id === tag._id))
+              .map((tag) => (
+                <ListItem key={tag._id}>
+                  <SongTagAdd
+                    song={{
+                      _id: song._id,
+                      lyrics: song.lyrics,
+                      title: song.title,
+                    }}
+                    tag={tag}
+                  />
+                </ListItem>
+              ))
+          )}
         </List>
       </Flex>
     </Flex>
