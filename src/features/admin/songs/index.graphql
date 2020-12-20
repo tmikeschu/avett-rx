@@ -1,3 +1,8 @@
+fragment AdminTag on Tag {
+  _id
+  name
+}
+
 fragment AdminPharmacySong on Song {
   _id
   title
@@ -10,8 +15,7 @@ fragment AdminPharmacySong on Song {
 
   tags {
     data {
-      _id
-      name
+      ...AdminTag
     }
   }
 }
@@ -31,8 +35,7 @@ query AdminAllTags {
     after
     before
     data {
-      _id
-      name
+      ...AdminTag
     }
   }
 }
@@ -40,5 +43,11 @@ query AdminAllTags {
 mutation AdminUpdateSong($id: ID!, $data: SongInput!) {
   updateSong(id: $id, data: $data) {
     ...AdminPharmacySong
+  }
+}
+
+mutation AdminCreateTag($data: TagInput!) {
+  createTag(data: $data) {
+    ...AdminTag
   }
 }

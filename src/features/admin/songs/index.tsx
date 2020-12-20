@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   IconButton,
+  Input,
   List,
   ListItem,
   Spinner,
@@ -16,6 +17,7 @@ import {
   AdminAllSongsQueryResult,
   useAdminAllSongsQuery,
   useAdminAllTagsQuery,
+  useAdminCreateTagMutation,
   useAdminUpdateSongMutation,
 } from "api";
 import { renderResult } from "lib/render-result";
@@ -27,11 +29,44 @@ export type Song = NonNullable<
 
 const AdminSongs: NextPage = () => {
   const result = useAdminAllSongsQuery();
+  const [newTag, setNewTag] = React.useState("");
+  const [createTag, createResult] = useAdminCreateTagMutation({
+    refetchQueries: ["AdminAllTags"],
+    variables: {
+      data: {
+        name: newTag,
+      },
+    },
+  });
+
   return (
     <Flex direction="column" overflowY="auto">
-      <Heading as="h1" fontSize="2xl" mb={4}>
-        Avett Rx Songs
-      </Heading>
+      <Flex justifyContent="space-between" px={4} mb={4}>
+        <Heading as="h1" fontSize="2xl" mb={4} mr={4}>
+          Avett Rx Songs
+        </Heading>
+
+        <Flex>
+          <Input
+            value={newTag}
+            onChange={(e) => setNewTag(e.target.value)}
+            placeholder="Add a tag"
+            bg="white"
+            mr={2}
+          />
+          <IconButton
+            colorScheme="green"
+            disabled={!newTag}
+            isLoading={createResult.loading}
+            aria-label="create tag"
+            onClick={() => {
+              setNewTag("");
+              createTag();
+            }}
+            icon={<SmallAddIcon />}
+          />
+        </Flex>
+      </Flex>
       {renderResult(result, {
         Loading,
         Empty,
