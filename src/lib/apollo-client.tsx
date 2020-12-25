@@ -6,6 +6,7 @@ import {
   HttpOptions,
   InMemoryCache,
 } from "@apollo/client";
+import { relayStylePagination } from "@apollo/client/utilities";
 
 import { Route } from "./routes";
 import { Any } from "./types";
@@ -31,7 +32,15 @@ function createApolloClient({
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: httpLink,
-    cache: new InMemoryCache({}),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            allSongs: relayStylePagination(),
+          },
+        },
+      },
+    }),
   });
 }
 
