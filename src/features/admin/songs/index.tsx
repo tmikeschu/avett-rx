@@ -1,6 +1,12 @@
 import * as React from "react";
-import { SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  SmallAddIcon,
+  SmallCloseIcon,
+} from "@chakra-ui/icons";
+import {
+  ButtonGroup,
   Flex,
   Heading,
   IconButton,
@@ -28,7 +34,9 @@ export type Song = NonNullable<
 >;
 
 const AdminSongs: NextPage = () => {
-  const result = useAdminAllSongsQuery();
+  const result = useAdminAllSongsQuery({
+    variables: {},
+  });
   const [newTag, setNewTag] = React.useState("");
   const [createTag, createResult] = useAdminCreateTagMutation({
     refetchQueries: ["AdminAllTags"],
@@ -38,6 +46,21 @@ const AdminSongs: NextPage = () => {
       },
     },
   });
+  const { after, before } = result.data?.allSongs ?? {};
+  const back = () => {
+    result.fetchMore({
+      variables: {
+        cursor: before,
+      },
+    });
+  };
+  const forward = () => {
+    result.fetchMore({
+      variables: {
+        cursor: after,
+      },
+    });
+  };
 
   return (
     <Flex direction="column" overflowY="auto">
@@ -73,9 +96,25 @@ const AdminSongs: NextPage = () => {
         Success,
         Failure,
         isEmpty: (data) => !data.allSongs.data.some(Boolean),
-        successSelector: (data) =>
-          data.allSongs.data.filter((d) => d?._id) as Song[],
+        successSelector: (data) => data,
       })}
+      <ButtonGroup display="flex" justifyContent="space-between">
+        {before ? (
+          <IconButton
+            aria-label="Previous"
+            icon={<ArrowLeftIcon />}
+            onClick={back}
+          />
+        ) : null}
+        {after ? (
+          <IconButton
+            ml="auto"
+            aria-label="Next"
+            icon={<ArrowRightIcon />}
+            onClick={forward}
+          />
+        ) : null}
+      </ButtonGroup>
     </Flex>
   );
 };
@@ -292,7 +331,10 @@ export const SongRow: React.FC<SongRowProps> = ({ song }) => {
   );
 };
 
-const Success: React.FC<{ data: Song[] }> = ({ data: songs }) => {
+const Success: React.FC<{
+  data: NonNullable<AdminAllSongsQueryResult["data"]>;
+}> = ({ data }) => {
+  const songs = data.allSongs.data.filter(isDefinedAndNonNull) ?? [];
   return (
     <List
       display="flex"

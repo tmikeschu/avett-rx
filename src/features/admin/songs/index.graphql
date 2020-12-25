@@ -20,8 +20,8 @@ fragment AdminPharmacySong on Song {
   }
 }
 
-query AdminAllSongs {
-  allSongs {
+query AdminAllSongs($cursor: String) {
+  allSongs(_cursor: $cursor) {
     after
     before
     data {
