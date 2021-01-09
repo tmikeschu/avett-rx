@@ -1,4 +1,4 @@
-import { graphql } from "msw";
+import { graphql, rest } from "msw";
 
 import {
   AdminAllSongsQuery,
@@ -76,4 +76,17 @@ export const handlers = [
       );
     }
   ),
+
+  rest.get("/api/user", (_req, res, ctx) => {
+    return res(
+      ctx.json({
+        user: {
+          email: "tmikeschutte@gmail.com",
+          issuer: "did:ethr:0xF11f4298D84989605AFBC7D4ED7a5375948695cE",
+          roles: ["admin"],
+          _id: "96cbcf57d107f9e6667385dcd129fff6",
+        },
+      })
+    );
+  }),
 ];
