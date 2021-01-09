@@ -6,7 +6,7 @@ import EV from "./empty-void";
 import HB from "./heartbroken";
 
 export default {
-  title: "Art",
+  title: "Components/Art",
   decorators: [
     (Story) => (
       <Box maxW="lg">

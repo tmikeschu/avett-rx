@@ -4,7 +4,7 @@ import { Meta, Story } from "@storybook/react";
 import { ErrorFallback, FallbackProps } from ".";
 
 export default {
-  title: "Error Boundary",
+  title: "Components/Error Boundary",
   argTypes: {
     resetErrorBoundary: {
       action: "reset",
