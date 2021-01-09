@@ -17,7 +17,7 @@ exports[`<ViewTags /> shows a loading spinner while fetching data 1`] = `
 exports[`<ViewTags /> shows an empty state 1`] = `
 <div>
   <p
-    class="chakra-text css-1aut27h"
+    class="chakra-text css-vgfsv"
   >
     Oh snap! We don't have any tags to show yet.
   </p>
@@ -27,7 +27,7 @@ exports[`<ViewTags /> shows an empty state 1`] = `
 exports[`<ViewTags /> shows an error state 1`] = `
 <div>
   <p
-    class="chakra-text css-1asabzw"
+    class="chakra-text css-1d5luno"
   >
     Oh no! Something went wrong fetching that data.
   </p>
