@@ -39,6 +39,9 @@ export const theme = extendTheme({
       px: 4,
       py: 2,
       rounded: "md",
+      borderLeftWidth: "0.25rem",
+      borderLeftStyle: "solid",
+      borderLeftColor: "yellow.600",
     },
     error: {
       color: "red.600",
@@ -46,6 +49,9 @@ export const theme = extendTheme({
       px: 4,
       py: 2,
       rounded: "md",
+      borderLeftWidth: "0.25rem",
+      borderLeftStyle: "solid",
+      borderLeftColor: "red.600",
     },
   },
 });
