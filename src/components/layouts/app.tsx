@@ -9,11 +9,17 @@ import { AppMetaData } from "./meta-data";
 const AppLayout: React.FC = ({ children }) => {
   const { user } = useAuthContext();
   return (
-    <Flex direction="column" maxWidth="lg" mx="auto">
-      <AppMetaData />
-      {children}
+    <Flex
+      borderTopWidth="0.75rem"
+      borderTopStyle="solid"
+      borderTopColor="purple.500"
+    >
+      <Flex direction="column" maxWidth="lg" mx="auto">
+        <AppMetaData />
+        {children}
 
-      {user ? <LogoutButton /> : null}
+        {user ? <LogoutButton /> : null}
+      </Flex>
     </Flex>
   );
 };

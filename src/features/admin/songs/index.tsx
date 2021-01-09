@@ -258,6 +258,9 @@ export const SongRow: React.FC<SongRowProps> = ({ song }) => {
 
   return (
     <Flex
+      borderLeftWidth="0.25rem"
+      borderLeftStyle="solid"
+      borderLeftColor="purple.100"
       direction="column"
       fontSize="4xl"
       _notLast={{ mb: 4 }}
