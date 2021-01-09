@@ -1,5 +1,5 @@
 import "../src/styles/globals.css";
-import * as React from "React";
+import * as React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../src/styles/theme";
 import { worker } from "../src/mocks/browser";
