@@ -35,7 +35,16 @@ const AdminLayout: React.FC = ({ children }) => {
   }, [user, router, status]);
 
   return (
-    <Box h="100vh" w="100vw" bg="gray.100" overflowY="auto" pb={4}>
+    <Box
+      h="100vh"
+      w="100vw"
+      bg="gray.100"
+      overflowY="auto"
+      pb={4}
+      borderTopWidth="0.75rem"
+      borderTopStyle="solid"
+      borderTopColor="purple.500"
+    >
       <Flex
         direction="column"
         maxWidth="2xl"
