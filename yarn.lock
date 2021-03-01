@@ -3020,15 +3020,15 @@
     express "^4.17.1"
     node-fetch "^2.6.0"
 
-"@magic-sdk/commons@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-1.0.1.tgz#4733a860ecdf5b419f19c3b47765a8f862ff47a6"
-  integrity sha512-tj8u81BcdXDjsMFrpaI1LlGQyq8NLWKjW8U/Tdg6BDf/Avddf13nx0gtnrrE7s90OUIWz2Vp+bBj7aQlwZ7OPw==
+"@magic-sdk/commons@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-1.1.0.tgz#253fbbb8846b79e8defacda68ac30b0ac3581e7c"
+  integrity sha512-10CHQg6lMzWALccugQ7LZC3jOYaKMaEOJTfugrjMMgVntBtRPLPrQBz8+Vw9fl4tbGWtjCWcxVsrx5Wela2DHg==
 
-"@magic-sdk/provider@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-4.0.2.tgz#539d1e7af87060ba6e1fc1e5a882b8868182b0f2"
-  integrity sha512-lTC2ykdmZNSirTI0kHx/w9f9mhMj2kDXv7ctK3dEYbK7CSPFhWPw+XuWLcrFLJ74LFh+l3MNTqFAn7sTX9DqGQ==
+"@magic-sdk/provider@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-4.1.1.tgz#65ce55b5dd4c74cf368616a644291c75f65d085b"
+  integrity sha512-GWEE7elROm6tJDD8FmuI0QnI3hIkN0u/ycJOPZv886BNAkWrHhBBOJ4N1f2IRPdh3hsSkKbzSewIv7GFM0qrQw==
   dependencies:
     "@magic-sdk/types" "^3.0.1"
     eventemitter3 "^4.0.4"
@@ -11975,15 +11975,15 @@ lz-string@^1.4.4:
   resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
   integrity sha1-wNjq82BZ9wV5bh40SBHPTEmNOiY=
 
-magic-sdk@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-4.0.2.tgz#f10d55bc9f728ef5def8e62c874adcb6efece40d"
-  integrity sha512-OpE5a8s8dfH7sJbMBsQ9KIL13YAaBT0iKgx7Dinmd7VqU2F4oPKwa8eSRj7qeS4wU4CKYj3Fc01NEAAAxO3eeA==
+magic-sdk@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-4.1.1.tgz#6e6142df0bd483a8a452f1bf273d7cb299dcd63c"
+  integrity sha512-quqF9ASG/dIrf4u/noeJ5JQoqbbagat9qojBdg8ep57uNmz6VyoaKAcw3TBzp6z5Qsx0E55duqw+XKf2fweKwQ==
   dependencies:
     "@babel/core" "^7.9.6"
     "@babel/runtime" "^7.9.6"
-    "@magic-sdk/commons" "^1.0.1"
-    "@magic-sdk/provider" "^4.0.2"
+    "@magic-sdk/commons" "^1.1.0"
+    "@magic-sdk/provider" "^4.1.1"
     "@magic-sdk/types" "^3.0.1"
     localforage "^1.7.4"
     localforage-driver-memory "^1.0.5"
