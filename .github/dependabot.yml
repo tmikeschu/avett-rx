@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "10:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@storybook/addon-links"
+    versions:
+    - 6.1.20
+  - dependency-name: eslint-plugin-react
+    versions:
+    - 7.22.0
